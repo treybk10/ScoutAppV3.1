@@ -1,0 +1,940 @@
+5 ARENA
+The ARENA includes all elements of the game infrastructure that are required to play REBUILTTM presented by
+Haas: the FIELD, SCORING ELEMENTS, queue area, team media area (when available), designated
+TECHNICIAN area, and all equipment needed for FIELD control, ROBOT control, and scorekeeping.
+Figure 5-1 REBUILT ARENA (queue area, TECHNICIAN area, and media area not pictured)
+5.1 Dimensions and Accuracy
+All official models for the REBUILT FIELD were created in Onshape.
+The specification for the REBUILT FIELD can be retrieved from a few locations:
+− The 3D CAD model is the official representation of the REBUILT FIELD and how it is constructed.
+− Illustrations included in this section are for a general visual understanding of the REBUILT ARENA,
+and dimensions included in the manual are nominal and no tolerances are implied. Please refer to
+the official drawings for exact dimensions, tolerances, and construction details.
+− The Field Dimension Drawings package has critical dimensions for each FIELD element.
+− The FIELD Manual includes instructions on how to build the FIELD along with showing the ways
+construction type will influence the field tolerances. It also includes many of the key dimensions
+which are listed in the Official FIELD Drawings.
+− The FIELD Acceptance Checklists for the welded FIELD and for the AndyMark FIELD include the
+controlled dimensions (with relevant tolerances) which will be checked by event staff a few times
+throughout the event. The FIELD is expected to change during MATCH play. Teams can ask the FTA
+Section 5 ARENA Version: TU22 17 of 166
+to re-check specific measurements if they believe something is out of spec prior to a MATCH
+beginning.
+The official drawings, CAD models, and drawings for low-cost versions of important elements of the REBUILT
+FIELD are posted on the Playing FIELD webpage.
+The ARENA is modular and assembled, used, disassembled, and shipped many
+times during the competition season. It undergoes wear and tear. The ARENA is
+designed to withstand rigorous play and frequent shipping. Every effort is made
+to ensure that ARENAS are consistent from event to event.
+However, ARENAS are assembled in different venues by different event staff and
+some small variations occur. Successful teams will design ROBOTS that are
+insensitive to these variations.
+5.2 FIELD
+Each FIELD for REBUILT is an approximately 317.7in (~8.07m) by 651.2in (~16.54m) carpeted area bounded
+by inward facing surfaces of the ALLIANCE WALLS, OUTPOSTS, TOWER WALLS, and guardrails.
+Figure 5-2 FIELD boundary in pink
+The FIELD is populated with and surrounded by the following elements:
+− 1 OUTPOST per ALLIANCE,
+− 1 HUB per ALLIANCE,
+− 1 TOWER per ALLIANCE,
+− 2 DEPOTS,
+− 4 BUMPS, and
+Section 5 ARENA Version: TU22 18 of 166
+− 4 TRENCHES.
+The surface of the FIELD is low pile carpet, Shaw Floors, Philadelphia Commercial, Neyland II 20, “66561
+Medallion.” Neyland II carpet is not available for purchase at this time, and the closest equivalent is Shaw,
+Philadelphia Brand, Profusion 20, Style 54933; see results from evaluation in this blog post.
+Carpet edges and seams are secured with 3MTM Premium Matte Cloth (Gaffers) Tape GT2, GT3 or comparable
+Gaffer’s Tape. Tears, rips, and damage to the carpet may be repaired with the same styles of tape and ROBOTS
+must be prepared to operate on surfaces made of carpet, tape, or combinations of both materials as repairs
+are made through the course of competition.
+Guardrails form the long edges of the FIELD. Guardrails are a 20.0in (50.8cm) tall system of transparent
+polycarbonate supported on the top and bottom by aluminum extrusion. There are 4 gates in the guardrail that
+allow access to the FIELD for placement and removal of ROBOTS. The gate passthrough, when open, is 38.0in
+(96.5cm) wide. Gates are closed and shielded during the MATCH.
+Figure 5-3 Gate locations
+There are 2 versions of guardrails and DRIVER STATIONS used for competitions. 1 design is the Welded FIELD
+which is reflected in the 2026 Official FIRST FIELD Drawings & Models. The other is designed and sold by
+AndyMark. Table 5-1 and
+Table 5-2 illustrate which areas have each kind of FIELD. All FIELDS (divisions, practice and Einstein) at the
+FIRST Championship will be the Welded FIELD type.
+While the designs are slightly different, the critical dimensions, performance, and expected user experience
+between them are the same unless otherwise noted. Detailed drawings for the AndyMark design are posted on
+the AndyMark website. All illustrations in this manual show the traditional Welded FIELD design.
+Table 5-1: District Field Types
+District Field Type
+FIRST Chesapeake AndyMark
+Section 5 ARENA Version: TU22 19 of 166
+District Field Type
+FIRST California Welded
+FIRST in Michigan Welded
+FIRST in Texas AndyMark
+FIRST Indiana Robotics AndyMark
+FIRST Israel Welded
+FIRST Mid-Atlantic Welded
+FIRST North Carolina AndyMark
+FIRST South Carolina Welded
+FIRST Wisconsin AndyMark
+NE FIRST AndyMark
+Ontario Welded
+Pacific Northwest Welded
+Peachtree Welded
+Table 5-2 Regional Field Types
+Regional Location Field Type
+Australia Welded
+Brazil AndyMark
+Canada Welded
+China AndyMark
+Mexico AndyMark
+Türkiye AndyMark
+United States Welded
+5.3 Areas, Zones, & Markings
+FIELD areas, zones, and markings of consequence are described below. Unless otherwise specified, the tape
+used to mark lines and zones throughout the FIELD is 2.0in (5.1cm) 3M™ Premium Matte Cloth (Gaffers) Tape
+(GT2), ProGaff® Premium Professional Grade Gaffer Tape, or comparable gaffers tape.
+Section 5 ARENA Version: TU22 20 of 166
+Figure 5-4 Areas, markings, and zones
+− ALLIANCE AREA: an approximately 360in wide by 134in deep (~9.14m by 3.4m) infinitely tall volume
+formed by, and including the ALLIANCE WALL, OUTPOST, TOWER WALL, the edge of the carpet, and
+ALLIANCE colored tape perpendicular to the DRIVER STATIONS.
+− ALLIANCE ZONE: A 158.6in deep by 317.7in long (~4.03m by 8.07m), infinitely tall volume formed by an
+ALLIANCE WALL, TOWER WALL, and guardrails. It surrounds an ALLIANCE TOWER and a DEPOT. It is
+bounded by and includes the ROBOT STARTING LINE.
+− CENTER LINE: a white line that spans the width of the FIELD that bisects the NEUTRAL ZONE in half.
+− NEUTRAL ZONE: A 283in deep by 317.7in long (7.19m by 8.07m), infinitely tall volume formed by the
+BUMPS, TRENCHES, HUBS, and guardrails. It surrounds and includes the CENTER LINE.
+− HUMAN STARTING LINE: a white line spanning the ALLIANCE AREA up to the OUTPOST AREA that is
+parallel to and located 24.0in (61.0cm) from the bottom square tube of the ALLIANCE WALL to the near
+edge of the tape.
+− OUTPOST AREA: a 71.0in wide by 134in deep (1.8m by 3.4m) infinitely tall volume bounded by the
+OUTPOST, edge of carpet, and ALLIANCE and white colored tape.
+− ROBOT STARTING LINE: an ALLIANCE colored line that spans the width of the FIELD at the edge of an
+ALLIANCE ZONE in front of two BUMPS and an ALLIANCE HUB.
+Section 5 ARENA Version: TU22 21 of 166
+5.4 HUB
+Figure 5-5 HUB
+A HUB is one of two 47in by 47in (~1.19m by 1.19m) rectangular prism structures with an extended opening at
+the top surface. Each ALLIANCE has a dedicated HUB centered between two BUMPS located 158.6in (~4.03m)
+away from their ALLIANCE WALL. Each HUB has a set of exits that randomly distributes FUEL into the
+NEUTRAL ZONE. A net structure located in the back of the HUB prevents FUEL launched from most prohibited
+areas from entering the opening.
+Figure 5-6: HUB distance to the ALLIANCE WALL
+Section 5 ARENA Version: TU22 22 of 166
+The top of each HUB has a 41.7in (~1.06m) hexagonal opening into which ROBOTS can deliver FUEL. The front
+edge of the opening is 72in (~1.83m) off the carpet.
+Figure 5-7: HUB Dimensions
+HUBS have a series of exits at the base of the HUB facing towards the NEUTRAL ZONE. FUEL processed
+through the HUB are distributed into the NEUTRAL ZONE via one of four exits as shown in Figure 5-8. Examples
+of FUEL distribution from the HUB can be found on the Playing FIELD webpage.
+Figure 5-8: HUB exits (approximation)
+Section 5 ARENA Version: TU22 23 of 166
+The top angles of the HUB are lit by DMX light bars that indicate if the HUB is active. See Table 5-3 for more
+details about the various light states in the HUB.
+Table 5-3: HUB Lighting
+Color Pre-MATCH MATCH Post-Match
+ALLIANCE color at 100%
+HUB active
+brightness
+HUB deactivation warning.
+Starts 3 seconds before and
+ALLIANCE color pulsing
+continues until deactivation or
+end of MATCH.
+N/A
+During the TRANSITION SHIFT,
+Indicates the ALLIANCE HUB
+ALLIANCE color with
+that will be inactive in
+white chase
+N/A
+ALLIANCE SHIFT 1.
+HUB is active.
+FIELD is safe for
+Purple
+FIELD STAFF.
+Green FIELD is safe for all.
+N/A
+Post MATCH 3
+White
+Second Scoring
+Assessment Period
+Off MATCH ready to start. HUB is not active. N/A
+Section 5 ARENA Version: TU22 24 of 166
+5.5 BUMP
+Figure 5-9 BUMP
+BUMPS are 73.0in (1.854m) wide, 44.4in (1.128m) deep, and 6.513in (16.54cm) tall structures on either side of
+the HUB that ROBOTS drive over. The top surface of each BUMP is made up of 0.5in (1.27cm) thick, ALLIANCE
+colored, Orange Peel textured, HDPE ramps at a 15-degree angle with one ramp sloping down towards the
+NEUTRAL ZONE and the other ramp sloping down towards the ALLIANCE ZONE.
+5.6 TRENCH
+Figure 5-10: TRENCH
+TRENCHES are a 65.65in (1.668m) wide, 47.0in (1.194m) deep, and 40.25in (1.022m) tall structure that
+ROBOTS drive underneath. The TRENCH extends from the guardrail to the BUMP on both sides of the FIELD.
+The space underneath each TRENCH arm is 50.34in (1.279m) wide, 22.25in (56.52cm) tall.
+TRENCHES along the guardrail closest to the scoring table contain additional electronics to reach the HUB.
+The TRENCHES along the guardrail furthest from the scoring table have a pivot arm that allows the horizontal
+portion of the TRENCH to rotate into a vertical position for post-MATCH ROBOT retrieval and to let FIELD staff
+reset the field between matches. The pivot arm will be locked in the horizontal position during the MATCH.
+Section 5 ARENA Version: TU22 25 of 166
+5.7 DEPOT
+Figure 5-11: DEPOT
+A DEPOT is a 42.0in (1.07m) wide, 27.0in (68.6cm) deep structure located along the ALLIANCE WALL. There is
+1 DEPOT per ALLIANCE. DEPOTS are made up of 3.0in (7.62cm) wide, 1.0in (2.54cm) tall steel barriers. The
+DEPOT is secured to the carpet using hook fastener which increases the height to approximately 1.125in
+(2.86cm).
+5.8 TOWER
+Figure 5-12: TOWER
+Section 5 ARENA Version: TU22 26 of 166
+A TOWER is a 49.25in (1.251m) wide, 45.0in (1.143m) deep, and 78.25in (1.988m) tall structure made up of the
+TOWER WALL, TOWER BASE, UPRIGHTS, RUNGS and supporting structures. There is 1 TOWER per ALLIANCE.
+A TOWER is integrated into each ALLIANCE WALL between DRIVER STATION 2 and DRIVER STATION 3.
+The TOWER BASE is a 39.0in (99.06cm) wide by 45.18in (1.148m) deep plate that sits on the floor and extends
+from the TOWER WALL. The TOWER BASE is powder-coated steel with hook fastener underneath. The edges
+of the TOWER BASE are approximately 0.2in (0.5cm) to 0.3in (0.8cm) tall.
+The UPRIGHTS are two 72.1in (1.831m) tall, 1.5in (3.81cm) thick, 3.5in (8.89cm) deep sheet metal box frames
+that extend vertically up from the TOWER BASE. The distance between each UPRIGHT is 32.25in (81.92cm).
+The UPRIGHTS hold three horizontal RUNGS made up of 1-1/4in Sch 40 (1.66in (4.216cm) OD) pipe. Each
+RUNG is centered between the UPRIGHT and extend 5.875in (14.92cm) from the outer face of the UPRIGHT on
+either side. The center of the LOW RUNG is located 27.0in (68.58cm) from the floor. The center of the MID
+RUNG is located 45.0in (114.3cm) from the floor. The center of the HIGH RUNG is 63.0in (1.6m) from the floor.
+The RUNGS are 18.0in (45.72cm) apart center to center.
+The UPRIGHTS and RUNGS are powder-coated red or blue.
+Each TOWER has additional supporting structures extending from the UPRIGHT to the TOWER WALL between
+approximately 28.40in (72.14cm) and 43.38in (1.102m) off the floor.
+Figure 5-13: TOWER Dimensions
+5.9 ALLIANCE WALL
+The ALLIANCE WALL separates ROBOTS from DRIVE TEAM members in the ALLIANCE AREA. It consists of 3
+DRIVER STATIONS, an OUTPOST, and a TOWER WALL.
+Section 5 ARENA Version: TU22 27 of 166
+Figure 5-14: ALLIANCE WALL
+5.9.1 DRIVER STATIONS
+Figure 5-15: DRIVER STATION (ALLIANCE AREA perspective and FIELD perspective)
+Section 5 ARENA Version: TU22 28 of 166
+A DRIVER STATION is 1 of 3 assemblies within an ALLIANCE WALL behind which a DRIVE TEAM operates their
+ROBOT. Each DRIVER STATION is made from a 36.8in (93.5cm) tall diamond plate base topped with a 42in
+(1.07m) tall transparent plastic sheet and a top rail.
+An aluminum shelf is attached to each DRIVER STATION to support an OPERATOR CONSOLE. The shelf is 69in
+(1.75m) wide and 12.25in (31.1cm) deep. There is a 54.0in (1.372m) long by 2.0in (nominal) wide strip of hook-
+and-loop tape (“loop” side) along the center of the support shelf that may be used to secure the OPERATOR
+CONSOLE to the shelf. The shelf also includes two clips to hold the shelf in place with a 1.0in (2.5cm) wide by
+2.0in (5.1cm) deep tab that sits on the top surface of the shelf.
+There is a 6.0in (15.2cm) tall sponsor panel in each DRIVER STATION. The top of this panel is 42.9in (1.09m)
+from the carpet.
+There may be a ramp available at events for DRIVE TEAMS with limited mobility.
+It is designed to allow an individual using a wheelchair to access the DRIVER
+STATION shelf and/or see onto the FIELD; however, this accommodation is
+available to anyone who has a wheelchair or other physical disability that
+obstructs their view of the FIELD. Teams should speak to the FTA before
+MATCHES begin to ensure that it is available for each of the team’s MATCHES.
+This ramp is available at many Regional and District events. For questions,
+please connect with the local Program Delivery Partner.
+Teams should also speak to the FTA for any other FIELD side accommodations
+needed.
+Each DRIVER STATION contains the following elements for DRIVE TEAMS:
+− 1 Ethernet cable: attaches to the Ethernet port of the OPERATOR CONSOLE and provides connectivity
+to the FIELD Management System (FMS).
+− 1 120VAC NEMA 5-15R power outlet (i.e. standard US outlet): located on each DRIVER STATION shelf
+and protected by its own 2-Amp circuit breaker. It can be used to power the OPERATOR CONSOLE.
+DRIVE TEAMS are responsible for monitoring their power consumption as a tripped breaker in the outlet
+does not constitute an ARENA FAULT. For some events in regions that don’t use NEMA 5-15 shaped
+outlets, event organizers may install appropriate plug adapters to be used throughout the event.
+− 1 Emergency Stop (E-Stop) button: located on the left side of the DRIVER STATION shelf and is used to
+deactivate a ROBOT in an emergency.
+− 1 Autonomous Stop (A-Stop) button: located on the right side of the DRIVER STATION shelf and is used
+to DISABLE a ROBOT during AUTO.
+− 1 team sign: located at the top of each DRIVER STATION. The FIELD facing side of the sign displays the
+team number in the ALLIANCE color. The ALLIANCE AREA side of the sign displays the following
+information in red:
+o Pre-MATCH: team number and ROBOT connection state
+o During Qualification MATCHES:
+▪ Current SHIFT and time remaining in that period,
+• A shows for AUTO when both ALLIANCE’s HUBS are active
+• T shows for the TRANSITION SHIFT when both ALLIANCE’s HUBS are active
+• R shows when the Red ALLIANCE’S HUB is active
+Section 5 ARENA Version: TU22 29 of 166
+• B shows when the Blue ALLIANCE’S HUB is active
+• E shows for END GAME when both ALLIANCE’s HUBS are active
+▪ Progress towards the FUEL Ranking Points. This shows total scored out of the
+ENERGIZED RP and once that threshold passes it shows out of the SUPERCHARGED RP
+▪ AUTO TOWER points, and
+▪ remaining MATCH period time.
+Figure 5-16 Back of team sign (during Qualification MATCH)
+o During the MATCH during Playoff MATCHES:
+▪ Which MATCH period is active and time remaining in that period,
+▪ MATCH scores, and
+▪ remaining MATCH period time.
+Figure 5-17 Back of team sign (during Playoff MATCH)
+− 1 timer (in DRIVER STATION 2 only): displays the official time remaining in the MATCH period on the
+FIELD-facing side (in white) and on the team facing side the following information in red:
+o remaining MATCH period time, and
+o MATCH scores.
+Figure 5-18 Back of timer
+− 1 team LED stack: indicates ALLIANCE color, ROBOT status, E-Stop and A-Stop status, and is centered
+at the top of each DRIVER STATION.
+The stack includes 2 identical ALLIANCE-colored ROBOT status LEDs above a third amber A-stop/E-
+stop LED. LED states are as follows:
+o ROBOT status LEDs
+▪ Solid: indicates that the ROBOT is connected and enabled. This only happens during a
+MATCH.
+▪ Blinking: indicates that either the FMS is preset for the MATCH and the ROBOT is not
+connected yet, or it’s during a MATCH and the corresponding ROBOT has lost
+connectivity, or the E-stop was pressed.
+Section 5 ARENA Version: TU22 30 of 166
+▪ Off: indicates that the ROBOT is linked and DISABLED prior to the start of the MATCH, or
+the ROBOT is BYPASSED. This light is also off, regardless of ROBOT connection status,
+after the MATCH has concluded.
+o A-Stop/E-stop LED
+▪ Solid: the ROBOT is DISABLED due to a press of the team E-stop button, the FIELD E-stop
+button, or by the scorekeeper via the FMS.
+▪ Blinking: the ROBOT is DISABLED for the remainder of AUTO due to a press of the team
+A-Stop button.
+▪ Off: the ROBOT is not DISABLED by the FIELD.
+− FMS hardware and wiring: mostly located below shelves in the 2 DRIVER STATIONS closer to the
+scoring table.
+5.9.2 OUTPOST
+Figure 5-19 OUTPOST
+An OUTPOST is an assembly through which HUMAN PLAYERS feed FUEL into the FIELD and ROBOTS can
+deliver FUEL to their HUMAN PLAYERS. There are 2 OUTPOSTS, 1 on either end of the FIELD connecting the
+guardrail to the ALLIANCE WALL. Each OUTPOST has a 31.8in (80.8cm) wide by 7.0in (17.8cm) tall opening
+through which FUEL passes to the FIELD. The bottom of the opening is 28.1in (71.4cm) off the floor.
+A 15.0° sloped tunnel, called the CHUTE, leads to the upper opening in the OUTPOST. The CHUTE can hold
+approximately 25 FUEL at a time retained by the CHUTE DOOR. The CHUTE DOOR is an HDPE arm on a pivot
+that can be rotated approximately 90 degrees by the HUMAN PLAYER to open or close the CHUTE.
+At the base of the OUTPOST is an opening 32.0in (81.3cm) wide by 7.0in (17.8cm) tall where ROBOTS can
+push FUEL into the CORRAL. The bottom of the opening is 1.88in (4.77cm) off the ground. The opening is
+divided in the center by a vertical 1-1/4in Sch 40 (1.66in (4.216cm) OD) pipe. The CORRAL is made up of 8.13in
+(20.6cm) tall polycarbonate panels that create a 35.8in (90.8cm) wide, 37.6in (95.5cm) deep area on the floor
+in which FUEL can be stored.
+Section 5 ARENA Version: TU22 31 of 166
+The CHUTE and CORRAL each feature an ALLIANCE-colored tape line that indicates where DRIVE TEAMS may
+be restricted from reaching. The near edge of the CORRAL tape is 12.7in (32.3cm) from the FIELD-facing wall
+of the OUTPOST. The near edge of the CHUTE tape line is 12.9in (32.8cm) from the FIELD-facing wall of the
+OUTPOST.
+There are 2 stools available at events for DRIVE TEAMS to use. Each stool is
+23.0in (58.42cm) wide by 13.5in (34.29cm) deep, 6.25in (15.88cm) tall, and rated
+for 300lb (136.0kg).
+It is specially intended to allow individuals who are shorter, better sightlines onto
+the FIELD; however, this accommodation is available to anyone who has another
+physical disability that obstructs their view of the FIELD.
+Only 2 stools are available, and priority will be given to those with the biggest
+need. Teams should speak to the FTA before MATCHES begin to request that it
+is available for each of the team’s MATCHES. Teams may also purchase their
+own (Item Number: 779ac01stpm) or bring an equivalent (e.g. not foldable and
+similar dimensions) version to the event to guarantee use for every match.
+This stool is available at all events within the US & Canada and equivalents are
+available at international events. For questions, please connect with the local
+Program Delivery Partner.
+5.10 SCORING ELEMENTS
+SCORING ELEMENTS are items that teams use to score points. There is one type of SCORING ELEMENT used
+in REBUILT: FUEL.
+In REBUILT, a ROBOT may CONTROL any number of SCORING ELEMENTS after
+the start of the MATCH.
+5.10.1 FUEL
+Figure 5-20 FUEL
+A FUEL is a 5.91in (15.0cm) diameter, high density foam ball. FUEL is a custom made SCORING ELEMENT
+available for purchase on the AndyMark website, am-5801.
+Section 5 ARENA Version: TU22 32 of 166
+FUEL has a weight of between 0.448-0.500lb (~0.203-0.227kg).
+FUEL undergoes wear and tear during a competition. Generally, a FUEL that still appears to look approximately
+like a FUEL is considered a FUEL for the purposes of rule evaluation and scoring, whether damaged or not.
+Small chunks of a FUEL are not considered a FUEL.
+Most new FUEL will have small impressions due to being pressed against other
+FUEL or the sides of the packaging during shipping. These impressions are
+purely cosmetic and do not affect the function of the FUEL. Most impressions
+will gradually disappear as the FUEL is used.
+5.11 AprilTags
+AprilTags are 8.125in (20.64cm) square targets located on the HUB, TOWER WALL, OUTPOST, and TRENCHES.
+There are 32 unique markers on the FIELD positioned as shown in Figure 5-21.
+Figure 5-21 AprilTag Locations
+All markers are from the 36h11 tag family, IDs 1-32. All AprilTags are mounted to and centered on a 10.5in
+(26.67cm) square polycarbonate panel. Each marker has an identifying text label. If AprilTags experience wear
+and marking during MATCHES they are repaired with gaffers tape.
+Section 5 ARENA Version: TU22 33 of 166
+Figure 5-22 AprilTag sizing
+HUB AprilTags (IDs 2, 3, 4, 5, 8, 9, 10, 11, 18, 19, 20, 21, 24, 25, 26, 27) are located on all four faces of the HUB.
+Each face has two AprilTags with centers located 44.25in (1.124m) off the floor as shown in Figure 5-23. One
+AprilTag per face is centered and the other AprilTag is horizontally offset.
+Figure 5-23 HUB AprilTags
+Two AprilTags (IDs 15, 16, 31, 32) are located on each TOWER WALL with centers 21.75in (55.25cm) off the
+floor as shown in Figure 5-24. One AprilTag per TOWER is centered and the other AprilTag is horizontally
+offset.
+Section 5 ARENA Version: TU22 34 of 166
+Figure 5-24 TOWER WALL AprilTags
+Two AprilTags (IDs 13, 14, 29, 30) are located on each OUTPOST with centers 21.75in (55.25cm) off the floor
+as shown in Figure 5-25. One AprilTag per OUTPOST is centered with the CHUTE and CORRAL openings and
+the other AprilTag is horizontally offset.
+Figure 5-25 OUTPOST AprilTags
+TRENCH AprilTags (IDs 1, 6, 7, 12, 17, 22, 23, 28) are attached to mounting brackets located on the top surface
+of the horizontal arm of the TRENCH. Each TRENCH has two AprilTags, one facing the ALLIANCE ZONE and
+one facing the NEUTRAL ZONE. TRENCH AprilTags are approximately centered on the opening under the
+TRENCH arm and their centers are located 35in (88.9cm) off the floor as shown in Figure 5-26.
+Section 5 ARENA Version: TU22 35 of 166
+Figure 5-26 TRENCH AprilTags
+For further marker locating information please refer to the 2026 Field Dimension Drawings. Printable copies of
+the field AprilTags can be found on the Playing FIELD webpage.
+5.12 The FIELD Management System
+The FIELD Management System (FMS) is all the electronics responsible for sensing and controlling the FIRST
+Robotics Competition FIELD. The FMS encompasses all FIELD electronics, including computers, REFEREE
+touchscreens, the wireless access point, sensors, stack lights, A-Stops and E-Stops, etc.
+When a DRIVE TEAM connects the Ethernet cable from their assigned DRIVER STATION to their OPERATOR
+CONSOLE, the Driver Station Software on the OPERATOR CONSOLE computer communicates with FMS. Once
+connected, the open ports available are described in Table 8-5.
+Note that ROBOT code cannot be deployed while connected to the FMS. Additional information about the FMS
+may be found in the FMS Whitepaper.
+The FMS alerts participants to milestones in the MATCH using audio cues detailed in Table 5-4. Please note
+that audio cues are intended as a courtesy to participants and not intended as official MATCH markers. If there
+is a discrepancy between an audio cue and the FIELD timers, the FIELD timers are the authority.
+Table 5-4: Audio Cues
+Event Timer Value(s) Audio Cue
+MATCH start 0:20 (for AUTO) “Cavalry Charge”
+AUTO ends 0:00 (for AUTO) “Buzzer”
+TELEOP &
+2:20 “3 Bells”
+TRANSITION begins
+ALLIANCE SHIFT
+2:10
+“POWER UP –
+starts
+1:45
+Linear Popping”
+1:20
+0:55
+END GAME begins 0:30 “Steam Whistle”
+MATCH end 0:00 “Buzzer”
+MATCH stopped n/a “Foghorn”
+Section 5 ARENA Version: TU22 36 of 166
+5.13 FIELD STAFF
+FIELD STAFF are responsible for making sure the MATCHES are cycled through efficiently, fairly, safely, and
+with a spirit of cooperation, Gracious Professionalism, and generosity of spirit. FIELD STAFF roles are filled by
+volunteers from the community who prepare for the event with thorough training and certification. There are 3
+FIELD-side key volunteer roles with whom teams should be familiar and are encouraged to use as resources to
+make their event experience valuable (in whatever way the team defines “valuable”).
+− Head REFEREE – trains, directs, and supervises REFEREES. They oversee all scoring processes and
+procedures in collaboration with the FIRST Technical Advisor (FTA). They interact with STUDENTS,
+volunteers, and contracted/FIRST staff. The Head REFEREE is positioned between the FIELD and the
+scoring table and wears a yellow shirt. The Head REFEREE has final authority for decisions regarding
+MATCH scores, penalties, and YELLOW and RED CARD assignments. For additional details, please refer
+to the Head REFEREE role description.
+− FIRST Technical Advisor (FTA) - ensures events run smoothly, safely, and in accordance with FIRST
+requirements. The FTA collaborates with FIRST staff, event staff, and other event volunteers in many
+different areas at events. The FTA is the liaison between FIRST HQ and the event for all things related
+to the FIELD, ROBOTS, and game, acts as a team advocate for all teams competing at the event and is a
+major point of escalation and conflict resolution for the event. For additional details, please refer to the
+FTA role description.
+− FIELD Supervisor - directs activity on the FIELD to ensure efficient execution of the MATCHES, pacing
+of the event, and smooth flow of MATCH play. FIELD Supervisors are responsible for ensuring the
+FIELD is intact and lead FIELD Reset teams, who are responsible for resetting the FIELD after each
+MATCH in preparation for the subsequent MATCH. For additional details, please refer to the FIELD
+Supervisor role description.
+Section 5 ARENA Version: TU22 37 of 166
+6 Game Details
+Figure 6-1 REBUILT
+In REBUILT, 2 ALLIANCES (an ALLIANCE is a cooperative of up to 4 FIRST Robotics Competition teams) play
+MATCHES, set up and implemented per the details described below.
+6.1 MATCH Overview
+MATCHES run on 7–10-minute cycles, which consist of pre-MATCH setup, the 2-minute and 40-second
+MATCH, and the post-MATCH reset.
+During the MATCH, ROBOTS collect FUEL and score in their HUB. HUMAN PLAYERS can deliver FUEL to
+ROBOTS or score them in their HUB.
+ROBOTS conclude the MATCH climbing on their TOWER.
+6.2 DRIVE TEAM
+A DRIVE TEAM is a set of up to 5 people from the same FIRST Robotics Competition team responsible for
+team performance for a specific MATCH. There are 4 specific roles on a DRIVE TEAM which ALLIANCES can
+use to assist ROBOTS, and no more than 1 member of the DRIVE TEAM may be a non-STUDENT.
+The intent of the definition of DRIVE TEAM and DRIVE TEAM related rules is that,
+barring extenuating circumstances, the DRIVE TEAM consists of people who
+arrived at the event affiliated with that team and are responsible for their team’s
+and ROBOT’S performance at the event (this means a person may be affiliated
+with more than 1 team).
+The intent is not to allow teams to “adopt” members of other teams for strategic
+advantage for the loaning team, borrowing team, and/or their ALLIANCE (e.g. an
+ALLIANCE CAPTAIN believes 1 of their DRIVERS has more experience than a
+DRIVER on their first pick, and the teams agree the first pick team will “adopt”
+that DRIVER and make them a member of their DRIVE TEAM for Playoffs).
+Section 6 Game Details Version: TU22 39 of 166
+The definition isn’t stricter for 2 main reasons. First, to avoid additional
+bureaucratic burden on teams and event volunteers (e.g. requiring that teams
+submit official rosters that Queuing must check before allowing a DRIVE TEAM
+into the ARENA). Second, to provide space for exceptional circumstances that
+give teams the opportunity to display Gracious Professionalism (e.g. a bus is
+delayed, a DRIVE COACH has no DRIVERS, and their pit neighbors agree to help
+by loaning DRIVERS as temporary members of the team until their bus arrives).
+Table 6-1 DRIVE TEAM roles
+Role Description Max./
+Criteria
+DRIVE TEAM
+DRIVE COACH a guide or advisor 1 any team member, must wear “DRIVE
+COACH” button
+TECHNICIAN a resource for ROBOT
+1 any team member, must wear
+troubleshooting, setup, and
+“TECHNICIAN” button
+removal from the FIELD
+DRIVER an operator and controller
+3 STUDENT, must wear a “DRIVE TEAM”
+of the ROBOT
+button
+HUMAN PLAYER a SCORING ELEMENT
+manager
+A STUDENT is a person who has not completed high-school, secondary school, or the comparable level as of
+September 1 prior to Kickoff.
+The TECHNICIAN provides teams with a technical resource for pre-MATCH setup, ROBOT connectivity,
+OPERATOR CONSOLE troubleshooting, and post-MATCH removal of the ROBOT. Some pre-MATCH
+responsibilities for the TECHNICIAN may include, but are not limited to:
+− location of the ROBOT radio, its power connection, and understanding of its indicator lights
+− location of the roboRIO and understanding of its indicator lights
+− username and password for the OPERATOR CONSOLE
+− restarting the Driver Station and Dashboard software on the OPERATOR CONSOLE
+− changing the bandwidth utilization (e.g. camera resolution, frame rate, etc.)
+− changing a battery
+− charging pneumatics
+While the TECHNICIAN may be the primary technical member of the DRIVE
+TEAM, all members of the DRIVE TEAM are encouraged to have knowledge of the
+basic functionality of the ROBOT, such as the location and operation of the main
+circuit breaker, connecting and resetting joysticks or gamepads from the
+OPERATOR CONSOLE, and removing the ROBOT from the FIELD.
+Per Table 6-1, each team is allotted up to 3 STUDENTS who may be assigned as DRIVERS or HUMAN
+PLAYERS. If multiple teams on an ALLIANCE do not have 3 STUDENTS at the event to act in these roles, 1 of
+Section 6 Game Details Version: TU22 40 of 166
+the ALLIANCE’S teams may substitute a STUDENT TECHNICIAN as a HUMAN PLAYER for that MATCH only. In
+this case,
+− the Head REFEREE must be notified,
+− all HUMAN PLAYER rules now apply to this DRIVE TEAM member, and
+− this DRIVE TEAM member is no longer considered a TECHNICIAN for that MATCH.
+6.3 Setup
+Before each MATCH begins, FIELD STAFF stage SCORING ELEMENTS as described in section 6.3.4 SCORING
+ELEMENTS. DRIVE TEAMS stage their ROBOTS (as described in section 6.3.3 ROBOTS) and OPERATOR
+CONSOLES (as described in section 6.3.2 OPERATOR CONSOLES). Then, DRIVE TEAMS take their places as
+described in section 6.3.1 DRIVE TEAMS.
+6.3.1 DRIVE TEAMS
+DRIVE TEAMS prepare for a MATCH by staging in the appropriate areas, according to their role on the DRIVE
+TEAM, and by identifying themselves accordingly. DRIVE TEAM starting conditions are listed below, and a
+DRIVE TEAM obstructing or delaying any of the conditions is at risk of violating G301.
+A. B. C. D. E. F. G. only DRIVE TEAM members assigned to the upcoming MATCH are present,
+for Qualification MATCHES only DRIVE TEAM members whose ROBOTS have passed initial, complete
+Inspection are present,
+any number of HUMAN PLAYERS are staged in their OUTPOST AREAS,
+HUMAN PLAYERS not included in C, DRIVERS, and DRIVE COACHES are in their ALLIANCE AREA and
+behind the HUMAN STARTING LINE,
+TECHNICIANS are in the event-designated area near the FIELD,
+DRIVE TEAM members clearly display their designated buttons above their waists (DRIVE COACH -
+“Drive Coach”, DRIVERS and HUMAN PLAYERS - “Drive Team”, and TECHNICIAN - “Technician”), and
+if a Playoff MATCH, the ALLIANCE CAPTAIN clearly displays their designated ALLIANCE CAPTAIN
+identifier (e.g. hat or armband).
+6.3.2 OPERATOR CONSOLES
+DRIVE TEAMS set up their OPERATOR CONSOLE as soon as the DRIVE TEAM from the previous MATCH has
+cleared the area. OPERATOR CONSOLES must be compliant with all relevant rules, specifically those in section
+8.9 OPERATOR CONSOLE. The OPERATOR CONSOLE is plugged into the team’s assigned DRIVER STATION, as
+indicated on the team sign. Any control devices worn or held by their HUMAN PLAYERS and/or DRIVERS during
+the MATCH must be disconnected from or set on or beside the OPERATOR CONSOLE before the MATCH can
+begin. A DRIVE TEAM obstructing or delaying OPERATOR CONSOLE setup is at risk of violating G301.
+For the purposes of FIRST Robotics Competition, any device connected to the
+OPERATOR CONSOLE is considered a control device because REFEREES are not
+expected to differentiate between devices that can or cannot control the ROBOT.
+Section 6 Game Details Version: TU22 41 of 166
+6.3.3 ROBOTS
+DRIVE TEAMS stage their ROBOT in accordance with G303. A DRIVE TEAM obstructing or delaying ROBOT
+setup requirements is at risk of violating G301.
+If order of placement matters to either or both ALLIANCES, the ALLIANCE notifies the Head REFEREE during
+setup for that MATCH, and the Head REFEREE instructs ALLIANCES to alternate placement of ROBOTS. In a
+Qualification MATCH, REFEREE instructions are that ROBOTS are placed in the following order:
+1. 2. 3. 4. 5. 6. red DRIVER STATION 1 ROBOT
+blue DRIVER STATION 1 ROBOT
+red DRIVER STATION 2 ROBOT
+blue DRIVER STATION 2 ROBOT
+red DRIVER STATION 3 ROBOT
+blue DRIVER STATION 3 ROBOT
+In an intra-Division Playoff MATCH, the same pattern is applied, but instead of blue ALLIANCE placing last, the
+higher seeded ALLIANCE (regardless of color) places last. For inter-Division Playoff MATCHES, the ALLIANCE
+that places last is determined by a (real or virtual) coin flip facilitated by the Head REFEREE where a “heads”
+result invites the red ALLIANCE to place last.
+FIELD STAFF may ask teams to indicate their intended location and are not
+required to wait for a team to stage their ROBOT in its exact location before
+moving to the next team.
+6.3.4 SCORING ELEMENTS
+Before each MATCH begins, FIELD STAFF stage SCORING ELEMENTS.
+Figure 6-2 SCORING ELEMENT staging positions
+Section 6 Game Details Version: TU22 42 of 166
+504 FUEL are staged for each MATCH as follows (reference Figure 6-2):
+A. B. C. 24 FUEL are staged in each DEPOT (FUEL may not be in a uniform layout),
+24 FUEL are staged in each OUTPOST CHUTE,
+8 FUEL may be preloaded in each ROBOT by the ROBOT’S DRIVE TEAM, such that each FUEL is fully
+supported by the ROBOT (up to 48 total; a FUEL not pre-loaded in a ROBOT is staged in the NEUTRAL
+ZONE), and
+D. remaining FUEL are arranged in the NEUTRAL ZONE through a process listed in Section 6.3.4.1 (360 to
+408, depending on how many are preloaded in ROBOTS).
+Due to the high number of SCORING ELEMENTS in REBUILT, FIELD STAFF may
+not be able to perfectly count all FUEL put into the NEUTRAL ZONE. The number
+of FUEL staged in the NEUTRAL ZONE for any given match may fluctuate around
++/- 24 FUEL.
+For District Championship and/or FIRST Championship events, the quantity of FUEL staged in a MATCH may
+increase up to 600. If this happens, the additional FUEL will be included as part of an updated FUEL
+arrangement in the NEUTRAL ZONE.
+6.3.4.1 NEUTRAL ZONE FUEL ARRANGEMENT
+The NEUTRAL ZONE is staged by the FIELD crew by corralling all FUEL within a bounding box that is
+approximately 206.0in (5.23m) wide and 72.0in (1.83m) deep. The bounding box has a solid divider in the
+middle that is 2.0in (5.08cm) wide that will result in a small gap in FUEL. The dividers will be removed prior to
+the start of the MATCH.
+Figure 6-3 NEUTRAL ZONE FUEL setup
+Section 6 Game Details Version: TU22 43 of 166
+The expected result of the dispersal is a roughly equal split of FUEL on both sides of the CENTER LINE. The
+dispersal between the scoring table side and non-scoring table side of the field is expected to vary match to
+match.
+The placement of FUEL in the NEUTRAL ZONE is not intended to be in a perfect
+grid. Teams should expect variances in the placement of FUEL in the NEUTRAL
+ZONE at the start of the MATCH.
+6.4 MATCH Periods
+The first period of each MATCH is 20 seconds long and called the Autonomous Period (AUTO). During AUTO,
+ROBOTS operate without any DRIVE TEAM control or input. ROBOTS score SCORING ELEMENTS, may leave
+their ROBOT STARTING LINE and retrieve additional SCORING ELEMENTS, and may climb their TOWER. There
+is a 3-second delay between AUTO and TELEOP for scoring purposes as described in section 6.5 Scoring.
+The second period of each MATCH is the remaining 2 minutes and 20 seconds (2:20) and called the
+Teleoperated Period (TELEOP). During TELEOP, DRIVERS remotely operate ROBOTS to retrieve and score
+SCORING ELEMENTS and climb their TOWER. TELEOP is split into further segments: the TRANSITION SHIFT,
+the ALLIANCE SHIFTS, and END GAME. There are four ALLIANCE SHIFTS named SHIFT 1, SHIFT 2, SHIFT 3,
+and SHIFT 4. The duration of each timeframe is shown in Table 6-2.
+Table 6-2: MATCH SHIFTS
+MATCH Period MATCH Timeframe Duration Timer Values
+AUTO AUTO 20 Seconds 0:20 – 0:00
+TELEOP TRANSITION SHIFT 10 Seconds 2:20 – 2:10
+SHIFT 1 25 Seconds 2:10 – 1:45
+SHIFT 2 25 Seconds 1:45 – 1:20
+SHIFT 3 25 Seconds 1:20 – 0:55
+SHIFT 4 25 Seconds 0:55 – 0:30
+END GAME 30 Seconds 0:30 – 0:00
+6.4.1 HUB Status
+During the MATCH, the status of a HUB can be either active or inactive. FUEL scored in an active HUB is worth
+MATCH points but FUEL scored in an inactive HUB will not earn any points as shown in Table 6-3. Both
+ALLIANCE HUBS are active during AUTO, the TRANSITION SHIFT, and END GAME. During the ALLIANCE
+SHIFTS, only one ALLIANCE HUB will be active while the other ALLIANCE’S HUB becomes inactive.
+The status of both HUBS during the ALLIANCE SHIFTS is based on the results of AUTO. The ALLIANCE that
+scores the most FUEL during AUTO will have their HUB set to inactive for SHIFT 1 while their opponent’s HUB
+will be active, as shown in Table 6-3. HUB statuses will then alternate at the start of each following ALLIANCE
+SHIFT, until the start of END GAME where both HUBS return to active. If both ALLIANCES score the same
+number of FUEL during AUTO, the FMS will randomly select an ALLIANCE and use its HUB status order for the
+ALLIANCE SHIFTS during the MATCH.
+Section 6 Game Details Version: TU22 44 of 166
+FMS Game Data relays the ALLIANCE who scored more FUEL during AUTO, or
+the ALLIANCE selected by FMS, to all OPERATOR CONSOLES simultaneously at
+the start of TELEOP. Lights on the HUB will also indicate the ALLIANCE HUB that
+will be inactive in ALLIANCE SHIFT 1 as noted in Table 5-3.
+Specific details on the format of the data can be found on the 2026 FRC Control
+System website.
+Table 6-3: Hub Status during MATCH Timeframes
+AUTO Result: RED ALLIANCE scores more FUEL
+BLUE ALLIANCE scores more FUEL
+during AUTO or is selected by the FMS
+during AUTO or is selected by the FMS
+MATCH Timeframe
+RED ALLIANCE
+BLUE ALLIANCE
+RED ALLIANCE
+BLUE ALLIANCE
+(timer values)
+HUB status
+HUB status
+HUB status
+HUB status
+AUTO
+Active Active Active Active
+(0:20 – 0:00)
+TRANSITION SHIFT
+Active Active Active Active
+(2:20 – 2:10)
+SHIFT 1
+Inactive Active Active Inactive
+(2:10 – 1:45)
+SHIFT 2
+Active Inactive Inactive Active
+(1:45 – 1:20)
+SHIFT 3
+Inactive Active Active Inactive
+(1:20 – 0:55)
+SHIFT 4
+Active Inactive Inactive Active
+(0:55 – 0:30)
+END GAME
+Active Active Active Active
+(0:30 – 0:00)
+6.5 Scoring
+ALLIANCES are rewarded for accomplishing various actions throughout a MATCH, including scoring FUEL,
+climbing their TOWER, and winning or tying MATCHES.
+Rewards are granted either via MATCH points or Ranking Points (often abbreviated to RP, which increase the
+measure used to rank teams in the Qualification Tournament).
+All scores are assessed and updated throughout the MATCH, except as follows:
+A. assessment of FUEL scored in the HUB continues for up to 3 seconds after the ARENA timer displays
+0:00 following AUTO.
+B. assessment of FUEL scored in the HUB continues for up to 3 seconds after the ARENA timer displays
+0:00 following TELEOP.
+C. assessment of AUTO TOWER points is made after the ARENA timer displays 0:00 following AUTO.
+Section 6 Game Details Version: TU22 45 of 166
+D. assessment of TELEOP TOWER points is made 3 seconds after the ARENA timer displays 0:00
+following TELEOP, or when all ROBOTS have come to rest following the conclusion of the MATCH,
+whichever happens first.
+Assessment of FUEL scored in the HUB continues for 3 seconds after the HUB deactivates to account for FUEL
+processing time.
+TOWER points are evaluated and scored by human volunteers. Teams are
+encouraged to make sure that it is obvious and unambiguous that the criteria are
+met.
+6.5.1 SCORING ELEMENT Scoring Criteria
+A FUEL is scored in the HUB once it passes through the top opening of the HUB and through the sensor array.
+6.5.2 ROBOT Scoring Criteria
+To qualify for TOWER points for a given LEVEL, a ROBOT must meet the following conditions:
+− For LEVEL 1 – a ROBOT must no longer be touching the carpet or the TOWER BASE, or
+− For LEVEL 2 – a ROBOT must be positioned such that its BUMPER covers are completely above the
+LOW RUNG, or
+− For LEVEL 3 – a ROBOT must be positioned such that its BUMPER covers are completely above the
+MID RUNG.
+Additionally, a ROBOT must be contacting at least one RUNG and/or UPRIGHT on their TOWER and may
+additionally only contact the following elements:
+A. the TOWER WALL,
+B. support structure,
+C. FUEL, and/or.
+D. another ROBOT.
+A ROBOT may only earn TOWER points for LEVEL 1 during AUTO. A ROBOT may only earn TOWER points for a
+single LEVEL during TELEOP. A ROBOT that earns TOWER points in AUTO is eligible to earn additional TOWER
+points during TELEOP.
+Section 6 Game Details Version: TU22 46 of 166
+Figure 6-4: TOWER contact limitation for ROBOT Scoring Criteria
+6.5.3 Point Values
+Point values for tasks in REBUILT are detailed in Table 6-4.
+Table 6-4 REBUILT point values
+MATCH points Ranking
+Points
+AUTO TELEOP
+FUEL FUEL scored in an active HUB 1 1
+FUEL scored in an inactive HUB - -
+TOWER Each ROBOT at LEVEL 1 (2 ROBOTS max in
+15 10
+AUTO)
+Each ROBOT at LEVEL 2 - 20
+Each ROBOT at LEVEL 3 30
+*ENERGIZED RP – The amount of FUEL scored in an active HUB is at or above
+1
+threshold.
+*SUPERCHARGED RP – The amount of FUEL scored in an active HUB is at or above
+1
+threshold.
+*TRAVERSAL RP – The amount of TOWER points scored during the MATCH is at or
+1
+above threshold.
+Win completing a MATCH with more MATCH points than your
+3
+opponent
+Tie completing a MATCH with the same number of MATCH points as
+1
+your opponent
+Section 6 Game Details Version: TU22 47 of 166
+*See Table 6-5 for threshold values. For District Championship and/or FIRST Championship events,
+the BONUS RP (ENERGIZED RP, SUPERCHARGED RP, and TRAVERSAL RP) requirement thresholds
+may increase.
+Table 6-5: REBUILT BONUS RP thresholds
+BONUS RP Type Regional/
+District
+FIRST
+District Events
+Championships
+Championship
+ENERGIZED RP 100 240 360
+SUPERCHARGED RP 360 360 500
+TRAVERSAL RP 50 50 50
+BONUS RP thresholds for District Championships and FIRST Championship will
+be announced in Team Updates.
+Section 6 Game Details Version: TU22 48 of 166
+6.6 Violations
+Unless otherwise noted, all violations are assigned for each instance of a rule violation. A description of the
+penalties is listed in Table 6-6. All rules throughout the Game Rules section are called as perceived by a
+REFEREE.
+Table 6-6 Rule violations
+Penalty Description
+MINOR FOUL a credit of 5 points towards the opponent’s MATCH point total
+MAJOR FOUL a credit of 15 points towards the opponent’s MATCH point total
+YELLOW CARD issued by the Head REFEREE for egregious ROBOT or team member
+behavior or rule violations. A subsequent YELLOW CARD within the
+same tournament phase results in a RED CARD.
+RED CARD issued by the Head REFEREE for egregious ROBOT or team member
+behavior or rule violations which results in a team being
+DISQUALIFIED for the MATCH.
+DISABLED the state in which a ROBOT is commanded to deactivate all outputs,
+rendering the ROBOT inoperable for the remainder of the MATCH.
+DISQUALIFIED the state of a team in which they receive 0 MATCH points and 0
+Ranking Points in a Qualification MATCH or causes their ALLIANCE to
+receive 0 MATCH points in a Playoff MATCH
+VERBAL
+a warning issued to a team by event staff or the Head REFEREE.
+WARNING
+ALLIANCE is
+An ALLIANCE is ineligible for the specified RP for that MATCH. This
+ineligible for RP
+overrides any RP awarded through normal MATCH play or other rule
+violations.
+6.6.1 YELLOW and RED CARDS
+In addition to rule violations explicitly listed throughout this document, YELLOW CARDS and RED CARDS are
+used in FIRST Robotics Competition to address team and ROBOT behavior that does not align with the mission,
+values, and culture of FIRST.
+The Head REFEREE may assign a YELLOW CARD as a warning, or a RED CARD for egregious behavior
+inappropriate at a FIRST Robotics Competition event.
+If an action resulting in the assignment of a YELLOW or RED CARD is determined to be the result of an ARENA
+FAULT, per section 10.2, the CARD will be rescinded.
+A YELLOW or RED CARD is indicated on the audience display MATCH results screen. During Qualification
+MATCHES, A YELLOW or RED CARD is indicated next to the team who received the CARD and the Game
+Announcer describes the violation. During Playoff MATCHES, the card is applied to the whole ALLIANCE and as
+such “RED CARD" or "YELLOW CARD" appears above the ALLIANCE number.
+Section 6 Game Details Version: TU22 49 of 166
+YELLOW CARDS are additive, meaning that a second YELLOW CARD is automatically converted to a RED
+CARD. A team is issued a RED CARD for any subsequent incident in which they receive an additional YELLOW
+CARD, including earning a second YELLOW CARD during a single MATCH. A second YELLOW CARD is
+indicated with a RED CARD on the audience display next to the team who received the CARDS. A team that has
+received either a YELLOW CARD or a RED CARD carries a YELLOW CARD into subsequent MATCHES, except as
+noted below.
+Once a team receives a YELLOW or RED CARD, a yellow rectangle will show next to the team number on the
+audience display during subsequent MATCHES, including any replays.
+Figure 6-5 Example audience screen graphic showing YELLOW CARD indicators
+All YELLOW CARDS and G301 VERBAL WARNINGS are cleared at the conclusion of Practice, Qualification, and
+division Playoff MATCHES. Other VERBAL WARNINGS issued by the head REFEREE are cleared after Practice
+MATCHES and persist from Qualification MATCHES through subsequent tournament phases.
+6.6.2 YELLOW and RED CARD application
+YELLOW and RED CARDS are applied based on the following:
+Table 6-7: YELLOW and RED CARD application
+MATCH to which CARD is applied:
+REFEREES may or may not be present during Practice
+MATCHES. With input from event staff, the Head REFEREE
+Time YELLOW or RED CARDS earned: Prior to Qualification MATCHES may opt to perpetuate a VERBAL WARNING or YELLOW
+CARD earned prior to Qualification MATCHES to the first
+Qualification MATCH for particularly egregious behavior.
+during the Qualification MATCHES team’s current (or just-completed) MATCH. In the case where
+the team participated as a SURROGATE in the current (or just
+completed) MATCH, the card is applied to the team’s
+previous MATCH (i.e. the team’s second Qualification
+MATCH)
+between the end of Qualification
+ALLIANCE’S first Playoff MATCH
+MATCHES and the start of Playoff
+MATCHES
+during the Playoff MATCHES ALLIANCE’S current (or just-completed) MATCH
+A MATCH is no longer the current MATCH once the results of the MATCH have
+been posted or the Head REFEREE or their designee has indicated that teams can
+collect their ROBOTS, whichever is later.
+Section 6 Game Details Version: TU22 50 of 166
+Please see examples of the application of YELLOW and RED CARDS as shown in
+section 6.6.4 Violation Details.
+6.6.3 YELLOW and RED CARDS during Playoff MATCHES
+During Playoff MATCHES, YELLOW and RED CARDS are assigned to the violating team’s entire ALLIANCE
+instead of to only the violating team. If an ALLIANCE receives 2 YELLOW CARDS, the entire ALLIANCE is issued
+a RED CARD which results in DISQUALIFICATION for the associated MATCH. If both ALLIANCES receive a RED
+CARD, the ALLIANCE assessed the first RED CARD, chronologically, is DISQUALIFIED and loses the MATCH.
+6.6.4 Violation Details
+There are several styles of violation wording used in this manual. Below are some example violations and a
+clarification of the way the violation would be assessed. The examples shown do not represent all possible
+violations, but rather a representative set of combinations.
+Table 6-8 Violation examples
+Example Violation Expanded Interpretation
+MINOR FOUL Upon violation, a MINOR FOUL is assessed against the
+violating ALLIANCE.
+MAJOR FOUL and YELLOW CARD Upon violation, a MAJOR FOUL is assessed against the
+violating ALLIANCE. After the MATCH, the Head
+REFEREE presents the violating team with a YELLOW
+CARD.
+MINOR FOUL per additional SCORING
+Upon violation, a number of MINOR FOULS are assessed
+ELEMENT. If egregious, YELLOW CARD
+against the violating ALLIANCE equal to the number of
+additional SCORING ELEMENTS beyond the permitted
+quantity. Additionally, if the REFEREES determine that
+the action was egregious, the Head REFEREE presents
+the violating team with a YELLOW CARD after the
+MATCH.
+MINOR FOUL. MAJOR FOUL IF
+Upon initial violation in a MATCH, a MINOR FOUL is
+REPEATED
+assessed against the violating ALLIANCE. If the
+ALLIANCE ROBOT repeats the infraction in the MATCH, a
+MAJOR FOUL is assessed against the violating
+ALLIANCE. Assuming no additional infractions of that
+rule by that ROBOT in that MATCH, the ROBOT has
+“earned” a MINOR FOUL and a MAJOR FOUL for their
+ALLIANCE.
+MAJOR FOUL, and for every 3 seconds in
+Upon violation, a MAJOR FOUL is assessed against the
+which the situation is not corrected, a
+violating ALLIANCE and the REFEREE begins to count.
+MAJOR FOUL is assessed
+Their count continues until the criteria to discontinue the
+count are met, and for each 3 seconds within that time,
+Section 6 Game Details Version: TU22 51 of 166
+Example Violation Expanded Interpretation
+an additional MAJOR FOUL is assessed against the
+violating ALLIANCE. A ROBOT in violation of this type of
+rule for 15 seconds receives a total of 6 MAJOR FOULS
+(assuming no other rules were being simultaneously
+violated).
+RED CARD for the ALLIANCE After the MATCH, the Head REFEREE presents the
+violating ALLIANCE with a RED CARD in the following
+fashion:
+• In a PLAYOFF MATCH, a single RED CARD is
+assessed to the ALLIANCE.
+• In all other scenarios, each team on the
+ALLIANCE is issued a RED CARD.
+6.7 Head REFEREE and FTA Interaction
+The Head REFEREE has the ultimate authority in the ARENA during the event, but may receive input from
+additional sources, e.g. Game Designers, FIRST personnel, FTA, and other event staff. The Head REFEREE
+rulings are final. No event staff, including the Head REFEREE, will review video, photos, artistic renderings, etc.
+of any MATCH, from any source, under any circumstances.
+6.7.1 Question Box (Q)
+Each ALLIANCE has a designated Question Box near the scoring table. If a DRIVE TEAM has a question about a
+MATCH, the FIELD, etc., they may send up to 2 DRIVE TEAM members to their corresponding Question Box.
+Depending on timing, the Head REFEREE or FTA may postpone any requested discussion until the end of the
+subsequent MATCH.
+Technical questions regarding FIELD or ROBOT operation are addressed by the FTA, and additional team
+members are invited to participate in these conversations if necessary. If a DRIVE TEAM needs clarification on
+a ruling or score, per Q101, up to 2 DRIVE TEAM members should address the Head REFEREE after the ARENA
+Reset Signal (e.g. FIELD lights turn green).
+While FMS tracks quantities of MINOR and MAJOR FOULS, FIRST instructs REFEREES to not self-track details
+about MINOR FOULS and MAJOR FOULS; as a result, REFEREES are not expected to recall details about what
+MINOR FOULS and MAJOR FOULS were made, when they occurred, and against whom.
+specific details.
+Q101 *Head REFEREE Interactions. A team may only address the Head REFEREE with maximum of 2 people,
+1 of which must be a STUDENT.
+Violation: The Head REFEREE will not address non-compliant team members or peripheral conversations.
+Section 6 Game Details Version: TU22 52 of 166
+Any reasonable question is fair game in the Question Box, and Head REFEREES
+will make good faith efforts to provide helpful feedback (e.g. how/why certain
+MINOR FOULS are being called, why a particular ROBOT may be susceptible to
+certain MINOR FOULS based on its design or game play, how specific rules are
+being called or interpreted), but please know that they may not be able to supply
+Some events may restrict ARENA access to members of the DRIVE TEAM. Team
+members are permitted to swap buttons within their team as needed to access
+As much as possible, the STUDENT should be an active participant in the
+conversation.
+Teams should not record interactions without consent (see E117).
+Examples of inappropriate behavior are outlined in G201.
+Note that ROBOTS and HUMAN PLAYERS may not deliberately cause SCORING
+the Question Box.
+Q102 Conversations must be civil. Any team interaction with the Head REFEREE must be appropriate.
+Violation: The Head REFEREE may terminate the conversation to allow time for parties to cool down. A
+person with subsequent violations will not be allowed to interact with the Head REFEREE.
+6.8 Other Logistics
+SCORING ELEMENTS that leave the FIELD (other than through the opening at the base of the OUTPOST) are
+placed back into the FIELD approximately at the point of exit by FIELD STAFF (REFEREES, FTAs, or other staff
+working around the FIELD) at the earliest safe opportunity.
+ELEMENTS to leave the FIELD (see G405).
+An ARENA FAULT (an error in ARENA operation described in section 10.2 MATCH Replays) is not called for
+MATCHES that accidentally begin with damaged SCORING ELEMENTS. Damaged SCORING ELEMENTS are not
+replaced until the next ARENA reset period. DRIVE TEAMS should alert the FIELD STAFF to any missing or
+damaged SCORING ELEMENTS prior to the start of the MATCH but as noted in 6.3.4, the exact number of FUEL
+in the NEUTRAL ZONE may vary.
+Once the MATCH is over and the Head REFEREE determines that the FIELD is safe for FIELD STAFF and DRIVE
+TEAMS, they or their designee change the FIELD lights to green and DRIVE TEAMS may retrieve their ROBOT.
+Some MATCHES may include a short period afterward to allow FIELD staff to begin to clean the field to make it
+easier and safer for teams to collect their robot. This period is indicated with purple lights on the team signs
+and the word “clean” displayed. TEAMS are not allowed on the field during this time.
+During ARENA reset, the ARENA is cleared of ROBOTS and OPERATOR CONSOLES from the MATCH that just
+ended, ROBOTS and OPERATOR CONSOLES for the subsequent MATCH are loaded into the ARENA by DRIVE
+TEAMS, and FIELD STAFF reset ARENA elements.
+FIRST Robotics Competition uses 3 words in the context of how durations and actions are assessed with
+regards to evaluation of rules and assignment of violations. These words provide general guidance to describe
+benchmarks to be used across the program. It is not the intent for REFEREES to provide a count during the
+time periods.
+− MOMENTARY describes durations that are fewer than approximately 3 seconds.
+− CONTINUOUS describes durations that are more than approximately 10 seconds.
+− REPEATED describes actions that happen more than once within a MATCH.
