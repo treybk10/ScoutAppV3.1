@@ -31,6 +31,8 @@ MAX_FRAMES = 130
 st.set_page_config(page_title="Match Scouter", layout="centered")
 selectedAlliance = st.title("FRC Scouting Master")
 
+VIDEO_PATH = st.file_uploader("Please Upload Match Video", type=["mp4", "mov"])
+
 allianceOptions = ["Red", "Blue"]
 targetTeam = st.text_input("Please enter team number")
 st.multiselect("Please select alliance", allianceOptions)
