@@ -17,7 +17,7 @@ if st.button("Load matches"):
     response = client.chat.send(
         model="google/gemini-3.1-pro-preview",
         messages=[
-            {"role": "user", "content": """Hi!"""}
+            {"role": "user", "content": """Please give me pthon code to be able to import a youtube link and export a .mp4 file of that youtube video. Please use streamlit also. Don't use yt_dlp"""}
         ],
         stream=False,
     )
