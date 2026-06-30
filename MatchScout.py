@@ -124,7 +124,6 @@ def extract_frames_from_video(video_path, max_frames=MAX_FRAMES):
     frame_interval = max(1, total_frames // max_frames)
 
     base64_frames = []
-    base64_frames_2 = []
     frame_count = 0
 
     print(f"Extracting frames from {video_path}...")
@@ -252,3 +251,6 @@ if st.button("Scout match"):
     except Exception as e:
         print(f"\nAn error occurred: {e}")
         st.text(f"\nAn error has occurred. {e}")
+
+if (VIDEO_PATH is not None):
+    st.video(VIDEO_PATH)
