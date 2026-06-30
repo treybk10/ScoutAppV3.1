@@ -12,7 +12,7 @@ HACK_CLUB_API_KEY = st.secrets["API_KEY"]
 HACK_CLUB_BASE_URL = "https://ai.hackclub.com/proxy/v1" 
 
 # pro doesn't work?
-MODEL_NAME = "google/gemini-2.5-pro" 
+MODEL_NAME = "google/gemini-2.5-flash" 
 
 VIDEO_PATH = ""
 
@@ -29,7 +29,7 @@ FUEL_URL = os.path.join(BASE_DIR, "Other Files", "Feul.png")
 
 
 #Max frames AI reads
-MAX_FRAMES = 160
+MAX_FRAMES = 180
 
 st.set_page_config(page_title="Match Scouter", layout="centered")
 selectedAlliance = st.title("FRC Scouting Master")
@@ -114,7 +114,7 @@ def extract_frames_from_video(video_path, max_frames=MAX_FRAMES):
             frame = cv2.resize(frame, (512, 512))
 
             # reduced quality to reduce ai payload
-            encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 80]
+            encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 85]
             _, buffer = cv2.imencode(".jpg", frame, encode_param)
 
             base64_string = base64.b64encode(buffer).decode("utf-8")
