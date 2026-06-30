@@ -29,7 +29,7 @@ FUEL_URL = os.path.join(BASE_DIR, "Other Files", "Feul.png")
 
 
 #Max frames AI reads
-MAX_FRAMES = 140
+MAX_FRAMES = 135
 
 st.set_page_config(page_title="Match Scouter", layout="centered")
 selectedAlliance = st.title("FRC Scouting Master")
