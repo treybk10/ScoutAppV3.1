@@ -33,7 +33,7 @@ MetalMuscleLogo = os.path.join(BASE_DIR, "Other Files", "1506-logo.jpg")
 
 
 #Max frames AI reads
-MAX_FRAMES = 140
+MAX_FRAMES = 135
 
 st.image(MetalMuscleLogo)
 
