@@ -86,7 +86,13 @@ def encode_image_to_base64(file_path):
     """Converts a local image file into a Base64 string for the API payload."""
     if os.path.exists(file_path):
         with open(file_path, "rb") as image_file:
-            return base64.b64encode(image_file.read()).decode("utf-8")
+
+            img = cv2.imread(file_path)
+
+            encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 75]
+            success, buffer = cv2.imencode(".jpg", img, encode_param)
+
+            return base64.b64encode(buffer).decode("utf-8")
     else:
         raise FileNotFoundError(f"Missing critical app asset: {file_path}")
 
