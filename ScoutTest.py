@@ -12,7 +12,7 @@ HACK_CLUB_BASE_URL = "https://ai.hackclub.com/proxy/v1"
 # FIX 1: Change to a valid model name
 MODEL_NAME = "google/gemini-2.5-flash" 
 
-VIDEO_PATH = ""
+VIDEO_PATH = "/workspaces/ScoutAppV3.1/MatchVideo/IMG_8658.MOV"
 
 MANUAL_PATH = "/workspaces/ScoutAppV3.1/Other Files/2026GameRebuilt.txt"
 
@@ -30,8 +30,6 @@ MAX_FRAMES = 20
 
 st.set_page_config(page_title="Match Scouter", layout="centered")
 selectedAlliance = st.title("FRC Scouting Master")
-
-VIDEO_PATH = st.file_uploader("Please Upload Match Video", type=["mp4", "mov"])
 
 allianceOptions = ["Red", "Blue"]
 targetTeam = st.text_input("Please enter team number")
@@ -118,7 +116,7 @@ def extract_frames_from_video(video_path, max_frames=MAX_FRAMES):
             frame = cv2.resize(frame, (512, 512))
 
             # FIX 3: Lower JPEG quality to 70% to drastically reduce file size
-            encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 70]
+            encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 85]
             _, buffer = cv2.imencode(".jpg", frame, encode_param)
 
             base64_string = base64.b64encode(buffer).decode("utf-8")
@@ -145,10 +143,18 @@ client = OpenAI(
 )
 if st.button("Load matches"):
     try:
+        # 1. Extract video frames
         frames = extract_frames_from_video(VIDEO_PATH, MAX_FRAMES)
 
-        content_list = [{"type": "text", "text": prompt}]
+        # Helper function to encode local PNG images to Base64 strings
+        def encode_local_image(image_path):
+            if os.path.exists(image_path):
+                with open(image_path, "rb") as img_file:
+                    return base64.b64encode(img_file.read()).decode("utf-8")
+            else:
+                raise FileNotFoundError(f"Could not find image at {image_path}")
 
+        # 2. Load game rules text file
         if os.path.exists(MANUAL_PATH):
             with open(MANUAL_PATH, "r", encoding="utf-8", errors="ignore") as file:
                 game_rules_text = file.read()
@@ -156,40 +162,24 @@ if st.button("Load matches"):
         else:
             raise FileNotFoundError(f"Could not find the file at {MANUAL_PATH}")
 
-        # 2. Combine your prompt with the game rules text content
+        # 3. Combine prompt with game rules
         full_text_prompt = f"{prompt}\n\n--- REFERENCE GAME RULES FROM MANUAL ---\n{game_rules_text}"
 
-        # 3. Create the payload content list
-        content_list.append([{"type": "text", "text": full_text_prompt}])
+        # FIX 1: Initialize content_list as a clean, flat list of dictionaries
+        content_list = [{"type": "text", "text": full_text_prompt}]
 
-        content_list.append([{
-            "type": "image_url",
-                    "image_url": {
-                        "url": TRENCH_URL
-                    }
-        }])
-        content_list.append([{
-            "type": "image_url",
-                    "image_url": {
-                        "url": HUB_URL
-                    }
-        }])
-        content_list.append([{
-            "type": "image_url",
-                    "image_url": {
-                        "url": BUMP_URL
-                    }
-        }])
-        content_list.append([{
-            "type": "image_url",
-                    "image_url": {
-                        "url": FEUL_URL
-                    }
-        }])
+        # FIX 2: Convert local game piece/field images to base64 data URIs
+        # (Using your defined variables TRENCH_URL, HUB_URL, etc.)
+        for img_path in [TRENCH_URL, HUB_URL, BUMP_URL, FEUL_URL]:
+            b64_img = encode_local_image(img_path)
+            content_list.append({
+                "type": "image_url",
+                "image_url": {
+                    "url": f"data:image/png;base64,{b64_img}"
+                }
+            })
 
-        print("Sending text data to Hack Club AI... Please wait.")
-
-
+        print("Adding video frames to payload...")
         for frame in frames:
             content_list.append({
                 "type": "image_url",
@@ -200,6 +190,7 @@ if st.button("Load matches"):
 
         print(f"Sending {len(frames)} frames to Hack Club AI ({MODEL_NAME})... Please wait.")
 
+        # 4. Create the completion request with the corrected payload
         response = client.chat.completions.create(
             model=MODEL_NAME,
             messages=[
@@ -212,8 +203,11 @@ if st.button("Load matches"):
 
         print("\n--- AI RESPONSE ---")
         print(response.choices[0].message.content)
-        st.text(response.choices[0].message.content)
+        
+        # PRO-TIP: Use st.markdown instead of st.text so your FRC scouting report 
+        # renders nicely with bolding, headers, and lists!
+        st.markdown(response.choices[0].message.content)
 
     except Exception as e:
         print(f"\nAn error occurred: {e}")
-        st.text(f"\nError")
+        st.error(f"An error occurred: {e}")
