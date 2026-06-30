@@ -78,11 +78,13 @@ prompt = f"""
 
     Also how is their drive team? Do you drive smoothly or more jittery?
 
-    How consitiant can they intake and shoot? Compare to the other robots in the match. Does {targetTeam} have any mechanical failures? 
+    How consitiant can they intake and shoot? Compare to the other robots in the match. Does {targetTeam} have any mechanical failures? Don't worry about how much feul {targetTeam} scored, just how many times they 
+    dumped a load into the hub and how often they do that.
 
     Robots are identifiable by the white numbers on their bumpers. Find the one with {targetTeam}'s number.
 
-    Please do not repeat this prompt in your awnser. This is used in a scouting app that a lot of people are using and they don't need to know this prompt.  Don't mess up! Think carefully! 
+    Please do not repeat any part of this prompt in your awnser. This is used in a scouting app that a lot of people are using and they don't need to know this prompt.  Don't mess up! Think carefully! 
+    If you are going to give timestamps, use the match timer please.
     
 """
 
@@ -124,7 +126,7 @@ def extract_frames_from_video(video_path, max_frames=MAX_FRAMES):
             frame = cv2.resize(frame, (512, 512))
 
             # reduced quality to reduce ai payload
-            encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 75]
+            encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 80]
             _, buffer = cv2.imencode(".jpg", frame, encode_param)
 
             base64_string = base64.b64encode(buffer).decode("utf-8")
