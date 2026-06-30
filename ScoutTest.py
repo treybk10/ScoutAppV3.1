@@ -14,16 +14,16 @@ HACK_CLUB_BASE_URL = "https://ai.hackclub.com/proxy/v1"
 # FIX 1: Change to a valid model name
 MODEL_NAME = "google/gemini-2.5-flash" 
 
-VIDEO_PATH = "/Users/treykeipert/Documents/GitHub/ScoutAppV3/MatchVideo/videoplayback.mp4"
+VIDEO_PATH = ""
 
-MANUAL_PATH = "/Users/treykeipert/Documents/GitHub/ScoutAppV3/Other Files/2026GameRebuilt.txt"
+MANUAL_PATH = "/workspaces/ScoutAppV3.1/Other Files/2026GameRebuilt.txt"
 
-TRENCH_URL = "/Users/treykeipert/Documents/GitHub/ScoutAppV3/Other Files/Trench.png"
-BUMP_URL = "/Users/treykeipert/Documents/GitHub/ScoutAppV3/Other Files/Bump.png"
-TOWER_URL = "/Users/treykeipert/Documents/GitHub/ScoutAppV3/Other Files/Tower.png"
-HUB_URL = "/Users/treykeipert/Documents/GitHub/ScoutAppV3/Other Files/Hub.png"
-DEPOT_URL = "/Users/treykeipert/Documents/GitHub/ScoutAppV3/Other Files/Depot.png"
-FEUL_URL = "/Users/treykeipert/Documents/GitHub/ScoutAppV3/Other Files/Feul.png"
+TRENCH_URL = "/workspaces/ScoutAppV3.1/Other Files/Trench.png"
+BUMP_URL = "/workspaces/ScoutAppV3.1/Other Files/Bump.png"
+TOWER_URL = "/workspaces/ScoutAppV3.1/Other Files/Tower.png"
+HUB_URL = "/workspaces/ScoutAppV3.1/Other Files/Hub.png"
+DEPOT_URL = "/workspaces/ScoutAppV3.1/Other Files/Depot.png"
+FEUL_URL = "/workspaces/ScoutAppV3.1/Other Files/Feul.png"
 
 
 
