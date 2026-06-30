@@ -20,7 +20,9 @@ MetalMuscleLogo = os.path.join(BASE_DIR, "More Files", "1506-logo.jpg")
 st.image(MetalMuscleLogo)
 
 st.set_page_config(page_title="Match Scouter", layout="centered")
+
 selectedAlliance = st.title("FRC Scouting Master")
+st.subheader("This is to help with alliance selection. Import your scouting data and a prompt for AI and it will give you a pick list!")
 st.badge("Please Note That This App Is Under Construction!", color="red")
 
 CSV_PATH = st.file_uploader("Please Upload Scouting Data (.csv fromat)", type=["csv"])
