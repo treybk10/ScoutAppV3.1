@@ -16,14 +16,16 @@ MODEL_NAME = "google/gemini-2.5-flash"
 
 VIDEO_PATH = ""
 
-MANUAL_PATH = "/workspaces/ScoutAppV3.1/Other Files/2026GameRebuilt.txt"
+BASE_DIR = os.path.dirname(__file__)
 
-TRENCH_URL = "/workspaces/ScoutAppV3.1/Other Files/Trench.png"
-BUMP_URL = "/workspaces/ScoutAppV3.1/Other Files/Bump.png"
-TOWER_URL = "/workspaces/ScoutAppV3.1/Other Files/Tower.png"
-HUB_URL = "/workspaces/ScoutAppV3.1/Other Files/Hub.png"
-DEPOT_URL = "/workspaces/ScoutAppV3.1/Other Files/Depot.png"
-FEUL_URL = "/workspaces/ScoutAppV3.1/Other Files/Feul.png"
+MANUAL_PATH = os.path.join(BASE_DIR, "Other Files", "2026GameRebuilt.txt")
+
+TRENCH_URL = os.path.join(BASE_DIR, "Other Files", "Trench.png")
+BUMP_URL = os.path.join(BASE_DIR, "Other Files", "Bump.png")
+TOWER_URL = os.path.join(BASE_DIR, "Other Files", "Tower.png")
+HUB_URL = os.path.join(BASE_DIR, "Other Files", "Hub.png")
+DEPOT_URL = os.path.join(BASE_DIR, "Other Files", "Depot.png")
+FUEL_URL = os.path.join(BASE_DIR, "Other Files", "Feul.png")
 
 
 
@@ -183,7 +185,7 @@ if st.button("Scout match"):
         content_list.append([{
             "type": "image_url",
                     "image_url": {
-                        "url": FEUL_URL
+                        "url": FUEL_URL
                     }
         }])
 
