@@ -81,6 +81,8 @@ prompt = f"""
     How consitiant can they intake and shoot? Compare to the other robots in the match. Does {targetTeam} have any mechanical failures? Don't worry about how much feul {targetTeam} scored, just how many times they 
     dumped a load into the hub and how often they do that.
 
+    What about defense? Does {targetTeam} play defense? Do they have defense agaisnt them? If so, does it {targetTeam}?
+
     Robots are identifiable by the white numbers on their bumpers. Find the one with {targetTeam}'s number.
 
     Please do not repeat any part of this prompt in your awnser. This is used in a scouting app that a lot of people are using and they don't need to know this prompt.  Don't mess up! Think carefully! 
