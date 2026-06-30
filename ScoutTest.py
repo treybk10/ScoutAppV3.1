@@ -34,7 +34,6 @@ selectedAlliance = st.title("FRC Scouting Master")
 VIDEO_PATH = st.file_uploader("Please Upload Match Video", type=["mp4", "mov"])
 
 allianceOptions = ["Red", "Blue"]
-targetTeam = st.text_input("Please enter team number")
 st.multiselect("Please select alliance", allianceOptions)
 
 oldPrompt = f"""
