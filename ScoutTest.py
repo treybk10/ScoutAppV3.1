@@ -29,7 +29,7 @@ FUEL_URL = os.path.join(BASE_DIR, "Other Files", "Feul.png")
 
 
 #Max frames AI reads
-MAX_FRAMES = 130
+MAX_FRAMES = 140
 
 st.set_page_config(page_title="Match Scouter", layout="centered")
 selectedAlliance = st.title("FRC Scouting Master")
@@ -75,6 +75,10 @@ prompt = f"""
     We will provide you with the information of the game as well as pictures of game elements and field elements.
 
     Please scout {targetTeam} and tell us how they perform in a match, where we could slow them down if we were against them, and how we could help them if we were with them.
+
+    Also how is their drive team? Do you drive smoothly or more jittery?
+
+    How consitiant can they intake and shoot? Any mechanical failures? 
 
     Robots are identifiable by the white numbers on their bumpers. Find the one with {targetTeam}'s number.
 
