@@ -114,7 +114,7 @@ def extract_frames_from_video(video_path, max_frames=MAX_FRAMES):
             frame = cv2.resize(frame, (512, 512))
 
             # reduced quality to reduce ai payload
-            encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 82]
+            encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 75]
             _, buffer = cv2.imencode(".jpg", frame, encode_param)
 
             base64_string = base64.b64encode(buffer).decode("utf-8")
