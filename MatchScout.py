@@ -3,6 +3,7 @@ import base64
 import os
 from openai import OpenAI
 import streamlit as st
+import random
 
 import tempfile
 
@@ -32,7 +33,7 @@ MetalMuscleLogo = os.path.join(BASE_DIR, "Other Files", "1506-logo.jpg")
 
 
 #Max frames AI reads
-MAX_FRAMES = 130
+MAX_FRAMES = 150
 
 st.image(MetalMuscleLogo)
 
@@ -87,7 +88,7 @@ prompt = f"""
     Also how is their drive team? Do you drive smoothly or more jittery?
 
     How consitiant can they intake and shoot? Compare to the other robots in the match. Does {targetTeam} have any mechanical failures? Don't worry about how much feul {targetTeam} scored, just how many times they 
-    dumped a load into the hub and how often they do that.
+    dumped a load into the hub and how often they do that. They only score inside their alliance zone.
 
     What about defense? Does {targetTeam} play defense? Do they have defense agaisnt them? If so, does it {targetTeam}?
 
@@ -123,6 +124,7 @@ def extract_frames_from_video(video_path, max_frames=MAX_FRAMES):
     frame_interval = max(1, total_frames // max_frames)
 
     base64_frames = []
+    base64_frames_2 = []
     frame_count = 0
 
     print(f"Extracting frames from {video_path}...")
@@ -136,7 +138,7 @@ def extract_frames_from_video(video_path, max_frames=MAX_FRAMES):
             frame = cv2.resize(frame, (512, 512))
 
             # reduced quality to reduce ai payload
-            encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 85]
+            encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 70]
             _, buffer = cv2.imencode(".jpg", frame, encode_param)
 
             base64_string = base64.b64encode(buffer).decode("utf-8")
