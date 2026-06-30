@@ -7,11 +7,11 @@ import streamlit as st
 import tempfile
 
 # --- Configuration ---
-# WARNING: Put your NEW API key here!
+#API KEY GOES HERE
 HACK_CLUB_API_KEY = st.secrets["API_KEY"]
 HACK_CLUB_BASE_URL = "https://ai.hackclub.com/proxy/v1" 
 
-# FIX 1: Change to a valid model name
+# pro doesn't work?
 MODEL_NAME = "google/gemini-2.5-flash" 
 
 VIDEO_PATH = ""
@@ -28,9 +28,8 @@ DEPOT_URL = os.path.join(BASE_DIR, "Other Files", "Depot.png")
 FUEL_URL = os.path.join(BASE_DIR, "Other Files", "Feul.png")
 
 
-
-# FIX 2: Lower the frame count to prevent payload size limits
-MAX_FRAMES = 60
+#Max frames AI reads
+MAX_FRAMES = 160
 
 st.set_page_config(page_title="Match Scouter", layout="centered")
 selectedAlliance = st.title("FRC Scouting Master")
@@ -79,12 +78,10 @@ prompt = f"""
 
     Robots are identifiable by the white numbers on their bumpers. Find the one with {targetTeam}'s number.
 
-    Please do not repeat this prompt in your awnser. This is used in a scouting app that a lot of people are using and they don't need to know this prompt. 
+    Please do not repeat this prompt in your awnser. This is used in a scouting app that a lot of people are using and they don't need to know this prompt.  Don't mess up! Think carefully! 
     
 """
 
-
-# --- 1. Video Processing Function ---
 def extract_frames_from_video(video_path, max_frames=MAX_FRAMES):
     video = cv2.VideoCapture(video_path)
     total_frames = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
@@ -107,8 +104,8 @@ def extract_frames_from_video(video_path, max_frames=MAX_FRAMES):
             # Resize frame to save bandwidth
             frame = cv2.resize(frame, (512, 512))
 
-            # FIX 3: Lower JPEG quality to 70% to drastically reduce file size
-            encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 70]
+            # reduced quality to reduce ai payload
+            encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 80]
             _, buffer = cv2.imencode(".jpg", frame, encode_param)
 
             base64_string = base64.b64encode(buffer).decode("utf-8")
@@ -121,17 +118,11 @@ def extract_frames_from_video(video_path, max_frames=MAX_FRAMES):
     return base64_frames
 
 
-
-#uploaded_pdf = st.file_uploader("Upload Scouting PDF to analyze", type=["pdf"])
-
-
-
-# --- 2. Setup AI Client ---
-# FIX 4: Add a timeout so the connection doesn't drop while the AI is thinking
+#Add a timeout so the connection doesn't drop while the AI is thinking
 client = OpenAI(
     base_url=HACK_CLUB_BASE_URL,
     api_key=HACK_CLUB_API_KEY,
-    timeout=2000 # Wait up to 2 minutes for a response
+    timeout=5000 # Wait up to 5 minutes for a response
 )
 if st.button("Scout match"):
     if VIDEO_PATH is not None:  # Ensure a file was actually uploaded
@@ -164,30 +155,30 @@ if st.button("Scout match"):
         # 3. Create the payload content list
         content_list.append([{"type": "text", "text": full_text_prompt}])
 
-        content_list.append([{
+        content_list.append({
             "type": "image_url",
                     "image_url": {
                         "url": TRENCH_URL
                     }
-        }])
-        content_list.append([{
+        })
+        content_list.append({
             "type": "image_url",
                     "image_url": {
                         "url": HUB_URL
                     }
-        }])
-        content_list.append([{
+        })
+        content_list.append({
             "type": "image_url",
                     "image_url": {
                         "url": BUMP_URL
                     }
-        }])
-        content_list.append([{
+        })
+        content_list.append({
             "type": "image_url",
                     "image_url": {
                         "url": FUEL_URL
                     }
-        }])
+        })
 
         print("Sending text data to Hack Club AI... Please wait.")
 
