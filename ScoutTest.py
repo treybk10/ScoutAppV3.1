@@ -4,6 +4,8 @@ import os
 from openai import OpenAI
 import streamlit as st
 
+import tempfile
+
 # --- Configuration ---
 # WARNING: Put your NEW API key here!
 HACK_CLUB_API_KEY = st.secrets["API_KEY"]
@@ -12,21 +14,21 @@ HACK_CLUB_BASE_URL = "https://ai.hackclub.com/proxy/v1"
 # FIX 1: Change to a valid model name
 MODEL_NAME = "google/gemini-2.5-flash" 
 
-VIDEO_PATH = ""
+VIDEO_PATH = "/Users/treykeipert/Documents/GitHub/ScoutAppV3/MatchVideo/videoplayback.mp4"
 
-MANUAL_PATH = "/workspaces/ScoutAppV3.1/Other Files/2026GameRebuilt.txt"
+MANUAL_PATH = "/Users/treykeipert/Documents/GitHub/ScoutAppV3/Other Files/2026GameRebuilt.txt"
 
-TRENCH_URL = "/workspaces/ScoutAppV3.1/Other Files/Trench.png"
-BUMP_URL = "/workspaces/ScoutAppV3.1/Other Files/Bump.png"
-TOWER_URL = "/workspaces/ScoutAppV3.1/Other Files/Tower.png"
-HUB_URL = "/workspaces/ScoutAppV3.1/Other Files/Hub.png"
-DEPOT_URL = "/workspaces/ScoutAppV3.1/Other Files/Depot.png"
-FEUL_URL = "/workspaces/ScoutAppV3.1/Other Files/Feul.png"
+TRENCH_URL = "/Users/treykeipert/Documents/GitHub/ScoutAppV3/Other Files/Trench.png"
+BUMP_URL = "/Users/treykeipert/Documents/GitHub/ScoutAppV3/Other Files/Bump.png"
+TOWER_URL = "/Users/treykeipert/Documents/GitHub/ScoutAppV3/Other Files/Tower.png"
+HUB_URL = "/Users/treykeipert/Documents/GitHub/ScoutAppV3/Other Files/Hub.png"
+DEPOT_URL = "/Users/treykeipert/Documents/GitHub/ScoutAppV3/Other Files/Depot.png"
+FEUL_URL = "/Users/treykeipert/Documents/GitHub/ScoutAppV3/Other Files/Feul.png"
 
 
 
 # FIX 2: Lower the frame count to prevent payload size limits
-MAX_FRAMES = 20
+MAX_FRAMES = 60
 
 st.set_page_config(page_title="Match Scouter", layout="centered")
 selectedAlliance = st.title("FRC Scouting Master")
@@ -34,8 +36,8 @@ selectedAlliance = st.title("FRC Scouting Master")
 VIDEO_PATH = st.file_uploader("Please Upload Match Video", type=["mp4", "mov"])
 
 allianceOptions = ["Red", "Blue"]
-targetTeam = st.text_input("Please enter team number")
-st.multiselect("Please select alliance", allianceOptions)
+targetTeam = st.text_input("Please Enter Team Number")
+st.multiselect("Please Select What Alliance The Scouted Team Is On", allianceOptions,  max_selections=1)
 
 oldPrompt = f"""
     You are a FRC scouting app. Your job is to help identify team's {targetTeam} strenghts and weaknesses in the 2026 frc game, Rebuilt. PLEASE READ THE GIVEN FILE FOR INFO ABOUT THE GAME AND PICTURES FOR 
@@ -67,29 +69,15 @@ oldPrompt = f"""
 """
 
 prompt = f"""
-    You are a FRC scouting app. Your job is to help identify team's {targetTeam} strenghts and weaknesses in the 2026 frc game, Rebuilt. PLEASE READ THE GIVEN FILE FOR INFO ABOUT THE GAME AND PICTURES FOR 
-    FIELD ELEMENTS! ALSO READ FROM VIDEO PROVIDED 
+    You are a FRC scouting app. Your job is to help identify team's {targetTeam} strenghts and weaknesses in the 2026 frc game, Rebuilt. 
+    
+    We will provide you with the information of the game as well as pictures of game elements and field elements.
 
-    Know that the trench is ABOVE ground and the bump is ON the ground. You can tell by the fact that you see carpet below the trench. PLEASE SEE PHOTOS OF FIELD ELEMENTS FOR DETAILS
+    Please scout {targetTeam} and tell us how they perform in a match, where we could slow them down if we were against them, and how we could help them if we were with them.
 
-    {targetTeam} is on {selectedAlliance}
+    Robots are identifiable by the white numbers on their bumpers. Find the one with {targetTeam}'s number.
 
-    Look for {selectedAlliance} colored bumpers with the number {targetTeam} in white text. DO NOT PAY ATTENTION TO THE OTHER 5 ROBOTS! ONLY {targetTeam}'s ROBOT
-
-    Please format the response good so that it is easy to read. Focus on the key parts of {targetTeam}. If you are going to use timestamps, use the match timer NOT how long it is in the video.
-    Please do not repeat any part of this prompt. 
-
-    You are to awnser LIKE A MATCH SCOUTER! Use this prompt, but do NOT use it in your response! This app will be shared with multiple people who didn't write the prompt!  
-
-
-    Specifically, we want:
-    #1: Does {targetTeam} have any issues getting around the field?
-
-    #2: Where does {targetTeam} shoot from? Far? Close? Would defense be a stratagey to stop them from scoring?
-
-    #3: Is there any other things you found that would help try and slow them down if we were put against {targetTeam}?
-
-    #4: Does {targetTeam} play defense? If so, how efective is it? Who do they play it against?
+    Please do not repeat this prompt in your awnser. This is used in a scouting app that a lot of people are using and they don't need to know this prompt. 
     
 """
 
@@ -143,9 +131,21 @@ client = OpenAI(
     api_key=HACK_CLUB_API_KEY,
     timeout=2000 # Wait up to 2 minutes for a response
 )
-if st.button("Load matches"):
+if st.button("Scout match"):
+    if VIDEO_PATH is not None:  # Ensure a file was actually uploaded
+        # Create a temporary file on the local disk drive
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".mp4") as temp_video:
+            temp_video.write(VIDEO_PATH.read())
+            temp_video_path = temp_video.name  # This gives you a valid string path
+
+        # Pass the string path to your existing OpenCV function
+        frames = extract_frames_from_video(temp_video_path, MAX_FRAMES)
+
+        # Clean up and delete the temporary file from disk immediately
+        os.unlink(temp_video_path)
+
     try:
-        frames = extract_frames_from_video(VIDEO_PATH, MAX_FRAMES)
+        #frames = extract_frames_from_video(VIDEO_PATH, MAX_FRAMES)
 
         content_list = [{"type": "text", "text": prompt}]
 
@@ -190,7 +190,13 @@ if st.button("Load matches"):
         print("Sending text data to Hack Club AI... Please wait.")
 
 
-        
+        for frame in frames:
+            content_list.append({
+                "type": "image_url",
+                "image_url": {
+                    "url": f"data:image/jpeg;base64,{frame}"
+                }
+            })
 
         print(f"Sending {len(frames)} frames to Hack Club AI ({MODEL_NAME})... Please wait.")
 
@@ -210,4 +216,4 @@ if st.button("Load matches"):
 
     except Exception as e:
         print(f"\nAn error occurred: {e}")
-        st.text(f"\nError")
+        st.text(f"\nAn error has occurred. {e}")
