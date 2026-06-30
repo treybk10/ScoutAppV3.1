@@ -12,7 +12,7 @@ HACK_CLUB_API_KEY = st.secrets["API_KEY"]
 HACK_CLUB_BASE_URL = "https://ai.hackclub.com/proxy/v1" 
 
 # pro doesn't work?
-MODEL_NAME = "google/gemini-2.5-flash" 
+MODEL_NAME = "google/gemini-2.5-pro" 
 
 VIDEO_PATH = ""
 
