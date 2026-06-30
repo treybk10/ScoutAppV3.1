@@ -82,6 +82,15 @@ prompt = f"""
     
 """
 
+def encode_image_to_base64(file_path):
+    """Converts a local image file into a Base64 string for the API payload."""
+    if os.path.exists(file_path):
+        with open(file_path, "rb") as image_file:
+            return base64.b64encode(image_file.read()).decode("utf-8")
+    else:
+        raise FileNotFoundError(f"Missing critical app asset: {file_path}")
+
+
 def extract_frames_from_video(video_path, max_frames=MAX_FRAMES):
     video = cv2.VideoCapture(video_path)
     total_frames = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
@@ -124,6 +133,13 @@ client = OpenAI(
     api_key=HACK_CLUB_API_KEY,
     timeout=5000 # Wait up to 5 minutes for a response
 )
+
+
+b64_TRENCH = encode_image_to_base64(TRENCH_URL)
+b64_BUMP = encode_image_to_base64(BUMP_URL)
+b64_HUB = encode_image_to_base64(HUB_URL)
+b64_FUEL = encode_image_to_base64(FUEL_URL)
+
 if st.button("Scout match"):
     if VIDEO_PATH is not None:  # Ensure a file was actually uploaded
         # Create a temporary file on the local disk drive
@@ -155,29 +171,30 @@ if st.button("Scout match"):
         # 3. Create the payload content list
         content_list.append([{"type": "text", "text": full_text_prompt}])
 
+
         content_list.append({
             "type": "image_url",
-                    "image_url": {
-                        "url": TRENCH_URL
-                    }
+            "image_url": {
+                "url": f"data:image/png;base64,{b64_BUMP}"
+            }
         })
         content_list.append({
             "type": "image_url",
-                    "image_url": {
-                        "url": HUB_URL
-                    }
+            "image_url": {
+                "url": f"data:image/png;base64,{b64_FUEL}"
+            }
         })
         content_list.append({
             "type": "image_url",
-                    "image_url": {
-                        "url": BUMP_URL
-                    }
+            "image_url": {
+                "url": f"data:image/png;base64,{b64_HUB}"
+            }
         })
         content_list.append({
             "type": "image_url",
-                    "image_url": {
-                        "url": FUEL_URL
-                    }
+            "image_url": {
+                "url": f"data:image/png;base64,{b64_TRENCH}"
+            }
         })
 
         print("Sending text data to Hack Club AI... Please wait.")
