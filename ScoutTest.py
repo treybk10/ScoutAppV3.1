@@ -162,17 +162,35 @@ if st.button("Load matches"):
         # 3. Create the payload content list
         content_list.append([{"type": "text", "text": full_text_prompt}])
 
-        
+        content_list.append([{
+            "type": "image_url",
+                    "image_url": {
+                        "url": TRENCH_URL
+                    }
+        }])
+        content_list.append([{
+            "type": "image_url",
+                    "image_url": {
+                        "url": HUB_URL
+                    }
+        }])
+        content_list.append([{
+            "type": "image_url",
+                    "image_url": {
+                        "url": BUMP_URL
+                    }
+        }])
+        content_list.append([{
+            "type": "image_url",
+                    "image_url": {
+                        "url": FEUL_URL
+                    }
+        }])
+
         print("Sending text data to Hack Club AI... Please wait.")
 
 
-        for frame in frames:
-            content_list.append({
-                "type": "image_url",
-                "image_url": {
-                    "url": f"data:image/jpeg;base64,{frame}"
-                }
-            })
+        
 
         print(f"Sending {len(frames)} frames to Hack Club AI ({MODEL_NAME})... Please wait.")
 
