@@ -28,9 +28,13 @@ HUB_URL = os.path.join(BASE_DIR, "Other Files", "Hub.png")
 DEPOT_URL = os.path.join(BASE_DIR, "Other Files", "Depot.png")
 FUEL_URL = os.path.join(BASE_DIR, "Other Files", "Feul.png")
 
+MetalMuscleLogo = os.path.join(BASE_DIR, "Other Files", "1506-logo.jpg")
+
 
 #Max frames AI reads
 MAX_FRAMES = 130
+
+st.image(MetalMuscleLogo)
 
 st.set_page_config(page_title="Match Scouter", layout="centered")
 selectedAlliance = st.title("FRC Scouting Master")

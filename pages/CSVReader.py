@@ -15,6 +15,9 @@ MODEL_NAME = "google/gemini-2.5-pro"
 BASE_DIR = os.path.dirname(__file__)
 
 MANUAL_PATH = os.path.join(BASE_DIR, "More Files", "2026GameRebuilt.txt")
+MetalMuscleLogo = os.path.join(BASE_DIR, "More Files", "1506-logo.jpg")
+
+st.image(MetalMuscleLogo)
 
 st.set_page_config(page_title="Match Scouter", layout="centered")
 selectedAlliance = st.title("FRC Scouting Master")
