@@ -20,6 +20,7 @@ BASE_DIR = os.path.dirname(__file__)
 
 MANUAL_PATH = os.path.join(BASE_DIR, "Other Files", "2026GameRebuilt.txt")
 
+
 TRENCH_URL = os.path.join(BASE_DIR, "Other Files", "Trench.png")
 BUMP_URL = os.path.join(BASE_DIR, "Other Files", "Bump.png")
 TOWER_URL = os.path.join(BASE_DIR, "Other Files", "Tower.png")
@@ -33,6 +34,9 @@ MAX_FRAMES = 130
 
 st.set_page_config(page_title="Match Scouter", layout="centered")
 selectedAlliance = st.title("FRC Scouting Master")
+
+st.badge("Please Note That This App Is Under Construction!", color="red")
+
 
 VIDEO_PATH = st.file_uploader("Please Upload Match Video", type=["mp4", "mov"])
 
@@ -170,7 +174,8 @@ if st.button("Scout match"):
     try:
         #frames = extract_frames_from_video(VIDEO_PATH, MAX_FRAMES)
 
-        content_list = [{"type": "text", "text": prompt}]
+        #Shouldn't need this.
+        #content_list = [{"type": "text", "text": prompt}]
 
         if os.path.exists(MANUAL_PATH):
             with open(MANUAL_PATH, "r", encoding="utf-8", errors="ignore") as file:
@@ -183,7 +188,7 @@ if st.button("Scout match"):
         full_text_prompt = f"{prompt}\n\n--- REFERENCE GAME RULES FROM MANUAL ---\n{game_rules_text}"
 
         # 3. Create the payload content list
-        content_list.append([{"type": "text", "text": full_text_prompt}])
+        content_list = [{"type": "text", "text": full_text_prompt}]
 
 
         content_list.append({
