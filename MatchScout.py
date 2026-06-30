@@ -33,7 +33,7 @@ MetalMuscleLogo = os.path.join(BASE_DIR, "Other Files", "1506-logo.jpg")
 
 
 #Max frames AI reads
-MAX_FRAMES = 150
+MAX_FRAMES = 140
 
 st.image(MetalMuscleLogo)
 
@@ -106,7 +106,7 @@ def encode_image_to_base64(file_path):
 
             img = cv2.imread(file_path)
 
-            encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 75]
+            encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 55]
             success, buffer = cv2.imencode(".jpg", img, encode_param)
 
             return base64.b64encode(buffer).decode("utf-8")
