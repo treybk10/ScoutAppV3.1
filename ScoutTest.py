@@ -78,7 +78,7 @@ prompt = f"""
 
     Also how is their drive team? Do you drive smoothly or more jittery?
 
-    How consitiant can they intake and shoot? Any mechanical failures? 
+    How consitiant can they intake and shoot? Compare to the other robots in the match. Does {targetTeam} have any mechanical failures? 
 
     Robots are identifiable by the white numbers on their bumpers. Find the one with {targetTeam}'s number.
 
