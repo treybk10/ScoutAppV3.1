@@ -29,6 +29,7 @@ HUB_URL = os.path.join(BASE_DIR, "Other Files", "Hub.png")
 DEPOT_URL = os.path.join(BASE_DIR, "Other Files", "Depot.png")
 FUEL_URL = os.path.join(BASE_DIR, "Other Files", "Feul.png")
 
+st.set_page_config(page_title="Metal Muscle Scouting", layout="centered")
 MetalMuscleLogo = os.path.join(BASE_DIR, "Other Files", "1506-logo.jpg")
 
 

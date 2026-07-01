@@ -24,6 +24,7 @@ headers = {
 
 BASE_DIR = os.path.dirname(__file__)
 
+st.set_page_config(page_title="Metal Muscle Scouting", layout="centered")
 MetalMuscleLogo = os.path.join(BASE_DIR, "More Files", "1506-logo.jpg")
 
 st.image(MetalMuscleLogo)

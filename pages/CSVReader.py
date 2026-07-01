@@ -17,6 +17,7 @@ BASE_DIR = os.path.dirname(__file__)
 MANUAL_PATH = os.path.join(BASE_DIR, "More Files", "2026GameRebuilt.txt")
 MetalMuscleLogo = os.path.join(BASE_DIR, "More Files", "1506-logo.jpg")
 
+st.set_page_config(page_title="Metal Muscle Scouting", layout="centered")
 st.image(MetalMuscleLogo)
 
 selectedAlliance = st.title("FRC Scouting Master")
