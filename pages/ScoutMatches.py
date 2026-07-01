@@ -102,7 +102,7 @@ if st.session_state.selected_team_state:
 
         robo_shooter_type = st.multiselect("Shooter type: ", shooter_types, max_selections=1)
         robo_hopper_size = st.select_slider("Hopper size (roughly)", ["Small (<30)", "Medium (31-60)", "Large (>61)"])
-        robo_has_scored = st.toggle("Robot has scored")
+        robo_has_scored = st.toggle("Robot has scored", value=True)
         if robo_has_scored:
             robo_accuracy = st.slider("Shooter accuracy %", min_value=0, max_value=100, step=1, value=50)
             robo_throughput = st.multiselect("Robot shooting speed", ["Very Slow", "Below Average", "Average", "Above Average", "Very Quick"])
