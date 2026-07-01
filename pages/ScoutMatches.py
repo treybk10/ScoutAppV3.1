@@ -109,7 +109,7 @@ if st.session_state.selected_team_state:
         if not robo_has_scored:
             robo_accuracy = 0
             robo_throughput = "They didn't score"
-        robo_cycle_time = st.select_slider("Robot cycle time", ["Like 1506 at Marysville :) (includes mechanical failures)", "It's ok, but could be better", "Average", "Good", "Great!", "Equivalent to High Tide"])
+        robo_cycle_time = st.select_slider("Robot cycle time", ["Terrible (includes mechanical failures)", "It's ok, but could be better", "Average", "Good", "Great!", "Can't Do Better"])
 
         robo_driving = st.select_slider("How fluid is their driving?", ["Not real sure what they're doing", "Mechanical failure that hinders drive performance", "Could be better", "They did great!", "Couldn't be better"])
 
@@ -155,7 +155,7 @@ if st.session_state.selected_team_state:
                 "Robot Auto Climb": robo_auto_climb,
                 "Robot Shooter Type": robo_shooter_type,
                 "Robot Hopper Size": robo_hopper_size,
-                "Robot Has Scored": robo_has_scored,
+                "Robot Has Scored Fuel": robo_has_scored,
                 "Robot Accuracy": robo_accuracy,
                 "Robot Throughput": robo_throughput,
                 "Robot Cycle Time": robo_cycle_time,
