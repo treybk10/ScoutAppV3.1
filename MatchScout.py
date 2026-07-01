@@ -37,8 +37,7 @@ MAX_FRAMES = 135
 
 st.image(MetalMuscleLogo)
 
-st.set_page_config(page_title="Match Scouter", layout="centered")
-selectedAlliance = st.title("FRC Scouting Master")
+st.title("FRC Scouting Master")
 
 st.badge("Please Note That This App Is Under Construction!", color="red")
 
@@ -47,7 +46,7 @@ VIDEO_PATH = st.file_uploader("Please Upload Match Video", type=["mp4", "mov"])
 
 allianceOptions = ["Red", "Blue"]
 targetTeam = st.text_input("Please Enter Team Number")
-st.multiselect("Please Select What Alliance The Scouted Team Is On", allianceOptions,  max_selections=1)
+selectedAlliance = st.multiselect("Please Select What Alliance The Scouted Team Is On", allianceOptions,  max_selections=1)
 
 oldPrompt = f"""
     You are a FRC scouting app. Your job is to help identify team's {targetTeam} strenghts and weaknesses in the 2026 frc game, Rebuilt. PLEASE READ THE GIVEN FILE FOR INFO ABOUT THE GAME AND PICTURES FOR 
