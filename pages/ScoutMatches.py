@@ -32,7 +32,8 @@ st.image(MetalMuscleLogo)
 selectedAlliance = st.title("FRC Scouting Master")
 st.subheader("Scout Matches!")
 
-st.badge("Please Know That This Page Does Not Work Yet!", color="red", icon="🚨")
+st.badge("Please Note That This App Is Under Construction!", color="red")
+st.badge("Matches for now are only for 2026 Michigan State Cahmpionship DTE field", color="red")
 
 qualMatch = st.text_input("Please enter match number:")
 allianceOptions = ["Red", "Blue"]
