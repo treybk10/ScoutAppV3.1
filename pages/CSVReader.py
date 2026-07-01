@@ -27,7 +27,7 @@ st.badge("Please Note That This App Is Under Construction!", color="red")
 CSV_PATH = st.file_uploader("Please Upload Scouting Data (.csv fromat)", type=["csv"])
 
 user_prompt = st.text_input("Please enter prompt for AI")
-base_prompt = f"You are a FRC scouter. Your job is to take the given files for the 2026 frc game rebuilt and figure out who would be the best robot to pick based on the other prompt. ONLY USE TEAMS FROM THE GIVEN LIST!"
+base_prompt = f"You are a FRC scouter. Your job is to take the given files for the 2026 frc game rebuilt and figure out who would be the best robot to pick based on the other prompt. Unless otherwise stated, climb doesn't really matter. ONLY USE TEAMS FROM THE GIVEN LIST!"
 
 
 #Add a timeout so the connection doesn't drop while the AI is thinking

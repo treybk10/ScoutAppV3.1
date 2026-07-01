@@ -1,18 +1,19 @@
 import os
 import streamlit as st
 import requests
+import pandas as pd
 
 #session state for streamlit
 if "found_teams" not in st.session_state:
     st.session_state.found_teams = False
 if "selected_team_state" not in st.session_state:
     st.session_state.selected_team_state = []
+if "entered_data" not in st.session_state:
+    st.session_state.entered_data = []
 if "red_teams" not in st.session_state:
     st.session_state.red_teams = []
 if "blue_teams" not in st.session_state:
     st.session_state.blue_teams = []
-
-
 
 TBA_API_KEY = st.secrets["TBA_KEY"]
 
@@ -80,7 +81,7 @@ if st.session_state.found_teams:
         for teams in st.session_state.blue_teams:
             st.write(teams)
 
-    selected_team = st.multiselect("Please select team:", wanted_teams, key="selected_team_state")
+    selected_team = st.multiselect("Please select team:", wanted_teams, key="selected_team_state", max_selections=1)
 
 if st.session_state.selected_team_state:
     st.subheader("Auto!")
@@ -90,24 +91,29 @@ if st.session_state.selected_team_state:
         if "Center" in starting_auto:
             center_intake = st.toggle("Intaked extra fuel?")
             center_shoot = st.toggle("Shot any fuel?")
+            neutral_passes = 0
         else:
             neutral_passes = st.number_input("Number of passes to neutral zone", step=1)
+            center_intake = False
+            center_shoot = False
         robo_auto_climb = st.toggle("Climb in auto")
 
         st.subheader("Tele-op!")
 
-        robo_shooter_type = st.multiselect("Shooter type: ", shooter_types)
+        robo_shooter_type = st.multiselect("Shooter type: ", shooter_types, max_selections=1)
         robo_hopper_size = st.select_slider("Hopper size (roughly)", ["Small (<30)", "Medium (31-60)", "Large (>61)"])
         robo_accuracy = st.slider("Shooter accuracy %", min_value=0, max_value=100, step=1, value=50)
         robo_cycle_time = st.select_slider("Robot cycle time", ["Like 1506 at Marysville :) (includes mechanical failures)", "It's ok, but could be better", "Average", "Good", "Great!", "Equivalent to High Tide"])
 
         robo_driving = st.select_slider("How fluid is their driving?", ["Not real sure what they're doing", "Mechanical failure that hinders drive performance", "Could be better", "They did great!", "Couldn't be better"])
 
-        robo_intake = st.multiselect("How do they intake? (Can select multiple)", ["Floor", "Outpost/Human Player"])
+        robo_intake = st.multiselect("How do they intake?", ["Floor", "Outpost/Human Player", "Both"], max_selections=1)
         if "Floor" in robo_intake:
-            robo_intake = st.select_slider("How's the intake?", ["There's an intake?", "Jammed several times", "Average", "Awesome!"])
+            robo_intake_rating = st.select_slider("How's the intake?", ["There's an intake?", "Jammed several times", "Average", "Awesome!"])
+        if "Floor" not in robo_intake:
+            robo_intake_rating = "Can't intake from floor"
 
-        st.multiselect("When the hub is inactive, what do they do? (Can select more that one)", ["Nothing", "Defense", "Clear opposing alliances fuel", "Pass/Collect fuel"])
+        robo_do_when_inactive = st.multiselect("When the hub is inactive, what do they do? (Can select more that one)", ["Nothing", "Defense", "Clear opposing alliances fuel", "Pass/Collect fuel"])
 
         robo_sotm = st.toggle("Shoot on the move?")
         robo_trench = st.toggle("Did the robot drive under the trench?")
@@ -116,10 +122,60 @@ if st.session_state.selected_team_state:
         robo_play_defense = st.toggle("Did they play defense?")
         if robo_play_defense:
             robo_defense_effeciency = st.select_slider("How effecient was their defense?", ["Hurt more than helped", "It's ok", "Great!", "Amazing!"])
+        if not robo_play_defense:
+            robo_defense_effeciency = "No defense"
+
         robo_had_defense = st.toggle("Did anyone play defense against them?")
         if robo_had_defense:
             robo_had_defense_rating = st.select_slider("How much did defense hurt them?", ["Wait, what defense?", "It kinda did", "Significantly hurt them", "Cost them the match"])
             robo_played_defense_on_team = st.text_input("Who played defense on them?")
+        if not robo_had_defense:
+            robo_had_defense_rating = "No defense against them"
+            robo_played_defense_on_team = "No one"
+        robo_tele_climb = st.toggle("Climb in tele-op")
 
 
         robo_extra = st.text_area("Anything else we should know about this match?")
+
+        if st.button("Save match results"):
+            #st.session_state.entered_data = [st.session_state.selected_team_state, qualMatch, starting_auto, center_intake, center_shoot, neutral_passes, robo_auto_climb, robo_shooter_type, robo_hopper_size, robo_accuracy, robo_cycle_time, robo_driving, robo_intake, robo_intake_rating, robo_do_when_inactive, robo_sotm, robo_trench, robo_bump, robo_play_defense, robo_defense_effeciency, robo_had_defense, robo_had_defense_rating, robo_played_defense_on_team, robo_tele_climb, robo_extra]
+            match_data_entered = {
+                "Team": st.session_state.selected_team_state,
+                "Qual Number": qualMatch,
+                "Auto Location": starting_auto,
+                "Center Intake": center_intake,
+                "Center Shoot": center_shoot,
+                "Neutral Passes": neutral_passes,
+                "Robot Auto Climb": robo_auto_climb,
+                "Robot Shooter Type": robo_shooter_type,
+                "Robot Hopper Size": robo_hopper_size,
+                "Robot Accuracy": robo_accuracy,
+                "Robot Cycle Time": robo_cycle_time,
+                "Robot Driving Rating": robo_driving,
+                "Robot Intake": robo_intake,
+                "Robot Intake Rating": robo_intake_rating,
+                "Robot Does When Inactive": ", ".join(robo_do_when_inactive),
+                "Robot Shoot On The Move": robo_sotm,
+                "Robot Trench": robo_trench,
+                "Robot Bump": robo_bump,
+                "Robot Played Defense": robo_play_defense,
+                "Robot Defense Rating": robo_defense_effeciency,
+                "Robot Had Defense": robo_had_defense,
+                "Who Played Defense Against Team": robo_played_defense_on_team,
+                "Robot Climbed In End Game": robo_tele_climb,
+                "Extra Notes": robo_extra
+            }
+            #match_data_entered_raw = {st.session_state.selected_team_state, qualMatch, starting_auto, center_intake, center_shoot, neutral_passes, robo_auto_climb, robo_shooter_type, robo_hopper_size, robo_accuracy, robo_cycle_time, robo_driving, robo_intake, robo_intake_rating, ", ".join(robo_do_when_inactive), robo_sotm, robo_trench, robo_bump, robo_play_defense, robo_defense_effeciency, robo_had_defense, robo_had_defense_rating, robo_played_defense_on_team, robo_tele_climb, robo_extra}
+            st.session_state.entered_data = match_data_entered
+
+if st.session_state.entered_data:
+    raw_data = st.session_state.entered_data
+    downloadable_data = pd.DataFrame([raw_data])
+    covert_data = downloadable_data.to_csv(index=False, header=False).encode('utf-8')
+
+    st.download_button(
+        label="Download Match",
+        data=covert_data,
+        file_name="Match_Data.csv",
+        mime="text/csv"
+    )
