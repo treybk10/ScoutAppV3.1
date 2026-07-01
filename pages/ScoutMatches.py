@@ -115,7 +115,7 @@ if st.session_state.selected_team_state:
 
         robo_intake = st.multiselect("How do they intake?", ["Floor", "Outpost/Human Player", "Both"], max_selections=1)
         if "Floor" in robo_intake:
-            robo_intake_rating = st.select_slider("How's the intake?", ["There's an intake?", "Jammed several times", "Average", "Awesome!"])
+            robo_intake_rating = st.select_slider("How's the intake?", ["There's an intake?", "Jammed several times", "Average", "Above Average", "Awesome!"])
         if "Floor" not in robo_intake:
             robo_intake_rating = "Can't intake from floor"
 
