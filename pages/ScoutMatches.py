@@ -113,10 +113,10 @@ if st.session_state.selected_team_state:
 
         robo_play_defense = st.toggle("Did they play defense?")
         if robo_play_defense:
-            robo_defense_effeciency = st.multiselect("How effecient was their defense?", ["Hurt more than helped", "It's ok", "Great!", "Amazing!"])
+            robo_defense_effeciency = st.select_slider("How effecient was their defense?", ["Hurt more than helped", "It's ok", "Great!", "Amazing!"])
         robo_had_defense = st.toggle("Did anyone play defense against them?")
         if robo_had_defense:
-            robo_had_defense_rating = st.multiselect("How much did defense hurt them?", ["Wait, what defense?", "It kinda did", "Significantly hurt them", "Cost them the match"])
+            robo_had_defense_rating = st.select_slider("How much did defense hurt them?", ["Wait, what defense?", "It kinda did", "Significantly hurt them", "Cost them the match"])
             robo_played_defense_on_team = st.text_input("Who played defense on them?")
 
 
