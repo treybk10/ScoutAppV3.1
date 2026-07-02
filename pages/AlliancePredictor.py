@@ -21,7 +21,7 @@ headers = {
 
 
 # pro doesn't work?
-MODEL_NAME = "google/gemini-2.5-pro" 
+MODEL_NAME = "google/gemini-2.5-flash" 
 
 BASE_DIR = os.path.dirname(__file__)
 
@@ -37,9 +37,10 @@ st.subheader("This will predict alliance selection")
 st.badge("Please Note That This App Is Under Construction!", color="red")
 
 CSV_PATH = st.file_uploader("Please Upload Scouting Data (.csv fromat)", type=["csv"])
-
-MATCH_KEY = f"2026micmp1"
-tba_url = f"https://www.thebluealliance.com/api/v3/event/{MATCH_KEY}/rankings"
+declines = st.toggle("Allow Declines?")
+user_prompt = st.text_area("Enter any additional notes for AI: ", value=".")
+MATCH_KEY = f"2026misal"
+tba_url = f"https://www.thebluealliance.com/api/v3/event/2026misal/rankings"
 
 response = requests.get(tba_url, headers=headers)
 
@@ -74,9 +75,9 @@ if st.button("Generate Predictions"):
             data = response.json()
             rankings = data.get("rankings", [])
 
-            if isinstance(rankings, dict) and "rankings" in rankings:
+            if isinstance(rankings, list):
 
-                for team in rankings.get("rankings", []):
+                for team in rankings:
                     team_info = {
                         "rank": team.get("rank"),
                         "team_number": team.get("team_key").replace("frc", ""),
@@ -86,25 +87,33 @@ if st.button("Generate Predictions"):
                         "played": team.get("matches_played"),
                         "dq": team.get("dq"),
                     }
+                    rank = team.get("rank"),
+                    team_number = team.get("team_key").replace("frc", "")
+                    wins = team.get("record", {}).get("wins")
+                    losses = team.get("record", {}).get("losses")
+                    ties = team.get("record", {}).get("ties")
                     # Append data to AI
                     AI_readable_rankings.append(team_info)
 
-                else:
-                    # If the API returned a list or error object, wrap it nicely for the AI
-                    error_payload = {
-                        "error": "Unexpected data format from TBA",
-                        "raw_response": rankings
-                    }
-                    print(json.dumps(error_payload))
-                    st.write(json.dumps(error_payload))
+            else:
+                # If the API returned a list or error object, wrap it nicely for the AI
+                error_payload = {
+                    "error": "Unexpected data format from TBA",
+                    "raw_response": rankings
+                }
+                print(json.dumps(error_payload))
+                st.write(json.dumps(error_payload))
+                st.error("Something didn't work")
 
         else:
             st.write("An error has occured 2")
-
+        #st.text(AI_readable_rankings)
 
         # 2. Combine your prompt with the game rules text content
-        full_text_prompt = f"""Please use the given rankings and CSV file and predict who will pick who in alliance selection. Please take {alliance_rules_text} for rules about alliance selection. Take {game_rules_text}
-        for rules about the game. Take {AI_readable_rankings} for the current rankings and take {readableCSV} for robot data. Take all this info and generate your predictions on what the alliances will be and format it so it is easy to read."""
+        full_text_prompt = f"""Please use the given data to predict the alliances for the given event. GIVE EACH TEAMS 1ST PICK FIRST, THAN GIVE AWNSERS ON 2nd PICK! Game rule: {game_rules_text}, alliance selection
+        rules: {alliance_rules_text}, scouting data (Weigh the current rankings slightly more than scouting data!): {readableCSV}, current rankings: {AI_readable_rankings} Use {declines} for if you should predict declining teams. 
+        Please give your awnser in a way that follows alliance selection proccess. Note that pick go in decending order for 1st pick (1st - 8th) and acending for 2nd picks (8th - 1st). 
+        Lastly, use {user_prompt} for anything else you should take into account. KNOW THAT THIS IS A SNAKE DRAFT!"""
 
         # 3. Create the payload content list
         content_list = [{"type": "text", "text": full_text_prompt}]
