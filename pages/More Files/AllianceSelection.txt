@@ -1,0 +1,115 @@
+10.6.1 ALLIANCE Selection Process
+At the end of the Qualification MATCHES, the top 8 ranked teams become the ALLIANCE Leads. The ranked
+ALLIANCES are designated, in order, ALLIANCE 1, ALLIANCE 2, etc., down to ALLIANCE 8. Using the ALLIANCE
+selection process described in this section, each ALLIANCE Lead chooses 2 other teams to join their
+ALLIANCE.
+A break of 8 minutes (8:00) occurs between the posting of scores from the last qualification match (scheduled
+or replay, whichever comes later) and the start of the ALLIANCE Selection process for events that host Alliance
+Selection shortly after QUALIFICATION MATCHES. At the end of this break, ALLIANCE 1 is “on the clock” as
+defined below in T605.
+T601 *Send your STUDENT representatives. Each team must choose and send a minimum of one and a
+maximum of three STUDENT team representatives. Representative(s) must report to the ARENA before
+the start of ALLIANCE Selection.
+Section 10 Tournaments (T) Version: TU22 123 of 166
+Violation: Team is ineligible for the Playoff Tournament if they are not represented by the time they are
+announced.
+These are the possible combinations of ALLIANCE Selection representatives
+between T601/T602:
+A. One STUDENT
+B. Two STUDENTS
+D. Two STUDENTS and one non-STUDENT
+If an absent team would have been an ALLIANCE Lead, all lower ranked
+ALLIANCE Leads are promoted 1 spot.
+The designated STUDENT representative from each ALLIANCE Lead is called the ALLIANCE CAPTAIN (if the
+ALLIANCE has sent multiple STUDENT representatives, they must designate only one as the ALLIANCE
+CAPTAIN). This representative may change between ALLIANCE selection and Playoff MATCHES.
+T602 *STUDENTS must outnumber adults. A non-STUDENT may additionally be a representative from a
+team if the team has exactly two STUDENT representatives.
+Violation: Non-STUDENT must leave the ARENA
+C. Three STUDENTS
+The ALLIANCE selection process consists of rounds during which each ALLIANCE CAPTAIN invites a team
+ranked below them in the standings to join their ALLIANCE. The invited team’s representative must either
+accept or decline the invitation immediately. If the team accepts, it becomes a member of that ALLIANCE. This
+process results in 8 ALLIANCES of 3 teams.
+Each round is complete when all ALLIANCES have added one additional team, and each round must be
+complete before the next round can begin. In round 1 selections are made in descending order (ALLIANCE 1 to
+ALLIANCE 8), whereas in round 2 selections are made in ascending order (ALLIANCE 8 to ALLIANCE 1).
+T603 * Only STUDENTS may use the mic. Only a single STUDENT from the invited team is allowed to
+accept/decline.
+Violation: The team is assumed to have declined.
+T604 * Only the ALLIANCE CAPTAIN may invite an ALLIANCE. The ALLIANCE CAPTAIN is the only
+representative of the ALLIANCE who may approach the emcee and make a valid pick via the
+microphone.
+Violation: Pick does not count, and pick timer continues to count down.
+T605 * Picks are time limited. Once the emcee requests an ALLIANCE’S selection, the ALLIANCE is
+considered “on the clock” and the pick timer begins to countdown. In round 1, the timer begins at 45
+seconds (0:45), in round 2 the timer begins at 1 minute and 30 seconds (1:30). A sound will play to
+indicate that there are 5 seconds left on the timer and a buzzer will go off to indicate the end of the
+time. The ALLIANCE CAPTAIN must make a good faith effort, as determined by the FTA or their
+designee, to state a valid team selection before the expiration of the pick timer.
+Violation: The ALLIANCE is skipped, and the emcee moves to the next ALLIANCE, unless the selection is
+the last of a round in which case the ALLIANCE receives the next highest-ranked unselected team to the
+ALLIANCE.
+Section 10 Tournaments (T) Version: TU22 124 of 166
+The time remaining on the pick timer is displayed on the FIELD timers. Please
+note that audio cues are intended as a courtesy to participants and not intended
+as official markers.
+A valid team selection includes any team who has not yet accepted or declined
+an invitation to join another ALLIANCE and is not an ALLIANCE Lead that has had
+a pick timer violation. If an ALLIANCE CAPTAIN attempts to select a team that is
+not valid, the pick timer continues to run until it either expires, or a different
+(valid) team is invited to join the ALLIANCE.
+Examples of good faith efforts to state a valid team selection include but are not
+limited to:
+A. Walking safely towards the emcee when the clock hits zero
+B. Starting to state a team as the clock hits zero
+Examples that are not considered good faith efforts to quickly state a valid team
+selection include but are not limited to:
+C. Continuing to talk with your ALLIANCE partners without moving towards the
+emcee
+D. Talking into the microphone for more than approximately 30 seconds without
+clearly stating a team number to invite
+If an ALLIANCE CAPTAIN extends a valid invitation and the invited team declines, the pick clock resets to the
+time for the designated round and restarts immediately.
+After each accepted ALLIANCE invitation or T605 violation, the emcee invites any ALLIANCE CAPTAINS that
+received a T605 violation in that round to make their selections. Each ALLIANCE CAPTAIN may either indicate
+that they are ready to make their selection (and immediately do so as determined by the FTA or their designee)
+or indicate that they are not yet ready, and they will be revisited after the next accepted invitation or T605
+violation. If a team with a T605 violation extends a valid invitation and the invited team declines, they are
+allowed to make another selection immediately or else they are skipped and will be revisited as described
+above. If there are multiple ALLIANCE CAPTAINS that have received T605 violations, they are revisited in the
+same order in which they received their violations. If all remaining teams in a round have received a T605
+violation, each team is revisited to either make a pick immediately or receive the next highest-ranked
+unselected team.
+The ALLIANCE CAPTAIN with the last selection of a given round may not be the
+ALLIANCE CAPTAIN scheduled to have the final pick. For example, imagine in
+round 1 that ALLIANCES 1-6 have all made valid selections and ALLIANCE Lead 7
+receives a T605 violation. If ALLIANCE Lead 8 makes a valid selection, then
+ALLIANCE Lead 7 now has the final selection of round 1.
+A break of 2 minutes (2:00) occurs between each round of selections. At the conclusion of the break, the
+ALLIANCE scheduled to make the next selection goes “on the clock” and their timer begins per T605.
+T606 *Declining teams can’t be picked. An ALLIANCE CAPTAIN may not invite a team that has declined
+another ALLIANCE’S invitation to participate in the Playoff tournament. Declining teams are ineligible to
+be a BACKUP TEAM.
+Section 10 Tournaments (T) Version: TU22 125 of 166
+Violation: The ALLIANCE CAPTAIN must make another selection and pick timer continues to count down.
+When a team has declined, the team will show with a strikethrough on the team
+number in the audience display.
+Teams highlighted in orange (will become captain if not picked) will NOT get a
+strikethrough if they decline as they can still become captains.
+An ALLIANCE Lead that declines an invitation from another ALLIANCE is able to invite teams to join their
+ALLIANCE but may not be invited to join another ALLIANCE.
+At the conclusion of ALLIANCE selection, the highest ranked unselected teams are eligible to become a
+BACKUP TEAM, as defined in section 10.6.3 BACKUP TEAMS.
+10.6.2 Playoff MATCH Bracket
+The double elimination tournament consists of an Upper and Lower bracket as shown in Figure 10-2. Each
+ALLIANCE begins with a slot in the Upper bracket. If an ALLIANCE wins a MATCH in the Upper bracket, they
+remain in the Upper bracket. If an ALLIANCE loses a MATCH in the Upper bracket, they transition to the Lower
+bracket. ALLIANCES in the Lower bracket must win any subsequent MATCHES (except for finals) to remain in
+the tournament, i.e. once they lose a MATCH, they’re out of the tournament.
+In Round 1, the higher ranked ALLIANCE is assigned to the red ALLIANCE. For subsequent rounds, ALLIANCE
+color is assigned as shown in Figure 10-2. regardless of ALLIANCE rank at the start of the Playoff tournament.
+Figure 10-2 Playoff MATCH bracket (Red ALLIANCE tops each pairing)
+As shown in Figure 10-2 and Table 10-2, Playoff MATCHES consist of 6 rounds with breaks between later
+rounds and between Finals MATCHES. Breaks begin after the FIELD has been cleared from the previous
+MATCH. The Blue and Red Gap columns indicate the approximate time between each ALLIANCE’S MATCHES.

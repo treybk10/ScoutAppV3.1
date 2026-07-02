@@ -4,6 +4,7 @@ import os
 from openai import OpenAI
 import streamlit as st
 import random
+import time
 
 import tempfile
 
@@ -164,6 +165,10 @@ b64_HUB = encode_image_to_base64(HUB_URL)
 b64_FUEL = encode_image_to_base64(FUEL_URL)
 
 if st.button("Scout match"):
+    
+    with st.spinner("Scouting..."):
+        time.sleep(5)
+
     if VIDEO_PATH is not None:  # Ensure a file was actually uploaded
         # Create a temporary file on the local disk drive
         with tempfile.NamedTemporaryFile(delete=False, suffix=".mp4") as temp_video:

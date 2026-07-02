@@ -34,12 +34,14 @@ selectedAlliance = st.title("FRC Scouting Master")
 st.subheader("Scout Matches!")
 
 st.badge("Please Note That This App Is Under Construction!", color="red")
-st.badge("Matches for now are only for 2026 Michigan State Cahmpionship DTE field", color="red")
 
+Entered_Match_Key = st.text_input("Please enter event key: ", value="2026micmp1")
 qualMatch = st.text_input("Please enter match number:")
 allianceOptions = ["Red", "Blue"]
 selectedAlliance = st.multiselect("Please Select What Alliance The Scouted Team Is On", allianceOptions,  max_selections=1)
-MATCH_KEY = f"2026micmp1_qm{qualMatch}"
+#MATCH_KEY = f"2026micmp1_qm{qualMatch}"
+
+MATCH_KEY = f"{Entered_Match_Key}_qm{qualMatch}"
 
 url = f"https://www.thebluealliance.com/api/v3/match/{MATCH_KEY}"
 
@@ -73,7 +75,7 @@ if st.session_state.found_teams:
 
     col1, col2 = st.columns(2)
     with col1:
-        st.warning("RED ALLIANCE")
+        st.error("RED ALLIANCE")
         for teams in st.session_state.red_teams:
             st.write(teams)
     with col2:
@@ -177,6 +179,7 @@ if st.session_state.selected_team_state:
             st.session_state.entered_data = match_data_entered
 
 if st.session_state.entered_data:
+    st.balloons()
     raw_data = st.session_state.entered_data
     downloadable_data = pd.DataFrame([raw_data])
     covert_data = downloadable_data.to_csv(index=False, header=False).encode('utf-8')
