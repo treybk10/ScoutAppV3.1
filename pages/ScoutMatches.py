@@ -200,18 +200,21 @@ if st.session_state.entered_data:
                 realRedScore = st.number_input("Real Red Score", step=1)
             with col2_2:
                 realBlueScore = st.number_input("Real Blue Score", step=1)
-            redErrorOff = (abs(realRedScore - RedPrediction)/realRedScore) * 100
-            blueErrorOff = (abs(realBlueScore - BluePrediction)/realBlueScore) * 100
-            col1_3, col2_3 = st.columns(2)
+            if realRedScore != 0:
+                if realBlueScore != 0:
+                    redErrorOff = round((abs(realRedScore - RedPrediction)/realRedScore) * 100)
+                    blueErrorOff = round((abs(realBlueScore - BluePrediction)/realBlueScore) * 100)
 
-            if realRedScore is not None:
-                if realBlueScore is not None:
-                    with col1_3:
-                        st.error("Red Score: ")
-                        st.subheader(redErrorOff)
-                    with col2_3:
-                        st.info("Blue Score: ")
-                        st.subheader(blueErrorOff)
-                    percentageOff = (redErrorOff + blueErrorOff) / 2
-                    st.warning("Total Score (Smaller The Better): ")
-                    st.title(percentageOff)
+                    col1_3, col2_3 = st.columns(2)
+
+                    if realRedScore is not None:
+                        if realBlueScore is not None:
+                            with col1_3:
+                                st.error("Red Score: ")
+                                st.subheader(redErrorOff)
+                            with col2_3:
+                                st.info("Blue Score: ")
+                                st.subheader(blueErrorOff)
+                            percentageOff = (redErrorOff + blueErrorOff) / 2
+                            st.warning("Total Score (Smaller The Better): ")
+                            st.title(percentageOff)
