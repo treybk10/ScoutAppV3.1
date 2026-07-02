@@ -78,10 +78,12 @@ if st.session_state.found_teams:
         st.error("RED ALLIANCE")
         for teams in st.session_state.red_teams:
             st.write(teams)
+        RedPrediction = st.number_input("Red Predicted Score", step=1)
     with col2:
         st.info("BLUE ALLIANCE")
         for teams in st.session_state.blue_teams:
             st.write(teams)
+        BluePrediction = st.number_input("Blue Predicted Score", step=1)
 
     selected_team = st.multiselect("Please select team:", wanted_teams, key="selected_team_state", max_selections=1)
 
@@ -179,7 +181,6 @@ if st.session_state.selected_team_state:
             st.session_state.entered_data = match_data_entered
 
 if st.session_state.entered_data:
-    st.balloons()
     raw_data = st.session_state.entered_data
     downloadable_data = pd.DataFrame([raw_data])
     covert_data = downloadable_data.to_csv(index=False, header=False).encode('utf-8')
@@ -190,3 +191,27 @@ if st.session_state.entered_data:
         file_name="Match_Data.csv",
         mime="text/csv"
     )
+
+    if RedPrediction is not None:
+        if BluePrediction is not None:
+
+            col1_2, col2_2 = st.columns(2)
+            with col1_2:
+                realRedScore = st.number_input("Real Red Score", step=1)
+            with col2_2:
+                realBlueScore = st.number_input("Real Blue Score", step=1)
+            redErrorOff = (abs(realRedScore - RedPrediction)/realRedScore) * 100
+            blueErrorOff = (abs(realBlueScore - BluePrediction)/realBlueScore) * 100
+            col1_3, col2_3 = st.columns(2)
+
+            if realRedScore is not None:
+                if realBlueScore is not None:
+                    with col1_3:
+                        st.error("Red Score: ")
+                        st.subheader(redErrorOff)
+                    with col2_3:
+                        st.info("Blue Score: ")
+                        st.subheader(blueErrorOff)
+                    percentageOff = (redErrorOff + blueErrorOff) / 2
+                    st.warning("Total Score (Smaller The Better): ")
+                    st.title(percentageOff)
