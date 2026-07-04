@@ -15,6 +15,9 @@ if "red_teams" not in st.session_state:
 if "blue_teams" not in st.session_state:
     st.session_state.blue_teams = []
 
+if "all_teams" not in st.session_state:
+    st.session_state.all_teams = []
+
 TBA_API_KEY = st.secrets["TBA_KEY"]
 
 headers = {
@@ -38,7 +41,7 @@ st.badge("Please Note That This App Is Under Construction!", color="red")
 Entered_Match_Key = st.text_input("Please enter event key: ", value="2026micmp1")
 qualMatch = st.text_input("Please enter match number:")
 allianceOptions = ["Red", "Blue"]
-selectedAlliance = st.multiselect("Please Select What Alliance The Scouted Team Is On", allianceOptions,  max_selections=1)
+#selectedAlliance = st.multiselect("Please Select What Alliance The Scouted Team Is On", allianceOptions,  max_selections=1)
 #MATCH_KEY = f"2026micmp1_qm{qualMatch}"
 
 MATCH_KEY = f"{Entered_Match_Key}_qm{qualMatch}"
@@ -49,6 +52,7 @@ url = f"https://www.thebluealliance.com/api/v3/match/{MATCH_KEY}"
 auto_starting = ["Left", "Right", "Center"]
 shooter_types = ["Single Dumper", "Multi-Wide Dumper", "Single Turret", "Dual Turret"]
 
+total_scouting_data = []
 
 
 if st.button("Find Teams"):
@@ -64,14 +68,14 @@ if st.button("Find Teams"):
             alliances = match_data.get("alliances", {})
             st.session_state.red_teams = [team.replace("frc", "") for team in alliances.get("red", {}).get("team_keys", [])]
             st.session_state.blue_teams = [team.replace("frc", "") for team in alliances.get("blue", {}).get("team_keys", [])]
+            st.session_state.all_teams = [team.replace("frc", "") for team in alliances.get("red", {}).get("team_keys", [])] + [team.replace("frc", "") for team in alliances.get("blue", {}).get("team_keys", [])]
             st.session_state.found_teams = True
 
 if st.session_state.found_teams:
-    if "Red" in selectedAlliance:
-        wanted_teams = st.session_state.red_teams
-    if "Blue" in selectedAlliance:
-        wanted_teams = st.session_state.blue_teams
-        teamArray = [wanted_teams]
+    #if "Red" in selectedAlliance:
+        #wanted_teams = st.session_state.red_teams
+    #if "Blue" in selectedAlliance:
+        #wanted_teams = st.session_state.blue_teams
 
     col1, col2 = st.columns(2)
     with col1:
@@ -85,7 +89,7 @@ if st.session_state.found_teams:
             st.write(teams)
         BluePrediction = st.number_input("Blue Predicted Score", step=1)
 
-    selected_team = st.multiselect("Please select team:", wanted_teams, key="selected_team_state", max_selections=1)
+    selected_team = st.multiselect("Please select team:", st.session_state.all_teams, key="selected_team_state", max_selections=1)
 
 if st.session_state.selected_team_state:
     st.subheader("Auto!")
@@ -109,7 +113,7 @@ if st.session_state.selected_team_state:
         robo_has_scored = st.toggle("Robot has scored", value=True)
         if robo_has_scored:
             robo_accuracy = st.slider("Shooter accuracy %", min_value=0, max_value=100, step=1, value=50)
-            robo_throughput = st.multiselect("Robot shooting speed", ["Very Slow", "Below Average", "Average", "Above Average", "Very Quick"])
+            robo_throughput = st.select_slider("Robot shooting speed", ["Very Slow", "Below Average", "Average", "Above Average", "Very Quick"])
         if not robo_has_scored:
             robo_accuracy = 0
             robo_throughput = "They didn't score"
@@ -148,6 +152,8 @@ if st.session_state.selected_team_state:
         robo_extra = st.text_area("Anything else we should know about this match?")
 
         if st.button("Save match results"):
+            st.balloons()
+            st.badge("Saved! Download match data below.", color="green")
             #st.session_state.entered_data = [st.session_state.selected_team_state, qualMatch, starting_auto, center_intake, center_shoot, neutral_passes, robo_auto_climb, robo_shooter_type, robo_hopper_size, robo_accuracy, robo_cycle_time, robo_driving, robo_intake, robo_intake_rating, robo_do_when_inactive, robo_sotm, robo_trench, robo_bump, robo_play_defense, robo_defense_effeciency, robo_had_defense, robo_had_defense_rating, robo_played_defense_on_team, robo_tele_climb, robo_extra]
             match_data_entered = {
                 "Team": st.session_state.selected_team_state,
@@ -177,12 +183,13 @@ if st.session_state.selected_team_state:
                 "Robot Climbed In End Game": robo_tele_climb,
                 "Extra Notes": robo_extra
             }
+            total_scouting_data.append(match_data_entered)
             #match_data_entered_raw = {st.session_state.selected_team_state, qualMatch, starting_auto, center_intake, center_shoot, neutral_passes, robo_auto_climb, robo_shooter_type, robo_hopper_size, robo_accuracy, robo_cycle_time, robo_driving, robo_intake, robo_intake_rating, ", ".join(robo_do_when_inactive), robo_sotm, robo_trench, robo_bump, robo_play_defense, robo_defense_effeciency, robo_had_defense, robo_had_defense_rating, robo_played_defense_on_team, robo_tele_climb, robo_extra}
             st.session_state.entered_data = match_data_entered
 
 if st.session_state.entered_data:
     raw_data = st.session_state.entered_data
-    downloadable_data = pd.DataFrame([raw_data])
+    downloadable_data = pd.DataFrame([total_scouting_data])
     covert_data = downloadable_data.to_csv(index=False, header=False).encode('utf-8')
 
     st.download_button(
@@ -195,6 +202,7 @@ if st.session_state.entered_data:
     if RedPrediction is not None:
         if BluePrediction is not None:
 
+            st.subheader("Real Match Results:")
             col1_2, col2_2 = st.columns(2)
             with col1_2:
                 realRedScore = st.number_input("Real Red Score", step=1)
@@ -211,10 +219,11 @@ if st.session_state.entered_data:
                         if realBlueScore is not None:
                             with col1_3:
                                 st.error("Red Score: ")
-                                st.subheader(redErrorOff)
+                                st.subheader(f"{redErrorOff}%")
                             with col2_3:
                                 st.info("Blue Score: ")
-                                st.subheader(blueErrorOff)
+                                st.subheader(f"{blueErrorOff}%")
                             percentageOff = (redErrorOff + blueErrorOff) / 2
                             st.warning("Total Score (Smaller The Better): ")
-                            st.title(percentageOff)
+                            st.title(f"{percentageOff}%")
+

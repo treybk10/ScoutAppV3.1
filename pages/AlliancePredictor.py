@@ -36,11 +36,14 @@ selectedAlliance = st.title("FRC Scouting Master")
 st.subheader("This will predict alliance selection")
 st.badge("Please Note That This App Is Under Construction!", color="red")
 
+comp = st.text_input("Event Key: ", value="2026misal")
 CSV_PATH = st.file_uploader("Please Upload Scouting Data (.csv fromat)", type=["csv"])
 declines = st.toggle("Allow Declines?")
-user_prompt = st.text_area("Enter any additional notes for AI: ", value=".")
-MATCH_KEY = f"2026misal"
-tba_url = f"https://www.thebluealliance.com/api/v3/event/2026misal/rankings"
+#second_pick = st.toggle("Predict second pick?")
+trust_factor_data = st.slider("How much to trust the scouting data?", min_value=1, max_value=100, value=80)
+user_prompt = st.text_area("Enter any additional notes for AI: ")
+#MATCH_KEY = f"2026misal"
+tba_url = f"https://www.thebluealliance.com/api/v3/event/{comp}/rankings"
 
 response = requests.get(tba_url, headers=headers)
 
@@ -112,8 +115,9 @@ if st.button("Generate Predictions"):
         # 2. Combine your prompt with the game rules text content
         full_text_prompt = f"""Please use the given data to predict the alliances for the given event. GIVE EACH TEAMS 1ST PICK FIRST, THAN GIVE AWNSERS ON 2nd PICK! Game rule: {game_rules_text}, alliance selection
         rules: {alliance_rules_text}, scouting data (Weigh the current rankings slightly more than scouting data!): {readableCSV}, current rankings: {AI_readable_rankings} Use {declines} for if you should predict declining teams. 
-        Please give your awnser in a way that follows alliance selection proccess. Note that pick go in decending order for 1st pick (1st - 8th) and acending for 2nd picks (8th - 1st). 
-        Lastly, use {user_prompt} for anything else you should take into account. KNOW THAT THIS IS A SNAKE DRAFT!"""
+        Trust the scouting data {trust_factor_data}%. JUST PREDICT FIRST PICKS! Please give your awnser in a way that follows alliance selection proccess. Note that pick go in decending order for 1st pick (1st - 8th) and acending for 2nd picks (8th - 1st). 
+        Lastly, use {user_prompt} for anything else you should take into account. KNOW THAT THIS IS A SNAKE DRAFT! If a team is already picked than the next captain is the highest ranked unpicked team. PLEASE READ {alliance_rules_text}!!!
+        Know that this is a SNAKE DRAFT! 1st alliance picks first for 1st pick, and last for 2nd pick! It does NOT go 1st alliance's 1st and 2nd pick!"""
 
         # 3. Create the payload content list
         content_list = [{"type": "text", "text": full_text_prompt}]

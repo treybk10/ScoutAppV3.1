@@ -10,7 +10,7 @@ HACK_CLUB_API_KEY = st.secrets["API_KEY"]
 HACK_CLUB_BASE_URL = "https://ai.hackclub.com/proxy/v1" 
 
 # pro doesn't work?
-MODEL_NAME = "google/gemini-2.5-pro" 
+MODEL_NAME = "google/gemini-2.5-flash" 
 
 BASE_DIR = os.path.dirname(__file__)
 
@@ -26,7 +26,7 @@ st.badge("Please Note That This App Is Under Construction!", color="red")
 
 CSV_PATH = st.file_uploader("Please Upload Scouting Data (.csv fromat)", type=["csv"])
 
-user_prompt = st.text_input("Please enter prompt for AI")
+user_prompt = st.text_area("Please enter prompt for AI")
 base_prompt = f"You are a FRC scouter. Your job is to take the given files for the 2026 frc game rebuilt and figure out who would be the best robot to pick based on the other prompt. Unless otherwise stated, climb doesn't really matter. ONLY USE TEAMS FROM THE GIVEN LIST!"
 
 
