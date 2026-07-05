@@ -47,7 +47,7 @@ st.badge("Please Note That This App Is Under Construction!", color="red")
 VIDEO_PATH = st.file_uploader("Please Upload Match Video", type=["mp4", "mov"])
 
 allianceOptions = ["Red", "Blue"]
-targetTeam = st.text_input("Please Enter Team Number")
+targetTeam = st.number_input("Please Enter Team Number", step=1)
 selectedAlliance = st.multiselect("Please Select What Alliance The Scouted Team Is On", allianceOptions,  max_selections=1)
 
 oldPrompt = f"""
@@ -165,7 +165,7 @@ b64_HUB = encode_image_to_base64(HUB_URL)
 b64_FUEL = encode_image_to_base64(FUEL_URL)
 
 if st.button("Scout match"):
-    
+
     with st.spinner("Scouting..."):
         time.sleep(5)
 
