@@ -12,7 +12,7 @@ MetalMuscleLogo = os.path.join(BASE_DIR, "More Files", "1506-logo.jpg")
 
 st.image(MetalMuscleLogo)
 st.badge("Please Note That This App Is Under Construction!", color="red")
-st.badge("This is only for qual matches as of now", color="red")
+
 
 
 event_key = st.text_input("Event Key: ", value="2026misal")
@@ -106,3 +106,21 @@ with st.expander("Event Match Schedule: "):
             st.write(red_alliance)
         with col3:
             st.write(blue_alliance)
+
+with st.expander("Find Team Data"):
+    search_team = st.number_input("Enter Team Number", step=1)
+    if st.button("Search For Team"):
+        team_data = sb.get_team(search_team)
+
+        epa_data = team_data['norm_epa']
+        record_data = team_data['record']
+
+        st.header(f"Team {team_data['name']}")
+        st.subheader(f"EPA: {epa_data['current']}")
+        st.subheader(f"Win Rate: {record_data['winrate']}")
+
+        st.subheader(f"Country: {team_data['country']}")
+        st.subheader(f"State: {team_data['state']}")
+        st.subheader(f"Rookie Year: {team_data['rookie_year']}")
+        with st.expander("View Raw Team Data"):
+            st.write(team_data)
