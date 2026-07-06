@@ -25,9 +25,6 @@ st.page_link("pages/CurrentRankings.py", label="Current Rankings")
 st.page_link("pages/StandScouting.py", label="Stand Scouting")
 st.page_link("pages/Statbotics.py", label="Statbotics")
 
-
-st.badge("Please Note That This App Is Under Construction!", color="red")
-
 event_key = st.text_input("Event Key: ", value="2026misal")
 
 with st.expander("Match Predicctions: "):

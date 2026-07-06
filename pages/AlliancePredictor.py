@@ -34,7 +34,6 @@ st.image(MetalMuscleLogo)
 
 selectedAlliance = st.title("FRC Scouting Master")
 st.subheader("This will predict alliance selection")
-st.badge("Please Note That This App Is Under Construction!", color="red")
 
 comp = st.text_input("Event Key: ", value="2026misal")
 CSV_PATH = st.file_uploader("Please Upload Scouting Data (.csv fromat)", type=["csv"])

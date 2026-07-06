@@ -30,8 +30,6 @@ sb = statbotics.Statbotics()
 Event_Key = st.text_input("Event Key: ", value="2026misal")
 event_teams = sb.get_team_events(event=f"{Event_Key}", limit=100)
 
-st.badge("Please Note That This App Is Under Construction!", color="red")
-
 CSV_PATH = st.file_uploader("Please Upload Scouting Data (.csv fromat)", type=["csv"])
 
 user_prompt = st.text_area("Please enter prompt for AI")

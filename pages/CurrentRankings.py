@@ -29,7 +29,6 @@ st.page_link("pages/Statbotics.py", label="Statbotics")
 
 selectedAlliance = st.title("FRC Scouting Master")
 st.subheader("Event Rankings")
-st.badge("Please Note That This App Is Under Construction!", color="red")
 
 comp = st.text_input("Event Key: ", value="2026misal")
 tba_url = f"https://www.thebluealliance.com/api/v3/event/{comp}/rankings"
