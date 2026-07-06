@@ -41,8 +41,6 @@ st.image(MetalMuscleLogo)
 
 st.title("FRC Scouting Master")
 
-st.badge("Please Note That This App Is Under Construction!", color="red")
-
 
 VIDEO_PATH = st.file_uploader("Please Upload Match Video", type=["mp4", "mov"])
 
