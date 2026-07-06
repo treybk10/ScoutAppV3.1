@@ -3,6 +3,15 @@ import os
 import statbotics
 import streamlit as st
 
+
+TBA_API_KEY = st.secrets["TBA_KEY"]
+
+headers = {
+    "X-TBA-Auth-Key": TBA_API_KEY
+}
+
+
+
 sb = statbotics.Statbotics()
 
 
@@ -11,9 +20,16 @@ st.set_page_config(page_title="Metal Muscle Scouting", layout="centered")
 MetalMuscleLogo = os.path.join(BASE_DIR, "More Files", "1506-logo.jpg")
 
 st.image(MetalMuscleLogo)
+
+st.page_link("pages/CurrentRankings.py", label="Current Rankings")
+st.page_link("pages/StandScouting.py", label="Stand Scouting")
+st.page_link("pages/Statbotics.py", label="Statbotics")
+
+
 st.badge("Please Note That This App Is Under Construction!", color="red")
 
 event_key = st.text_input("Event Key: ", value="2026misal")
+
 with st.expander("Match Predicctions: "):
     match_number = st.number_input("Match Number: ", value=1)
     if st.toggle("Playoff Match"):
@@ -41,6 +57,16 @@ with st.expander("Match Predicctions: "):
         winner = predictions.get("winner")
         red_prob = predictions.get("red_win_prob")
 
+        alliances_data = match_data["alliances"]
+
+        video = match_data.get("video")
+        
+        red_alliance = alliances_data["red"]["team_keys"]
+        blue_alliance = alliances_data["blue"]["team_keys"]
+
+        red1, red2, red3 = red_alliance
+        blue1, blue2, blue3 = blue_alliance
+
         if winner:  
             readable_winner = str(winner).upper()
 
@@ -58,8 +84,26 @@ with st.expander("Match Predicctions: "):
         m1, m2 = st.columns(2)
         m1.metric(label="Predicted Winner Alliance", value=readable_winner)
         m2.metric(label="Win Probability", value=f"{prob:.1f}%")
+
+        col1, col2 = st.columns(2)
+        with col1:
+            st.error("RED ALLIANCE")
+            st.write(f":red-background[{red1}]")
+            st.write(f":red-background[{red2}]")
+            st.write(f":red-background[{red3}]")
+        with col2:
+            st.info("BLUE ALLIANCE")
+            st.write(f":blue-background[{blue1}]")
+            st.write(f":blue-background[{blue2}]")
+            st.write(f":blue-background[{blue3}]")
+
+        if video:
+            video_URL = f"https://www.youtube.com/watch?v={video}"
+            st.link_button("Match Video", video_URL)
+
         with st.expander("See raw match data: "):
             st.write(match_data)
+
 
 
 
@@ -67,7 +111,7 @@ with st.expander("Team Match Schedule: "):
     target_team = st.number_input("Enter a specific team: ", step=1)
 
     if st.button("Find Matches"):
-        col1, col2, col3 = st.columns(3)
+        col1, col2, col3, col4 = st.columns(4)
         with col1:
             st.subheader("Match Number")
         with col2:
@@ -77,7 +121,9 @@ with st.expander("Team Match Schedule: "):
             
         event_mathces = sb.get_matches(event=event_key, team=target_team, fields=["match_name", "alliances"])
 
+
         for match in event_mathces:
+            video = match.get("video")
             match_number = match["match_name"]
 
             alliances_data = match["alliances"]
@@ -88,7 +134,7 @@ with st.expander("Team Match Schedule: "):
             red1, red2, red3 = red_alliance
             blue1, blue2, blue3 = blue_alliance
 
-            col1, col2, col3 = st.columns(3)
+            col1, col2, col3, col4 = st.columns(4)
             with col1:
                 st.write(match_number)
             with col2:
@@ -99,12 +145,18 @@ with st.expander("Team Match Schedule: "):
                 st.write(f":blue-background[{blue1}]")
                 st.write(f":blue-background[{blue2}]")
                 st.write(f":blue-background[{blue3}]")
+            with col4:
+                if video:
+                    video_URL = f"https://www.youtube.com/watch?v={video}"
+                    st.link_button("Match Video", video_URL)
+        with st.expander("Raw data"):
+            st.write(event_mathces)
 
 
 with st.expander("Event Match Schedule: "):
     event_mathces = sb.get_matches(event=event_key, fields=["match_name", "alliances"])
 
-    col1, col2, col3 = st.columns(3)
+    col1, col2, col3, col4 = st.columns(4)
     with col1:
         st.subheader("Match Number")
     with col2:
@@ -112,7 +164,10 @@ with st.expander("Event Match Schedule: "):
     with col3:
         st.info("BLUE ALLIANCE")
 
+
     for match in event_mathces:
+        video = match.get("video")
+
         match_number = match["match_name"]
 
         alliances_data = match["alliances"]
@@ -123,7 +178,7 @@ with st.expander("Event Match Schedule: "):
         red1, red2, red3 = red_alliance
         blue1, blue2, blue3 = blue_alliance
 
-        col1, col2, col3 = st.columns(3)
+        col1, col2, col3, col4 = st.columns(4)
         with col1:
             st.write(match_number)
         with col2:
@@ -134,9 +189,17 @@ with st.expander("Event Match Schedule: "):
             st.write(f":blue-background[{blue1}]")
             st.write(f":blue-background[{blue2}]")
             st.write(f":blue-background[{blue3}]")
+        if video:
+            video_URL = f"https://www.youtube.com/watch?v={video}"
+            with col4:
+                st.link_button("Match Video", video_URL)
+
+
+
 
 with st.expander("Find Team Data"):
     search_team = st.number_input("Enter Team Number", step=1)
+
     if st.button("Search For Team"):
         team_data = sb.get_team(search_team)
 

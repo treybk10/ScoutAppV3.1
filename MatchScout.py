@@ -48,7 +48,7 @@ VIDEO_PATH = st.file_uploader("Please Upload Match Video", type=["mp4", "mov"])
 
 allianceOptions = ["Red", "Blue"]
 targetTeam = st.number_input("Please Enter Team Number", step=1)
-selectedAlliance = st.multiselect("Please Select What Alliance The Scouted Team Is On", allianceOptions,  max_selections=1)
+#selectedAlliance = st.multiselect("Please Select What Alliance The Scouted Team Is On", allianceOptions,  max_selections=1)
 
 oldPrompt = f"""
     You are a FRC scouting app. Your job is to help identify team's {targetTeam} strenghts and weaknesses in the 2026 frc game, Rebuilt. PLEASE READ THE GIVEN FILE FOR INFO ABOUT THE GAME AND PICTURES FOR 
@@ -56,9 +56,7 @@ oldPrompt = f"""
 
     Know that the trench is ABOVE ground and the bump is ON the ground. You can tell by the fact that you see carpet below the trench. PLEASE SEE PHOTOS OF FIELD ELEMENTS FOR DETAILS
 
-    {targetTeam} is on {selectedAlliance}
-
-    Look for {selectedAlliance} colored bumpers with the number {targetTeam} in white text. DO NOT PAY ATTENTION TO THE OTHER 5 ROBOTS! ONLY {targetTeam}'s ROBOT
+    Look for red orblue colored bumpers with the number {targetTeam} in white text. DO NOT PAY ATTENTION TO THE OTHER 5 ROBOTS! ONLY {targetTeam}'s ROBOT
 
 
     Specifically, we want:
@@ -163,99 +161,112 @@ b64_TRENCH = encode_image_to_base64(TRENCH_URL)
 b64_BUMP = encode_image_to_base64(BUMP_URL)
 b64_HUB = encode_image_to_base64(HUB_URL)
 b64_FUEL = encode_image_to_base64(FUEL_URL)
+b64_TOWER = encode_image_to_base64(TOWER_URL)
+b64_DEPOT = encode_image_to_base64(DEPOT_URL)
 
-if st.button("Scout match"):
+if st.button("Scout Match"):
 
     with st.spinner("Scouting..."):
-        time.sleep(5)
 
-    if VIDEO_PATH is not None:  # Ensure a file was actually uploaded
-        # Create a temporary file on the local disk drive
-        with tempfile.NamedTemporaryFile(delete=False, suffix=".mp4") as temp_video:
-            temp_video.write(VIDEO_PATH.read())
-            temp_video_path = temp_video.name  # This gives you a valid string path
+        if VIDEO_PATH is not None:  # Ensure a file was actually uploaded
+            # Create a temporary file on the local disk drive
+            with tempfile.NamedTemporaryFile(delete=False, suffix=".mp4") as temp_video:
+                temp_video.write(VIDEO_PATH.read())
+                temp_video_path = temp_video.name  # This gives you a valid string path
 
-        # Pass the string path to your existing OpenCV function
-        frames = extract_frames_from_video(temp_video_path, MAX_FRAMES)
+            # Pass the string path to your existing OpenCV function
+            frames = extract_frames_from_video(temp_video_path, MAX_FRAMES)
 
-        # Clean up and delete the temporary file from disk immediately
-        os.unlink(temp_video_path)
+            # Clean up and delete the temporary file from disk immediately
+            os.unlink(temp_video_path)
 
-    try:
-        #frames = extract_frames_from_video(VIDEO_PATH, MAX_FRAMES)
+        try:
+            #frames = extract_frames_from_video(VIDEO_PATH, MAX_FRAMES)
 
-        #Shouldn't need this.
-        #content_list = [{"type": "text", "text": prompt}]
+            #Shouldn't need this.
+            #content_list = [{"type": "text", "text": prompt}]
 
-        if os.path.exists(MANUAL_PATH):
-            with open(MANUAL_PATH, "r", encoding="utf-8", errors="ignore") as file:
-                game_rules_text = file.read()
-            print(f"Successfully loaded '{MANUAL_PATH}'.")
-        else:
-            raise FileNotFoundError(f"Could not find the file at {MANUAL_PATH}")
+            if os.path.exists(MANUAL_PATH):
+                with open(MANUAL_PATH, "r", encoding="utf-8", errors="ignore") as file:
+                    game_rules_text = file.read()
+                print(f"Successfully loaded '{MANUAL_PATH}'.")
+            else:
+                raise FileNotFoundError(f"Could not find the file at {MANUAL_PATH}")
 
-        # 2. Combine your prompt with the game rules text content
-        full_text_prompt = f"{prompt}\n\n--- REFERENCE GAME RULES FROM MANUAL ---\n{game_rules_text}"
+            # 2. Combine your prompt with the game rules text content
+            full_text_prompt = f"{prompt}\n\n--- REFERENCE GAME RULES FROM MANUAL ---\n{game_rules_text}"
 
-        # 3. Create the payload content list
-        content_list = [{"type": "text", "text": full_text_prompt}]
-
-
-        content_list.append({
-            "type": "image_url",
-            "image_url": {
-                "url": f"data:image/png;base64,{b64_BUMP}"
-            }
-        })
-        content_list.append({
-            "type": "image_url",
-            "image_url": {
-                "url": f"data:image/png;base64,{b64_FUEL}"
-            }
-        })
-        content_list.append({
-            "type": "image_url",
-            "image_url": {
-                "url": f"data:image/png;base64,{b64_HUB}"
-            }
-        })
-        content_list.append({
-            "type": "image_url",
-            "image_url": {
-                "url": f"data:image/png;base64,{b64_TRENCH}"
-            }
-        })
-
-        print("Sending text data to Hack Club AI... Please wait.")
+            # 3. Create the payload content list
+            content_list = [{"type": "text", "text": full_text_prompt}]
 
 
-        for frame in frames:
             content_list.append({
                 "type": "image_url",
                 "image_url": {
-                    "url": f"data:image/jpeg;base64,{frame}"
+                    "url": f"data:image/png;base64,{b64_BUMP}"
+                }
+            })
+            content_list.append({
+                "type": "image_url",
+                "image_url": {
+                    "url": f"data:image/png;base64,{b64_FUEL}"
+                }
+            })
+            content_list.append({
+                "type": "image_url",
+                "image_url": {
+                    "url": f"data:image/png;base64,{b64_HUB}"
+                }
+            })
+            content_list.append({
+                "type": "image_url",
+                "image_url": {
+                    "url": f"data:image/png;base64,{b64_TRENCH}"
+                }
+            })
+            content_list.append({
+                "type": "image_url",
+                "image_url": {
+                    "url": f"data:image/png;base64,{b64_DEPOT}"
+                }
+            })
+            content_list.append({
+                "type": "image_url",
+                "image_url": {
+                    "url": f"data:image/png;base64,{b64_TOWER}"
                 }
             })
 
-        print(f"Sending {len(frames)} frames to Hack Club AI ({MODEL_NAME})... Please wait.")
+            print("Sending text data to Hack Club AI... Please wait.")
 
-        response = client.chat.completions.create(
-            model=MODEL_NAME,
-            messages=[
-                {
-                    "role": "user",
-                    "content": content_list
-                }
-            ]
-        )
 
-        print("\n--- AI RESPONSE ---")
-        print(response.choices[0].message.content)
-        st.text(response.choices[0].message.content)
+            for frame in frames:
+                content_list.append({
+                    "type": "image_url",
+                    "image_url": {
+                        "url": f"data:image/jpeg;base64,{frame}"
+                    }
+                })
 
-    except Exception as e:
-        print(f"\nAn error occurred: {e}")
-        st.text(f"\nAn error has occurred. {e}")
+            print(f"Sending {len(frames)} frames to Hack Club AI ({MODEL_NAME})... Please wait.")
 
-if (VIDEO_PATH is not None):
-    st.video(VIDEO_PATH)
+            response = client.chat.completions.create(
+                model=MODEL_NAME,
+                messages=[
+                    {
+                        "role": "user",
+                        "content": content_list
+                    }
+                ]
+            )
+
+            print("\n--- AI RESPONSE ---")
+            print(response.choices[0].message.content)
+            st.text(response.choices[0].message.content)
+
+        except Exception as e:
+            print(f"\nAn error occurred: {e}")
+            st.text(f"\nAn error has occurred. {e}")
+
+#if (VIDEO_PATH is not None):
+#    st.video(VIDEO_PATH)

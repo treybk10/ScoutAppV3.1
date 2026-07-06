@@ -33,6 +33,10 @@ MetalMuscleLogo = os.path.join(BASE_DIR, "More Files", "1506-logo.jpg")
 
 st.image(MetalMuscleLogo)
 
+st.page_link("pages/StandScouting.py", label="Stand Scouting")
+st.page_link("pages/CurrentRankings.py", label="Current Rankings")
+st.page_link("pages/Statbotics.py", label="Statbotics")
+
 selectedAlliance = st.title("FRC Scouting Master")
 st.subheader("Scout Matches!")
 

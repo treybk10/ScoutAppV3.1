@@ -1,9 +1,9 @@
 import json
 
-import cv2
+
 import base64
 import os
-from openai import OpenAI
+
 import streamlit as st
 import requests
 
@@ -22,6 +22,10 @@ MetalMuscleLogo = os.path.join(BASE_DIR, "More Files", "1506-logo.jpg")
 
 st.set_page_config(page_title="Metal Muscle Scouting", layout="centered")
 st.image(MetalMuscleLogo)
+
+st.page_link("pages/StandScouting.py", label="Stand Scouting")
+st.page_link("pages/CurrentRankings.py", label="Current Rankings")
+st.page_link("pages/Statbotics.py", label="Statbotics")
 
 selectedAlliance = st.title("FRC Scouting Master")
 st.subheader("Event Rankings")
@@ -52,7 +56,7 @@ if st.button("Load Rankings"):
                         "played": team.get("matches_played"),
                         "dq": team.get("dq"),
                     }
-                    rank = team.get("rank"),
+                    rank = team.get("rank")
                     team_number = team.get("team_key").replace("frc", "")
                     wins = team.get("record", {}).get("wins")
                     losses = team.get("record", {}).get("losses")
