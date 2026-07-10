@@ -191,10 +191,8 @@ if st.button("Scout Match"):
             else:
                 raise FileNotFoundError(f"Could not find the file at {MANUAL_PATH}")
 
-            # 2. Combine your prompt with the game rules text content
             full_text_prompt = f"{prompt}\n\n--- REFERENCE GAME RULES FROM MANUAL ---\n{game_rules_text}"
 
-            # 3. Create the payload content list
             content_list = [{"type": "text", "text": full_text_prompt}]
 
 

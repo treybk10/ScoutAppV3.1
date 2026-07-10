@@ -1,6 +1,7 @@
 import os
 
 import statbotics
+import requests
 import streamlit as st
 
 
@@ -21,11 +22,13 @@ MetalMuscleLogo = os.path.join(BASE_DIR, "More Files", "1506-logo.jpg")
 
 st.image(MetalMuscleLogo)
 
+st.badge("Statbotics server is currently down! Some features may not work!", color="red")
+
 st.page_link("pages/CurrentRankings.py", label="Current Rankings")
 st.page_link("pages/StandScouting.py", label="Stand Scouting")
 st.page_link("pages/Statbotics.py", label="Statbotics")
 
-event_key = st.text_input("Event Key: ", value="2026misal")
+event_key = st.text_input("Event Key: ", value="2026micmp1")
 
 with st.expander("Match Predicctions: "):
     match_number = st.number_input("Match Number: ", value=1)
@@ -47,7 +50,6 @@ with st.expander("Match Predicctions: "):
         else:
             final_key = f"{event_key}_qm{match_number}"
         match_data = sb.get_match(final_key)
-        #st.write(match_data)
         
         predictions = match_data.get("pred")
 
@@ -72,7 +74,7 @@ with st.expander("Match Predicctions: "):
             elif readable_winner == "BLUE":
                 prob = (1.0 - red_prob) * 100
             else:
-                prob = 50.0  # Perfectly even prediction split
+                prob = 50.0  
 
         else:
             readable_winner = "UNKNOWN"
@@ -105,35 +107,40 @@ with st.expander("Match Predicctions: "):
 
 
 with st.expander("Team Match Schedule: "):
-    target_team = st.number_input("Enter a specific team: ", step=1)
-
+    wanted_team = st.number_input("Team Number", step=1)
     if st.button("Find Matches"):
-        col1, col2, col3, col4 = st.columns(4)
+        url = f'https://www.thebluealliance.com/api/v3/team/frc{wanted_team}/event/{event_key}/matches'
+        response = requests.get(url, headers=headers)
+
+        allMatches = response.json()
+        print(f"Successfully retrieved {len(allMatches)} matches.")
+
+        matches = [m for m in allMatches if m['comp_level'] == 'qm']
+        matches = sorted(matches, key=lambda x: x['match_number'])
+
+        playoffMatches = [m for m in allMatches if m['comp_level'] in ['sf', 'f']]
+        playoffMatches = sorted(playoffMatches, key=lambda x: x.get('time') or 0)
+
+        col1, col2, col3 = st.columns(3)
         with col1:
-            st.subheader("Match Number")
+            st.warning("MATCH NUMBER")
         with col2:
             st.error("RED ALLIANCE")
         with col3:
             st.info("BLUE ALLIANCE")
-            
-        event_mathces = sb.get_matches(event=event_key, team=target_team, fields=["match_name", "alliances"])
 
-
-        for match in event_mathces:
-            video = match.get("video")
-            match_number = match["match_name"]
-
-            alliances_data = match["alliances"]
         
-            red_alliance = alliances_data["red"]["team_keys"]
-            blue_alliance = alliances_data["blue"]["team_keys"]
+        for match in matches:
+            match_number = match['match_number']
+            red_alliance = match['alliances']['red']['team_keys']
+            blue_alliance = match['alliances']['blue']['team_keys']
 
             red1, red2, red3 = red_alliance
             blue1, blue2, blue3 = blue_alliance
 
-            col1, col2, col3, col4 = st.columns(4)
+            col1, col2, col3 = st.columns(3)
             with col1:
-                st.write(match_number)
+                st.text(match_number)
             with col2:
                 st.write(f":red-background[{red1}]")
                 st.write(f":red-background[{red2}]")
@@ -142,42 +149,69 @@ with st.expander("Team Match Schedule: "):
                 st.write(f":blue-background[{blue1}]")
                 st.write(f":blue-background[{blue2}]")
                 st.write(f":blue-background[{blue3}]")
-            with col4:
-                if video:
-                    video_URL = f"https://www.youtube.com/watch?v={video}"
-                    st.link_button("Match Video", video_URL)
-        with st.expander("Raw data"):
-            st.write(event_mathces)
+
+        st.subheader("Playoffs")
+
+        for match in playoffMatches:
+            if match['comp_level'] == 'sf':
+                display_label = f"Playoff {match['set_number']}"
+            elif match['comp_level'] == 'f':
+                display_label = f"Finals {match['match_number']}"
+            else:
+                display_label = f"Match {match['match_number']}"
+            red_alliance = match['alliances']['red']['team_keys']
+            blue_alliance = match['alliances']['blue']['team_keys']
+
+            red1, red2, red3 = red_alliance
+            blue1, blue2, blue3 = blue_alliance
+
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                st.text(display_label)
+            with col2:
+                st.write(f":red-background[{red1}]")
+                st.write(f":red-background[{red2}]")
+                st.write(f":red-background[{red3}]")
+            with col3:
+                st.write(f":blue-background[{blue1}]")
+                st.write(f":blue-background[{blue2}]")
+                st.write(f":blue-background[{blue3}]")
+
 
 
 with st.expander("Event Match Schedule: "):
-    event_mathces = sb.get_matches(event=event_key, fields=["match_name", "alliances"])
+    url = f'https://www.thebluealliance.com/api/v3/event/{event_key}/matches'
+    response = requests.get(url, headers=headers)
 
-    col1, col2, col3, col4 = st.columns(4)
+    allMatches = response.json()
+    print(f"Successfully retrieved {len(allMatches)} matches.")
+
+    matches = [m for m in allMatches if m['comp_level'] == 'qm']
+    matches = sorted(matches, key=lambda x: x['match_number'])
+
+    playoffMatches = [m for m in allMatches if m['comp_level'] in ['sf', 'f']]
+    playoffMatches = sorted(playoffMatches, key=lambda x: x.get('time') or 0)
+
+    col1, col2, col3 = st.columns(3)
     with col1:
-        st.subheader("Match Number")
+        st.warning("MATCH NUMBER")
     with col2:
         st.error("RED ALLIANCE")
     with col3:
         st.info("BLUE ALLIANCE")
 
-
-    for match in event_mathces:
-        video = match.get("video")
-
-        match_number = match["match_name"]
-
-        alliances_data = match["alliances"]
     
-        red_alliance = alliances_data["red"]["team_keys"]
-        blue_alliance = alliances_data["blue"]["team_keys"]
+    for match in matches:
+        match_number = match['match_number']
+        red_alliance = match['alliances']['red']['team_keys']
+        blue_alliance = match['alliances']['blue']['team_keys']
 
         red1, red2, red3 = red_alliance
         blue1, blue2, blue3 = blue_alliance
 
-        col1, col2, col3, col4 = st.columns(4)
+        col1, col2, col3 = st.columns(3)
         with col1:
-            st.write(match_number)
+            st.text(match_number)
         with col2:
             st.write(f":red-background[{red1}]")
             st.write(f":red-background[{red2}]")
@@ -186,11 +220,35 @@ with st.expander("Event Match Schedule: "):
             st.write(f":blue-background[{blue1}]")
             st.write(f":blue-background[{blue2}]")
             st.write(f":blue-background[{blue3}]")
-        if video:
-            video_URL = f"https://www.youtube.com/watch?v={video}"
-            with col4:
-                st.link_button("Match Video", video_URL)
 
+
+    st.subheader("Playoffs")
+
+
+    for match in playoffMatches:
+        if match['comp_level'] == 'sf':
+            display_label = f"Playoff {match['set_number']}"
+        elif match['comp_level'] == 'f':
+            display_label = f"Finals {match['match_number']}"
+        else:
+            display_label = f"Match {match['match_number']}"
+        red_alliance = match['alliances']['red']['team_keys']
+        blue_alliance = match['alliances']['blue']['team_keys']
+
+        red1, red2, red3 = red_alliance
+        blue1, blue2, blue3 = blue_alliance
+
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            st.text(display_label)
+        with col2:
+            st.write(f":red-background[{red1}]")
+            st.write(f":red-background[{red2}]")
+            st.write(f":red-background[{red3}]")
+        with col3:
+            st.write(f":blue-background[{blue1}]")
+            st.write(f":blue-background[{blue2}]")
+            st.write(f":blue-background[{blue3}]")
 
 
 

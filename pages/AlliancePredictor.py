@@ -113,7 +113,6 @@ if st.button("Generate Predictions"):
                 st.write("An error has occured 2")
             #st.text(AI_readable_rankings)
 
-            # 2. Combine your prompt with the game rules text content
             full_text_prompt = f"""Please use the given data to predict the alliances for the given event. GIVE EACH TEAMS 1ST PICK FIRST, THAN GIVE AWNSERS ON 2nd PICK! Game rule: {game_rules_text}, alliance selection
             rules: {alliance_rules_text}, scouting data: {readableCSV}, current rankings: {AI_readable_rankings} Use {declines} for if you should predict declining teams. 
             Trust the scouting data {trust_factor_data}%. JUST PREDICT FIRST PICKS! Please give your awnser in a way that follows alliance selection proccess. Note that pick go in decending order for 1st pick (1st - 8th) and acending for 2nd picks (8th - 1st). 

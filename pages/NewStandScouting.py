@@ -3,7 +3,7 @@ import streamlit as st
 import requests
 import pandas as pd
 
-#session state for streamlit
+
 if "found_teams" not in st.session_state:
     st.session_state.found_teams = False
 if "selected_team_state" not in st.session_state:
@@ -21,14 +21,12 @@ if "all_scouting_data" not in st.session_state:
 if "save_locked" not in st.session_state:
     st.session_state.save_locked = False
 
+
 TBA_API_KEY = st.secrets["TBA_KEY"]
 
 headers = {
     "X-TBA-Auth-Key": TBA_API_KEY
 }
-
-submit_match = False
-
 
 
 BASE_DIR = os.path.dirname(__file__)
@@ -77,8 +75,8 @@ if st.button("Find Teams"):
             st.session_state.all_teams = [team.replace("frc", "") for team in alliances.get("red", {}).get("team_keys", [])] + [team.replace("frc", "") for team in alliances.get("blue", {}).get("team_keys", [])]
             st.session_state.found_teams = True
 
-
 if st.session_state.found_teams:
+
     col1, col2 = st.columns(2)
     with col1:
         st.error("RED ALLIANCE")
@@ -94,7 +92,6 @@ if st.session_state.found_teams:
     selected_team = st.multiselect("Please select team:", st.session_state.all_teams, key="selected_team_state", max_selections=1)
 
 if st.session_state.selected_team_state:
-
     st.subheader("Auto!")
     starting_auto = st.multiselect("Select auto starting location", auto_starting, max_selections=1)
     if "Center" in starting_auto:
@@ -149,15 +146,10 @@ if st.session_state.selected_team_state:
         robo_played_defense_on_team = "No one"
     robo_tele_climb = st.toggle("Climb in tele-op")
 
+
     robo_extra = st.text_area("Anything else we should know about this match?")
 
-
-if st.button("Save Match") and not st.session_state.get("save_locked", False):
-    st.session_state.save_locked = True
-
-    st.balloons()
-    st.badge("Saved! Download match data below.", color="green")
-    #st.session_state.entered_data = [st.session_state.selected_team_state, qualMatch, starting_auto, center_intake, center_shoot, neutral_passes, robo_auto_climb, robo_shooter_type, robo_hopper_size, robo_accuracy, robo_cycle_time, robo_driving, robo_intake, robo_intake_rating, robo_do_when_inactive, robo_sotm, robo_trench, robo_bump, robo_play_defense, robo_defense_effeciency, robo_had_defense, robo_had_defense_rating, robo_played_defense_on_team, robo_tele_climb, robo_extra]
+if st.button("Save Data"):
     match_data_entered = {
         "Team": st.session_state.selected_team_state,
         "Qual Number": qualMatch,
@@ -186,58 +178,6 @@ if st.button("Save Match") and not st.session_state.get("save_locked", False):
         "Robot Climbed In End Game": robo_tele_climb,
         "Extra Notes": robo_extra
     }
-    #total_scouting_data.append(match_data_entered)
-    #match_data_entered_raw = {st.session_state.selected_team_state, qualMatch, starting_auto, center_intake, center_shoot, neutral_passes, robo_auto_climb, robo_shooter_type, robo_hopper_size, robo_accuracy, robo_cycle_time, robo_driving, robo_intake, robo_intake_rating, ", ".join(robo_do_when_inactive), robo_sotm, robo_trench, robo_bump, robo_play_defense, robo_defense_effeciency, robo_had_defense, robo_had_defense_rating, robo_played_defense_on_team, robo_tele_climb, robo_extra}
     st.session_state.entered_data = match_data_entered
 
     st.session_state.all_scouting_data.append(match_data_entered)
-
-if st.session_state.get("save_locked", False):
-    st.session_state.save_locked = False
-
-if st.session_state.entered_data:
-    st.session_state.all_scouting_data.append(st.session_state.entered_data)
-    raw_data = st.session_state.all_scouting_data
-    downloadable_data = pd.DataFrame([st.session_state.all_scouting_data])
-    covert_data = downloadable_data.to_csv(index=False, header=False).encode('utf-8')
-
-    st.dataframe(downloadable_data)
-
-    st.download_button(
-        label="Download Match",
-        data=covert_data,
-        file_name="Match_Data.csv",
-        mime="text/csv"
-    )
-
-    if st.button("Clear Phone Memory"):
-        st.session_state.all_scouted_data = []
-        st.rerun()
-
-    if RedPrediction is not None:
-        if BluePrediction is not None:
-
-            st.subheader("Real Match Results:")
-            col1_2, col2_2 = st.columns(2)
-            with col1_2:
-                realRedScore = st.number_input("Real Red Score", step=1)
-            with col2_2:
-                realBlueScore = st.number_input("Real Blue Score", step=1)
-            if realRedScore != 0:
-                if realBlueScore != 0:
-                    redErrorOff = round((abs(realRedScore - RedPrediction)/realRedScore) * 100)
-                    blueErrorOff = round((abs(realBlueScore - BluePrediction)/realBlueScore) * 100)
-
-                    col1_3, col2_3 = st.columns(2)
-
-                    if realRedScore is not None:
-                        if realBlueScore is not None:
-                            with col1_3:
-                                st.error("Red Score: ")
-                                st.subheader(f"{redErrorOff}%")
-                            with col2_3:
-                                st.info("Blue Score: ")
-                                st.subheader(f"{blueErrorOff}%")
-                            percentageOff = (redErrorOff + blueErrorOff) / 2
-                            st.warning("Total Score (Smaller The Better): ")
-                            st.title(f"{percentageOff}%")

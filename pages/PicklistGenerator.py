@@ -58,10 +58,8 @@ if st.button("Generate Picklist"):
             else:
                 raise FileNotFoundError(f"Could not find the file at {MANUAL_PATH}")
 
-            # 2. Combine your prompt with the game rules text content
             full_text_prompt = f"{base_prompt}\n\n--- USER PROMPT: --- \n{user_prompt}\n\n--- REFERENCE GAME RULES FROM MANUAL ---\n{game_rules_text}\n\n--- FILE ---\n{readableCSV}\n\n--- TEAM DATA ---\n{event_teams}"
 
-            # 3. Create the payload content list
             content_list = [{"type": "text", "text": full_text_prompt}]
 
 
