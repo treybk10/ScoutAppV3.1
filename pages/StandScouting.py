@@ -48,6 +48,9 @@ st.subheader("Scout Matches!")
 Entered_Match_Key = st.text_input("Please enter event key: ", value="2026micmp1")
 qualMatch = st.text_input("Please enter match number:")
 allianceOptions = ["Red", "Blue"]
+
+RedPrediction = None
+BluePrediction = None
 #selectedAlliance = st.multiselect("Please Select What Alliance The Scouted Team Is On", allianceOptions,  max_selections=1)
 #MATCH_KEY = f"2026micmp1_qm{qualMatch}"
 
@@ -152,30 +155,31 @@ if st.session_state.selected_team_state:
     robo_extra = st.text_area("Anything else we should know about this match?")
 
 
-if st.button("Save Match") and not st.session_state.get("save_locked", False):
-    st.session_state.save_locked = True
+match_data_entered = None
 
-    st.balloons()
-    st.badge("Saved! Download match data below.", color="green")
-    #st.session_state.entered_data = [st.session_state.selected_team_state, qualMatch, starting_auto, center_intake, center_shoot, neutral_passes, robo_auto_climb, robo_shooter_type, robo_hopper_size, robo_accuracy, robo_cycle_time, robo_driving, robo_intake, robo_intake_rating, robo_do_when_inactive, robo_sotm, robo_trench, robo_bump, robo_play_defense, robo_defense_effeciency, robo_had_defense, robo_had_defense_rating, robo_played_defense_on_team, robo_tele_climb, robo_extra]
+# Only build the dictionary if a team is actively selected to prevent crashes
+if st.session_state.selected_team_state:
+    # Ensure team selection handles fallback formatting for lists safely
+    team_clean = st.session_state.selected_team_state[0] if isinstance(st.session_state.selected_team_state, list) and st.session_state.selected_team_state else "Unknown"
+    
     match_data_entered = {
-        "Team": st.session_state.selected_team_state,
+        "Team": team_clean,
         "Qual Number": qualMatch,
-        "Auto Location": starting_auto,
+        "Auto Location": starting_auto[0] if starting_auto else "None",
         "Center Intake": center_intake,
         "Center Shoot": center_shoot,
         "Neutral Passes": neutral_passes,
         "Robot Auto Climb": robo_auto_climb,
-        "Robot Shooter Type": robo_shooter_type,
+        "Robot Shooter Type": robo_shooter_type[0] if robo_shooter_type else "None",
         "Robot Hopper Size": robo_hopper_size,
         "Robot Has Scored Fuel": robo_has_scored,
         "Robot Accuracy": robo_accuracy,
         "Robot Throughput": robo_throughput,
         "Robot Cycle Time": robo_cycle_time,
         "Robot Driving Rating": robo_driving,
-        "Robot Intake": robo_intake,
+        "Robot Intake": robo_intake[0] if robo_intake else "None",
         "Robot Intake Rating": robo_intake_rating,
-        "Robot Does When Inactive": ", ".join(robo_do_when_inactive),
+        "Robot Does When Inactive": ", ".join(robo_do_when_inactive) if robo_do_when_inactive else "Nothing",
         "Robot Shoot On The Move": robo_sotm,
         "Robot Trench": robo_trench,
         "Robot Bump": robo_bump,
@@ -186,58 +190,68 @@ if st.button("Save Match") and not st.session_state.get("save_locked", False):
         "Robot Climbed In End Game": robo_tele_climb,
         "Extra Notes": robo_extra
     }
-    #total_scouting_data.append(match_data_entered)
-    #match_data_entered_raw = {st.session_state.selected_team_state, qualMatch, starting_auto, center_intake, center_shoot, neutral_passes, robo_auto_climb, robo_shooter_type, robo_hopper_size, robo_accuracy, robo_cycle_time, robo_driving, robo_intake, robo_intake_rating, ", ".join(robo_do_when_inactive), robo_sotm, robo_trench, robo_bump, robo_play_defense, robo_defense_effeciency, robo_had_defense, robo_had_defense_rating, robo_played_defense_on_team, robo_tele_climb, robo_extra}
-    st.session_state.entered_data = match_data_entered
 
-    st.session_state.all_scouting_data.append(match_data_entered)
+st.divider()
 
-if st.session_state.get("save_locked", False):
-    st.session_state.save_locked = False
+# --- STEP 2: TRIGGER THE SAVE ACTION ---
+# Consolidated into a single button layout to prevent duplicate state submissions
+col_save, col_clear = st.columns(2)
 
-if st.session_state.entered_data:
-    st.session_state.all_scouting_data.append(st.session_state.entered_data)
-    raw_data = st.session_state.all_scouting_data
-    downloadable_data = pd.DataFrame([st.session_state.all_scouting_data])
-    covert_data = downloadable_data.to_csv(index=False, header=False).encode('utf-8')
+with col_save:
+    st.badge("Add current data to list", color="yellow")
+    if st.button("Save Match Data"):   
+        if match_data_entered:
+            st.session_state.all_scouting_data.append(match_data_entered)
+        else:
+            st.error("Please ensure a team is selected and data is entered before saving.")
 
-    st.dataframe(downloadable_data)
-
-    st.download_button(
-        label="Download Match",
-        data=covert_data,
-        file_name="Match_Data.csv",
-        mime="text/csv"
-    )
-
-    if st.button("Clear Phone Memory"):
-        st.session_state.all_scouted_data = []
+with col_clear:
+    st.badge("This will clear current match results!", color="red")
+    if st.button("Clear Current Data"):
+        st.session_state.all_scouting_data = []
+        st.toast("Local session memory has been wiped clean.", icon="⚠️")
         st.rerun()
 
-    if RedPrediction is not None:
-        if BluePrediction is not None:
 
-            st.subheader("Real Match Results:")
-            col1_2, col2_2 = st.columns(2)
-            with col1_2:
-                realRedScore = st.number_input("Real Red Score", step=1)
-            with col2_2:
-                realBlueScore = st.number_input("Real Blue Score", step=1)
-            if realRedScore != 0:
-                if realBlueScore != 0:
-                    redErrorOff = round((abs(realRedScore - RedPrediction)/realRedScore) * 100)
-                    blueErrorOff = round((abs(realBlueScore - BluePrediction)/realBlueScore) * 100)
+if st.session_state.all_scouting_data:
+    #st.subheader(f"Currently Collected Matches ({len(st.session_state.all_scouting_data)})")
+    
+    downloadable_data = pd.DataFrame(st.session_state.all_scouting_data)
+    st.dataframe(downloadable_data)
 
-                    col1_3, col2_3 = st.columns(2)
+    convert_data = downloadable_data.to_csv(index=False, header=False).encode('utf-8')
 
-                    if realRedScore is not None:
-                        if realBlueScore is not None:
-                            with col1_3:
-                                st.error("Red Score: ")
-                                st.subheader(f"{redErrorOff}%")
-                            with col2_3:
-                                st.info("Blue Score: ")
-                                st.subheader(f"{blueErrorOff}%")
-                            percentageOff = (redErrorOff + blueErrorOff) / 2
-                            st.warning("Total Score (Smaller The Better): ")
-                            st.title(f"{percentageOff}%")
+    st.download_button(
+        label="Download All Data",
+        data=convert_data,
+        file_name=f"Scouting_Data_{Entered_Match_Key}.csv",
+        mime="text/csv"
+    )
+else:
+    st.info("No matches have been saved in this cache session yet.")
+
+
+if RedPrediction > 0 and BluePrediction > 0:
+    st.subheader("Real Match Results")
+    col1_2, col2_2 = st.columns(2)
+    
+    with col1_2:
+        realRedScore = st.number_input("Real Red Score", step=1, min_value=0, value=0)
+    with col2_2:
+        realBlueScore = st.number_input("Real Blue Score", step=1, min_value=0, value=0)
+        
+    if realRedScore > 0 and realBlueScore > 0:
+        redErrorOff = round((abs(realRedScore - RedPrediction) / realRedScore) * 100)
+        blueErrorOff = round((abs(realBlueScore - BluePrediction) / realBlueScore) * 100)
+
+        col1_3, col2_3 = st.columns(2)
+        with col1_3:
+            st.error("Red Prediction Error Margin: ")
+            st.subheader(f"{redErrorOff}%")
+        with col2_3:
+            st.info("Blue Prediction Error Margin: ")
+            st.subheader(f"{blueErrorOff}%")
+            
+        percentageOff = (redErrorOff + blueErrorOff) / 2
+        st.warning("Average Strategy Deviation (Lower Is Better): ")
+        st.title(f"{percentageOff}%")
