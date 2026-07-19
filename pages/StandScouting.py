@@ -230,28 +230,28 @@ if st.session_state.all_scouting_data:
 else:
     st.info("No matches have been saved in this cache session yet.")
 
-
-if RedPrediction > 0 and BluePrediction > 0:
-    st.subheader("Real Match Results")
-    col1_2, col2_2 = st.columns(2)
-    
-    with col1_2:
-        realRedScore = st.number_input("Real Red Score", step=1, min_value=0, value=0)
-    with col2_2:
-        realBlueScore = st.number_input("Real Blue Score", step=1, min_value=0, value=0)
+if RedPrediction is not None and BluePrediction is not None:
+    if RedPrediction > 0 and BluePrediction > 0:
+        st.subheader("Real Match Results")
+        col1_2, col2_2 = st.columns(2)
         
-    if realRedScore > 0 and realBlueScore > 0:
-        redErrorOff = round((abs(realRedScore - RedPrediction) / realRedScore) * 100)
-        blueErrorOff = round((abs(realBlueScore - BluePrediction) / realBlueScore) * 100)
-
-        col1_3, col2_3 = st.columns(2)
-        with col1_3:
-            st.error("Red Prediction Error Margin: ")
-            st.subheader(f"{redErrorOff}%")
-        with col2_3:
-            st.info("Blue Prediction Error Margin: ")
-            st.subheader(f"{blueErrorOff}%")
+        with col1_2:
+            realRedScore = st.number_input("Real Red Score", step=1, min_value=0, value=0)
+        with col2_2:
+            realBlueScore = st.number_input("Real Blue Score", step=1, min_value=0, value=0)
             
-        percentageOff = (redErrorOff + blueErrorOff) / 2
-        st.warning("Average Strategy Deviation (Lower Is Better): ")
-        st.title(f"{percentageOff}%")
+        if realRedScore > 0 and realBlueScore > 0:
+            redErrorOff = round((abs(realRedScore - RedPrediction) / realRedScore) * 100)
+            blueErrorOff = round((abs(realBlueScore - BluePrediction) / realBlueScore) * 100)
+
+            col1_3, col2_3 = st.columns(2)
+            with col1_3:
+                st.error("Red Prediction Error Margin: ")
+                st.subheader(f"{redErrorOff}%")
+            with col2_3:
+                st.info("Blue Prediction Error Margin: ")
+                st.subheader(f"{blueErrorOff}%")
+                
+            percentageOff = (redErrorOff + blueErrorOff) / 2
+            st.warning("Average Strategy Deviation (Lower Is Better): ")
+            st.title(f"{percentageOff}%")
