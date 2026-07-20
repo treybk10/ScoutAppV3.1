@@ -1,13 +1,20 @@
-import statbotics
+# import statbotics
 
 import cv2
 import base64
 import os
 from openai import OpenAI
+import requests
 import streamlit as st
 
-# --- Configuration ---
 #API KEY GOES HERE
+TBA_API_KEY = st.secrets["TBA_KEY"]
+
+headers = {
+    "X-TBA-Auth-Key": TBA_API_KEY
+}
+
+#API KEY GOES HERE ALSO
 HACK_CLUB_API_KEY = st.secrets["API_KEY"]
 HACK_CLUB_BASE_URL = "https://ai.hackclub.com/proxy/v1" 
 
@@ -26,11 +33,13 @@ selectedAlliance = st.title("FRC Scouting Master")
 st.subheader("This is to help with alliance selection. Import your scouting data and a prompt for AI and it will generate a picklist!")
 
 
-sb = statbotics.Statbotics()
+# sb = statbotics.Statbotics()
 Event_Key = st.text_input("Event Key: ", value="2026misal")
-event_teams = sb.get_team_events(event=f"{Event_Key}", limit=100)
+# event_teams = sb.get_team_events(event=f"{Event_Key}", limit=100)
 
 CSV_PATH = st.file_uploader("Please Upload Scouting Data (.csv fromat)", type=["csv"])
+
+
 
 user_prompt = st.text_area("Please enter prompt for AI")
 base_prompt = f"""You are a FRC scouter. Your job is to take the given files for the 2026 frc game rebuilt and figure out who 
@@ -46,6 +55,13 @@ client = OpenAI(
 )
 
 if st.button("Generate Picklist"):
+
+    tba_url = f"https://www.thebluealliance.com/api/v3/event/{Event_Key}/rankings"
+
+    response = requests.get(tba_url, headers=headers)
+
+    jsonData = response.json()
+
     with st.spinner("Generating Picklist..."):
         try:
             readableCSV = CSV_PATH.read().decode("utf-8")
@@ -58,7 +74,7 @@ if st.button("Generate Picklist"):
             else:
                 raise FileNotFoundError(f"Could not find the file at {MANUAL_PATH}")
 
-            full_text_prompt = f"{base_prompt}\n\n--- USER PROMPT: --- \n{user_prompt}\n\n--- REFERENCE GAME RULES FROM MANUAL ---\n{game_rules_text}\n\n--- FILE ---\n{readableCSV}\n\n--- TEAM DATA ---\n{event_teams}"
+            full_text_prompt = f"{base_prompt}\n\n--- USER PROMPT: --- \n{user_prompt}\n\n--- REFERENCE GAME RULES FROM MANUAL ---\n{game_rules_text}\n\n--- FILE ---\n{readableCSV}\n\n--- TEAM DATA ---\n{jsonData}"
 
             content_list = [{"type": "text", "text": full_text_prompt}]
 
@@ -79,8 +95,8 @@ if st.button("Generate Picklist"):
             print(response.choices[0].message.content)
             st.text(response.choices[0].message.content)
 
-            with st.expander("Raw Team Data From Teams at Event"):
-                st.write(event_teams)
+            with st.expander("View Raw JSON Data"):
+                st.write(jsonData)
 
         except Exception as e:
             print(f"\nAn error occurred: {e}")

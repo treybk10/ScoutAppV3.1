@@ -246,12 +246,12 @@ if RedPrediction is not None and BluePrediction is not None:
 
             col1_3, col2_3 = st.columns(2)
             with col1_3:
-                st.error("Red Prediction Error Margin: ")
+                st.error("Red Prediction Score: ")
                 st.subheader(f"{redErrorOff}%")
             with col2_3:
-                st.info("Blue Prediction Error Margin: ")
+                st.info("Blue Prediction Score: ")
                 st.subheader(f"{blueErrorOff}%")
                 
             percentageOff = (redErrorOff + blueErrorOff) / 2
-            st.warning("Average Strategy Deviation (Lower Is Better): ")
+            st.warning("Total Score (Lower Is Better): ")
             st.title(f"{percentageOff}%")

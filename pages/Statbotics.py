@@ -1,3 +1,4 @@
+import json
 import os
 
 import statbotics
@@ -48,6 +49,8 @@ with st.expander("Match Predicctions: "):
         else:
             final_key = f"{event_key}_qm{match_number}"
         #match_data = sb.get_match(final_key)
+
+        final_key = final_key.strip().lower() 
 
         api_url = f"https://api.statbotics.io/v3/match/{final_key}"
 
@@ -118,6 +121,52 @@ with st.expander("Match Predicctions: "):
             st.error(f"Failed to connect to Statbotics. Network error: {e}")
 
 
+with st.expander("Current Rankings:"):
+
+    tba_url = f"https://www.thebluealliance.com/api/v3/event/{event_key}/rankings"
+
+    response = requests.get(tba_url, headers=headers)
+
+    try:
+        if response.status_code == 200:
+            data = response.json()
+            rankings = data.get("rankings", [])
+
+            if isinstance(rankings, list):
+                st.write("rank, team, wins, losses, ties, played, dq")
+                for team in rankings:
+                    team_info = {
+                        "rank": team.get("rank"),
+                        "team_number": team.get("team_key").replace("frc", ""),
+                        "wins": team.get("record", {}).get("wins"),
+                        "losses": team.get("record", {}).get("losses"),
+                        "ties": team.get("record", {}).get("ties"),
+                        "played": team.get("matches_played"),
+                        "dq": team.get("dq"),
+                    }
+                    rank = team.get("rank")
+                    team_number = team.get("team_key").replace("frc", "")
+                    wins = team.get("record", {}).get("wins")
+                    losses = team.get("record", {}).get("losses")
+                    ties = team.get("record", {}).get("ties")
+                    played = team.get("matches_played")
+                    dq = team.get("dq")
+                    st.write(rank, team_number, wins, losses, ties, played, dq)
+
+
+            else:
+                error_payload = {
+                    "error": "Unexpected data format from TBA",
+                    "raw_response": rankings
+                }
+                print(json.dumps(error_payload))
+                st.write(json.dumps(error_payload))
+                st.error("Something didn't work")
+
+        
+    except Exception as e:
+        print(f"\nAn error occurred: {e}")
+        st.text(f"\nAn error has occurred. {e}")
 
 with st.expander("Team Match Schedule: "):
     wanted_team = st.number_input("Team Number", step=1)
