@@ -5,6 +5,7 @@ from openai import OpenAI
 import streamlit as st
 import random
 import time
+from yt_dlp import YoutubeDL
 
 import tempfile
 
@@ -41,39 +42,17 @@ st.image(MetalMuscleLogo)
 
 st.title("FRC Scouting Master")
 
-
-VIDEO_PATH = st.file_uploader("Please Upload Match Video", type=["mp4", "mov"])
+downloadedVideo = st.toggle("Use downloaded video?", value=False)
+if downloadedVideo == True:
+    YOUTUBE_URL = None
+    VIDEO_PATH = st.file_uploader("Please Upload Match Video", type=["mp4", "mov"])
+elif downloadedVideo == False:
+    YOUTUBE_URL = st.text_input("Please Enter YouTube Match Video Link", placeholder="https://youtube.com...")
+    VIDEO_PATH = None
 
 allianceOptions = ["Red", "Blue"]
 targetTeam = st.number_input("Please Enter Team Number", step=1)
 #selectedAlliance = st.multiselect("Please Select What Alliance The Scouted Team Is On", allianceOptions,  max_selections=1)
-
-oldPrompt = f"""
-    You are a FRC scouting app. Your job is to help identify team's {targetTeam} strenghts and weaknesses in the 2026 frc game, Rebuilt. PLEASE READ THE GIVEN FILE FOR INFO ABOUT THE GAME AND PICTURES FOR 
-    FIELD ELEMENTS! ALSO READ FROM VIDEO PROVIDED 
-
-    Know that the trench is ABOVE ground and the bump is ON the ground. You can tell by the fact that you see carpet below the trench. PLEASE SEE PHOTOS OF FIELD ELEMENTS FOR DETAILS
-
-    Look for red orblue colored bumpers with the number {targetTeam} in white text. DO NOT PAY ATTENTION TO THE OTHER 5 ROBOTS! ONLY {targetTeam}'s ROBOT
-
-
-    Specifically, we want:
-    #1: How effecient is {targetTeam} geting to and from the zones
-
-    #2: How big and effective are {targetTeam}'s cycles? Do they shoot on the move? If so how accurate are they? If they aren't, how fast can they dump their load and how many loads do they unload?
-
-    #3: If you were to guess, how uch fuel did {targetTeam} score in the entire match? Break it down into teleop and auto. Use the example photos for game peice info.
-
-    #4: How efficient is {targetTeam}'s intake? Can they intake feul quickly off the ground or does it get jammed? 
-
-    #5: Where can {targetTeam} shoot from? Can they shoot close? How about far?
-
-    #6: Did they play any defense? If so, how effective was it? If they did play defense, focus on any team they played defense against to see if they were "shut down"/were slowed down by defense
-
-    #7: Did they have defense played against them? If so, did it hurt {targetTeam}?
-    
-    Please make the awnser easy to read and if you are going to give time stamps, please use what exact time it is in the video, not what time is left in the match. ONLY FOCUS ON KEY PARTS OF THE MATCH
-"""
 
 prompt = f"""
     You are a FRC scouting app. Your job is to help identify team's {targetTeam} strenghts and weaknesses in the 2026 frc game, Rebuilt. 
@@ -84,8 +63,7 @@ prompt = f"""
 
     Also how is their drive team? Do you drive smoothly or more jittery?
 
-    How consitiant can they intake and shoot? Compare to the other robots in the match. Does {targetTeam} have any mechanical failures? Don't worry about how much feul {targetTeam} scored, just how many times they 
-    dumped a load into the hub and how often they do that. They only score inside their alliance zone.
+    Any mechanical failures? Shooter, intake, get stuck anywhere?
 
     What about defense? Does {targetTeam} play defense? Do they have defense agaisnt them? If so, does it {targetTeam}?
 
@@ -95,6 +73,23 @@ prompt = f"""
     If you are going to give timestamps, use the match timer please.
     
 """
+
+def download_youtube_to_temp(url):
+    """Downloads a YouTube video to a temporary path and returns the path string."""
+    temp_dir = tempfile.gettempdir()
+    
+    # We restrict to 720p or worse to save download time and processing memory
+    ydl_opts = {
+        'format': 'best[height<=720]', 
+        'outtmpl': os.path.join(temp_dir, 'yt_scout_video.%(ext)s'),
+        'quiet': True,
+        'no_warnings': True,
+    }
+    
+    with YoutubeDL(ydl_opts) as ydl:
+        info = ydl.extract_info(url, download=True)
+        filename = ydl.prepare_filename(info)
+        return filename
 
 def encode_image_to_base64(file_path):
     """Converts a local image file into a Base64 string for the API payload."""
@@ -178,11 +173,21 @@ if st.button("Scout Match"):
             # Clean up and delete the temporary file from disk immediately
             os.unlink(temp_video_path)
 
+        if not YOUTUBE_URL.strip() and YOUTUBE_URL is not None:
+            st.warning("Please provide a valid YouTube URL first.")
+            st.stop()
         try:
-            #frames = extract_frames_from_video(VIDEO_PATH, MAX_FRAMES)
+            if YOUTUBE_URL is not None:
+                temp_video_path = None
+            
 
-            #Shouldn't need this.
-            #content_list = [{"type": "text", "text": prompt}]
+                temp_video_path = download_youtube_to_temp(YOUTUBE_URL)
+
+                frames = extract_frames_from_video(temp_video_path, MAX_FRAMES)
+
+                if temp_video_path and os.path.exists(temp_video_path):
+                    os.unlink(temp_video_path)
+
 
             if os.path.exists(MANUAL_PATH):
                 with open(MANUAL_PATH, "r", encoding="utf-8", errors="ignore") as file:
