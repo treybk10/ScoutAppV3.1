@@ -99,7 +99,7 @@ if st.button("Generate Picklist"):
             st.text(response.choices[0].message.content)
 
             with st.expander("View Raw JSON Data"):
-                st.write(jsonData)
+                st.json(jsonData)
 
         except Exception as e:
             print(f"\nAn error occurred: {e}")
