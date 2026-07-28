@@ -18,9 +18,6 @@ headers = {
 HACK_CLUB_API_KEY = st.secrets["API_KEY"]
 HACK_CLUB_BASE_URL = "https://ai.hackclub.com/proxy/v1" 
 
-# pro doesn't work?
-MODEL_NAME = "google/gemini-2.5-flash" 
-
 BASE_DIR = os.path.dirname(__file__)
 
 MANUAL_PATH = os.path.join(BASE_DIR, "More Files", "2026GameRebuilt.txt")
@@ -32,6 +29,12 @@ st.image(MetalMuscleLogo)
 selectedAlliance = st.title("FRC Scouting Master")
 st.subheader("This is to help with alliance selection. Import your scouting data and a prompt for AI and it will generate a picklist!")
 
+Use_Pro_AI = st.toggle("Use Gemini Pro?", value=False)
+
+if Use_Pro_AI == True:
+    MODEL_NAME = "google/gemini-2.5-pro" 
+elif Use_Pro_AI == False:
+    MODEL_NAME = "google/gemini-2.5-flash" 
 
 # sb = statbotics.Statbotics()
 Event_Key = st.text_input("Event Key: ", value="2026misal")
