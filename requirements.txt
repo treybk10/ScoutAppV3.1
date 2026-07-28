@@ -4,4 +4,4 @@ openai
 requests
 statbotics
 YoutubeDL
-
+yt_dlp
