@@ -36,7 +36,7 @@ MetalMuscleLogo = os.path.join(BASE_DIR, "Other Files", "1506-logo.jpg")
 
 
 #Max frames AI reads
-MAX_FRAMES = 135
+MAX_FRAMES = 140
 
 st.image(MetalMuscleLogo)
 
@@ -78,12 +78,28 @@ def download_youtube_to_temp(url):
     """Downloads a YouTube video to a temporary path and returns the path string."""
     temp_dir = tempfile.gettempdir()
     
-    # We restrict to 720p or worse to save download time and processing memory
+
     ydl_opts = {
-        'format': 'best[height<=720]', 
-        'outtmpl': os.path.join(temp_dir, 'yt_scout_video.%(ext)s'),
+
+        'format': 'best[height<=720][ext=mp4]/best[height<=720]', 
+
+        'outtmpl': os.path.join(temp_dir, 'yt_scout_video.mp4'),
         'quiet': True,
         'no_warnings': True,
+
+        'rm_cachedir': True,
+
+        'extractor_args': {
+            'youtube': {
+                'player_client': ['default', '-android_sdkless'],
+            }
+        },
+
+        'http_headers': {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+            'Accept-Language': 'en-US,en;q=0.5',
+        },
     }
     
     with YoutubeDL(ydl_opts) as ydl:
@@ -98,7 +114,7 @@ def encode_image_to_base64(file_path):
 
             img = cv2.imread(file_path)
 
-            encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 55]
+            encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 50]
             success, buffer = cv2.imencode(".jpg", img, encode_param)
 
             return base64.b64encode(buffer).decode("utf-8")
