@@ -3,5 +3,4 @@ opencv-python-headless
 openai
 requests
 statbotics
-YoutubeDL
 yt_dlp
