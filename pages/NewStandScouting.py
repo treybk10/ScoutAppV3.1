@@ -3,6 +3,18 @@ import streamlit as st
 import requests
 import pandas as pd
 
+
+st.html(
+    """
+    <style>
+        div[data-testid="stVerticalBlock"] > div:has(div[data-testid="stSlider"]) {
+            padding-left: 5%;
+            padding-right: 5%;
+        }
+    </style>
+    """
+)
+
 #session state for streamlit
 if "found_teams" not in st.session_state:
     st.session_state.found_teams = False
@@ -94,94 +106,95 @@ if st.session_state.found_teams:
         BluePrediction = st.number_input("Blue Predicted Score", step=1)
 
     selected_team = st.multiselect("Please select team:", st.session_state.all_teams, key="selected_team_state", max_selections=1)
+    st.divider()
 
-bufferLeft, middleData, bufferRight = st.columns([0.1, 0.8, 0.1])
+# bufferLeft, middleData, bufferRight = st.columns([0.1, 0.8, 0.1])
 
-with middleData:
-    if st.session_state.selected_team_state:
+#with middleData:
+if st.session_state.selected_team_state:
 
-        scouter_name = st.text_input("Scouter's name:", max_chars=20)
+    scouter_name = st.text_input("Scouter's name:", max_chars=20)
 
-        st.divider()
-        st.subheader("Auto!")
-        starting_auto = st.multiselect("Select auto starting location: ", auto_starting, max_selections=2)
-        if "Center" in starting_auto:
-            center_shoot = st.toggle("Scored any fuel?")
-            center_intake = st.toggle("Intaked other fuel besides preload?")
-            neutral_passes = 0
-        else:
-            neutral_passes = st.number_input("Number of passes to neutral zone", step=1, max_value=3, min_value=0)
-            center_intake = False
-            center_shoot = False
+    st.divider()
+    st.subheader("Auto!")
+    starting_auto = st.multiselect("Select auto starting location: ", auto_starting, max_selections=2)
+    if "Center" in starting_auto:
+        center_shoot = st.toggle("Scored any fuel?")
+        center_intake = st.toggle("Intaked other fuel besides preload?")
+        neutral_passes = 0
+    else:
+        neutral_passes = st.number_input("Number of passes to neutral zone", step=1, max_value=3, min_value=0)
+        center_intake = False
+        center_shoot = False
 
-        robo_auto_climb = st.toggle("Climb in auto?", value=False)
-        if robo_auto_climb == True:
-            robo_auto_level = st.slider("What level climb?", min_value=1, max_value=3)
-        elif robo_auto_climb == False:
-            robo_auto_level = 0
+    robo_auto_climb = st.toggle("Climb in auto?", value=False)
+    if robo_auto_climb == True:
+        robo_auto_level = st.slider("What level climb?", min_value=1, max_value=3)
+    elif robo_auto_climb == False:
+        robo_auto_level = 0
 
-        st.divider()
-        st.subheader("Tele-op!")
+    st.divider()
+    st.subheader("Tele-op!")
 
-        robo_scored = st.toggle("Did robot score fuel?", value=True)
-        if robo_scored == True:
-            robo_shooter_type = st.multiselect("Shooter type: ", shooter_types, max_selections=2)
-            robo_hopper_size = st.select_slider("Hopper capacity: ", ["Small (<30)", "Medium (31-60)", "Large (>61)"], value="Medium (31-60)")
-            robo_accuracy = st.slider("Robot accuracy: ", min_value=1, max_value=100, value=80)
-            robo_cycle_time = st.select_slider("Robot cycle time: ", ["Extremely Slow", "Below Average", "Average", "Above Average", "Super Fast"], value="Average")
-            robo_throughput = st.select_slider("Shooting speed: ", ["Extremely Slow", "Below Average", "Average", "Above Average", "Super Fast"], value="Average")
-        elif robo_scored == False:
-            robo_shooter_type = "N/A"
-            robo_hopper_size = "N/A"
-            robo_accuracy = 0
-            robo_throughput = "N/A"
+    robo_scored = st.toggle("Did robot score fuel?", value=True)
+    if robo_scored == True:
+        robo_shooter_type = st.multiselect("Shooter type: ", shooter_types, max_selections=2)
+        robo_hopper_size = st.select_slider("Hopper capacity: ", ["Small (<30)", "Medium (31-60)", "Large (>61)"], value="Medium (31-60)")
+        robo_accuracy = st.slider("Robot accuracy: ", min_value=1, max_value=100, value=80)
+        robo_cycle_time = st.select_slider("Robot cycle time: ", ["Extremely Slow", "Below Average", "Average", "Above Average", "Super Fast"], value="Average")
+        robo_throughput = st.select_slider("Shooting speed: ", ["Extremely Slow", "Below Average", "Average", "Above Average", "Super Fast"], value="Average")
+    elif robo_scored == False:
+        robo_shooter_type = "N/A"
+        robo_hopper_size = "N/A"
+        robo_accuracy = 0
+        robo_throughput = "N/A"
 
-        robo_driving = st.select_slider("How fluid is their driving?", ["Not real sure what they're doing", "Mechanical failure that hinders drive performance", "Could be better", "Average", "Above Average", "Couldn't be better"], value="Average")
+    robo_driving = st.select_slider("How fluid is their driving?", ["Not real sure what they're doing", "Mechanical failure that hinders drive performance", "Could be better", "Average", "Above Average", "Couldn't be better"], value="Average")
 
-        robo_intake = st.multiselect("How do they intake?", ["Floor", "Outpost/Human Player", "Both"], max_selections=2)
-        if "Floor" in robo_intake:
-            robo_intake_rating = st.select_slider("How's the intake?", ["There's an intake?", "Jammed several times", "Average", "Above Average", "Awesome!"], value="Average")
-        if "Floor" not in robo_intake:
-            robo_intake_rating = "Can't intake from floor"
+    robo_intake = st.multiselect("How do they intake?", ["Floor", "Outpost/Human Player", "Both"], max_selections=2)
+    if "Floor" in robo_intake:
+        robo_intake_rating = st.select_slider("How's the intake?", ["There's an intake?", "Jammed several times", "Average", "Above Average", "Awesome!"], value="Average")
+    if "Floor" not in robo_intake:
+        robo_intake_rating = "Can't intake from floor"
 
-        robo_do_when_inactive = st.multiselect("When the hub is inactive, what do they do? (Can select more that one)", ["Nothing", "Defense", "Clear opposing alliances fuel", "Pass/Collect fuel"])
+    robo_do_when_inactive = st.multiselect("When the hub is inactive, what do they do? (Can select more that one)", ["Nothing", "Defense", "Clear opposing alliances fuel", "Pass/Collect fuel"])
 
-        robo_sotm = st.toggle("Shoot on the move?")
-        robo_trench = st.toggle("Did the robot drive under the trench?", value=True)
-        robo_bump = st.toggle("Did the robot drive over the bump?", value=True)
+    robo_sotm = st.toggle("Shoot on the move?")
+    robo_trench = st.toggle("Did the robot drive under the trench?", value=True)
+    robo_bump = st.toggle("Did the robot drive over the bump?", value=True)
 
-        if robo_trench == True and robo_bump == True:
-            robo_prefered_travel = st.multiselect("Prefered method of travel: ", ["Trench", "Bump"])
-        else:
-            robo_prefered_travel = "Don't do both"
+    if robo_trench == True and robo_bump == True:
+        robo_prefered_travel = st.multiselect("Prefered method of travel: ", ["Trench", "Bump"])
+    else:
+        robo_prefered_travel = "Don't do both"
 
-        robo_play_defense = st.toggle("Did they play defense?")
-        if robo_play_defense:
-            robo_defense_effeciency = st.select_slider("How effecient was their defense?", ["Hurt more than helped", "It's ok", "Great!", "Amazing!"])
-        if not robo_play_defense:
-            robo_defense_effeciency = "N/A"
+    robo_play_defense = st.toggle("Did they play defense?")
+    if robo_play_defense:
+        robo_defense_effeciency = st.select_slider("How effecient was their defense?", ["Hurt more than helped", "It's ok", "Great!", "Amazing!"])
+    if not robo_play_defense:
+        robo_defense_effeciency = "N/A"
 
-        robo_had_defense = st.toggle("Did anyone play defense against them?")
-        if robo_had_defense:
-            robo_had_defense_rating = st.select_slider("How much did defense hurt them?", ["Wait, what defense?", "It kinda did", "Significantly hurt them", "Cost them the match"])
-            robo_played_defense_on_team = st.text_input("Who played defense on them?")
-        if not robo_had_defense:
-            robo_had_defense_rating = "N/A"
-            robo_played_defense_on_team = "N/A"
+    robo_had_defense = st.toggle("Did anyone play defense against them?")
+    if robo_had_defense:
+        robo_had_defense_rating = st.select_slider("How much did defense hurt them?", ["Wait, what defense?", "It kinda did", "Significantly hurt them", "Cost them the match"])
+        robo_played_defense_on_team = st.text_input("Who played defense on them?")
+    if not robo_had_defense:
+        robo_had_defense_rating = "N/A"
+        robo_played_defense_on_team = "N/A"
 
-        robo_tele_climb = st.toggle("Climb in endgame?", value=False)
-        if robo_tele_climb == True:
-            robo_teleop_level = st.slider("What level climb?", min_value=1, max_value=3)
-        elif robo_tele_climb == False:
-            robo_teleop_level = 0
+    robo_tele_climb = st.toggle("Climb in endgame?", value=False)
+    if robo_tele_climb == True:
+        robo_teleop_level = st.slider("What level climb?", min_value=1, max_value=3)
+    elif robo_tele_climb == False:
+        robo_teleop_level = 0
 
-        robo_broke = st.toggle("Did the robot break?", value=False)
-        if robo_broke == True:
-            robo_broke_explanation = st.text_area("Why did the robot break? How did it affect them?")
-        elif robo_broke == False:
-            robo_broke_explanation = "Didn't break"
+    robo_broke = st.toggle("Did the robot break?", value=False)
+    if robo_broke == True:
+        robo_broke_explanation = st.text_area("Why did the robot break? How did it affect them?")
+    elif robo_broke == False:
+        robo_broke_explanation = "Didn't break"
 
-        robo_extra = st.text_area("Anything else we should know about this match?")
+    robo_extra = st.text_area("Anything else we should know about this match?")
         
 
 
@@ -257,7 +270,7 @@ if st.session_state.all_scouting_data:
     downloadable_data = pd.DataFrame(st.session_state.all_scouting_data)
     st.dataframe(downloadable_data)
 
-    convert_data = downloadable_data.to_csv(index=False, header=True).encode('utf-8')
+    convert_data = downloadable_data.to_csv(index=False, header=False).encode('utf-8')
 
     st.download_button(
         label="Download All Data",
