@@ -106,7 +106,7 @@ with middleData:
         st.subheader("Auto!")
         starting_auto = st.multiselect("Select auto starting location: ", auto_starting, max_selections=2)
         if "Center" in starting_auto:
-            center_scored = st.toggle("Scored any fuel?")
+            center_shoot = st.toggle("Scored any fuel?")
             center_intake = st.toggle("Intaked other fuel besides preload?")
             neutral_passes = 0
         else:
