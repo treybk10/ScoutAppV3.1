@@ -75,7 +75,7 @@ prompt = f"""
 """
 
 def download_youtube_to_temp(url):
-    """Downloads a YouTube video to a temporary path and returns the path string."""
+
     temp_dir = tempfile.gettempdir()
     
 
