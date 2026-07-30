@@ -128,10 +128,6 @@ if st.session_state.selected_team_state:
         center_shoot = False
 
     robo_auto_climb = st.toggle("Climb in auto?", value=False)
-    if robo_auto_climb == True:
-        robo_auto_level = st.slider("What level climb?", min_value=1, max_value=3)
-    elif robo_auto_climb == False:
-        robo_auto_level = 0
 
     st.divider()
     st.subheader("Tele-op!")
@@ -215,7 +211,6 @@ if st.session_state.selected_team_state:
         "Center Auto Scored": center_shoot,
         "Neutral Auto Passes": neutral_passes,
         "Robot Auto Climb": robo_auto_climb,
-        "Robot Auto Climb Level": robo_auto_level,
         "Robot Has Scored Fuel": robo_scored,
         "Robot Shooter Type": robo_shooter_type[0] if robo_shooter_type else "Not entered",
         "Robot Hopper Size": robo_hopper_size,
