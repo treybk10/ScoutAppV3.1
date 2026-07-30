@@ -287,8 +287,8 @@ if RedPrediction is not None and BluePrediction is not None:
             realBlueScore = st.number_input("Real Blue Score", step=1, min_value=0, value=0)
             
         if realRedScore > 0 and realBlueScore > 0:
-            redErrorOff = max(0, round(100 - ((abs(realRedScore - RedPrediction) / realRedScore) * 100)))
-            blueErrorOff = max(0, round(100 - ((abs(realBlueScore - BluePrediction) / realBlueScore) * 100)))
+            redErrorOff = max(-100, round(100 - ((abs(realRedScore - RedPrediction) / realRedScore) * 100)))
+            blueErrorOff = max(-100, round(100 - ((abs(realBlueScore - BluePrediction) / realBlueScore) * 100)))
 
             col1_3, col2_3 = st.columns(2)
             with col1_3:
@@ -299,5 +299,5 @@ if RedPrediction is not None and BluePrediction is not None:
                 st.subheader(f"{blueErrorOff}%")
                 
             percentageOff = (redErrorOff + blueErrorOff) / 2
-            st.warning("Total Score (Lower Is Better): ")
+            st.warning("Total Score (Higher Is Better): ")
             st.title(f"{percentageOff}%")
