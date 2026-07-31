@@ -57,7 +57,7 @@ st.page_link("pages/Statbotics.py", label="Statbotics")
 selectedAlliance = st.title("FRC Scouting Master")
 st.subheader("Scout Matches!")
 
-Entered_Match_Key = st.text_input("Please enter event key: ", value="2026micmp1")
+Entered_Match_Key = st.text_input("Please enter event key: ", value="2026miwrc")
 qualMatch = st.text_input("Please enter match number:")
 allianceOptions = ["Red", "Blue"]
 

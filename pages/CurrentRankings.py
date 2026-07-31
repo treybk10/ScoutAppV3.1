@@ -30,7 +30,7 @@ st.page_link("pages/Statbotics.py", label="Statbotics")
 selectedAlliance = st.title("FRC Scouting Master")
 st.subheader("Event Rankings")
 
-comp = st.text_input("Event Key: ", value="2026misal")
+comp = st.text_input("Event Key: ", value="2026miwrc")
 tba_url = f"https://www.thebluealliance.com/api/v3/event/{comp}/rankings"
 
 response = requests.get(tba_url, headers=headers)

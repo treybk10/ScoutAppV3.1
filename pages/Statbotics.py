@@ -26,7 +26,7 @@ st.page_link("pages/CurrentRankings.py", label="Current Rankings")
 st.page_link("pages/StandScouting.py", label="Stand Scouting")
 st.page_link("pages/Statbotics.py", label="Statbotics")
 
-event_key = st.text_input("Event Key: ", value="2026misal")
+event_key = st.text_input("Event Key: ", value="2026miwrc")
 
 st.badge("Match predictions will not work due to statbotics API issue!", color="red")
 with st.expander("Match Predicctions: "):

@@ -35,7 +35,7 @@ st.image(MetalMuscleLogo)
 selectedAlliance = st.title("FRC Scouting Master")
 st.subheader("This will predict alliance selection")
 
-comp = st.text_input("Event Key: ", value="2026misal")
+comp = st.text_input("Event Key: ", value="2026miwrc")
 CSV_PATH = st.file_uploader("Please Upload Scouting Data (.csv fromat)", type=["csv"])
 declines = st.toggle("Allow Declines?")
 #second_pick = st.toggle("Predict second pick?")

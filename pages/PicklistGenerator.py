@@ -37,7 +37,7 @@ elif Use_Pro_AI == False:
     MODEL_NAME = "google/gemini-2.5-flash" 
 
 # sb = statbotics.Statbotics()
-Event_Key = st.text_input("Event Key: ", value="2026misal")
+Event_Key = st.text_input("Event Key: ", value="2026miwrc")
 # event_teams = sb.get_team_events(event=f"{Event_Key}", limit=100)
 
 CSV_PATH = st.file_uploader("Please Upload Scouting Data (.csv fromat)", type=["csv"])
