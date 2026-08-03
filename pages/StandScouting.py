@@ -81,7 +81,8 @@ selectedAlliance = st.title("FRC Scouting Master")
 st.subheader("Scout Matches!")
 
 Entered_Match_Key = st.text_input("Please enter event key: ", value="2026miwrc")
-qualMatch = int(st.text_input("Please enter match number:"))
+qualMatch = st.text_input("Please enter match number:")
+# intQualMatch = int(qualMatch)
 allianceOptions = ["Red", "Blue"]
 
 RedPrediction = None
@@ -303,7 +304,6 @@ if st.button("Upload Match"):
     try:
         worksheet.append_row(rawMatchData)
         st.balloons()
-        qualMatch += 1
         st.session_state.found_teams = False
         st.success("Saved!")
     except Exception as e:
