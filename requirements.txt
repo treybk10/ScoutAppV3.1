@@ -4,3 +4,4 @@ openai
 requests
 statbotics
 yt_dlp
+gspread
