@@ -2,7 +2,8 @@ import os
 import streamlit as st
 import requests
 import pandas as pd
-
+import gspread
+from google.oauth2.service_account import Credentials
 
 st.html(
     """
@@ -41,7 +42,29 @@ headers = {
 
 submit_match = False
 
+secrets_info = st.secrets["connections"]["gsheets"]
+creds_dict = {
+    "type": secrets_info["type"],
+    "project_id": secrets_info["project_id"],
+    "private_key_id": secrets_info["private_key_id"],
+    "private_key": secrets_info["private_key"],
+    "client_email": secrets_info["client_email"],
+    "client_id": secrets_info["client_id"],
+    "auth_uri": secrets_info["auth_uri"],
+    "token_uri": secrets_info["token_uri"],
+    "auth_provider_x509_cert_url": secrets_info["auth_provider_x509_cert_url"],
+    "client_x509_cert_url": secrets_info["client_x509_cert_url"]
+}
 
+scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
+
+
+creds = Credentials.from_service_account_info(creds_dict, scopes=scope)
+client = gspread.authorize(creds)
+
+sh = client.open_by_url(st.secrets["connections"]["gsheets"]["spreadsheet"])
+
+worksheet = sh.get_worksheet(0)
 
 BASE_DIR = os.path.dirname(__file__)
 
@@ -50,7 +73,7 @@ MetalMuscleLogo = os.path.join(BASE_DIR, "More Files", "1506-logo.jpg")
 
 st.image(MetalMuscleLogo)
 
-st.page_link("pages/StandScouting.py", label="Stand Scouting")
+st.page_link("MatchScout.py", label="Match Scouting")
 st.page_link("pages/CurrentRankings.py", label="Current Rankings")
 st.page_link("pages/Statbotics.py", label="Statbotics")
 
@@ -58,7 +81,7 @@ selectedAlliance = st.title("FRC Scouting Master")
 st.subheader("Scout Matches!")
 
 Entered_Match_Key = st.text_input("Please enter event key: ", value="2026miwrc")
-qualMatch = st.text_input("Please enter match number:")
+qualMatch = int(st.text_input("Please enter match number:"))
 allianceOptions = ["Red", "Blue"]
 
 RedPrediction = None
@@ -70,6 +93,7 @@ MATCH_KEY = f"{Entered_Match_Key}_qm{qualMatch}"
 
 url = f"https://www.thebluealliance.com/api/v3/match/{MATCH_KEY}"
 
+scouter_name = st.text_input("Scouter's name:", max_chars=20)
 
 auto_starting = ["Left", "Right", "Center"]
 shooter_types = ["Single Dumper", "Multi-Wide Dumper", "Single Turret", "Dual Turret"]
@@ -91,6 +115,8 @@ if st.button("Find Teams"):
             st.session_state.blue_teams = [team.replace("frc", "") for team in alliances.get("blue", {}).get("team_keys", [])]
             st.session_state.all_teams = [team.replace("frc", "") for team in alliances.get("red", {}).get("team_keys", [])] + [team.replace("frc", "") for team in alliances.get("blue", {}).get("team_keys", [])]
             st.session_state.found_teams = True
+    else:
+        st.error("No matches found. Could be wrong event key, wrong qual number, or schedule isn't released yet.")
 
 if st.session_state.found_teams:
     col1, col2 = st.columns(2)
@@ -106,18 +132,16 @@ if st.session_state.found_teams:
         BluePrediction = st.number_input("Blue Predicted Score", step=1)
 
     selected_team = st.multiselect("Please select team:", st.session_state.all_teams, key="selected_team_state", max_selections=1)
-    st.divider()
+
 
 # bufferLeft, middleData, bufferRight = st.columns([0.1, 0.8, 0.1])
 
 #with middleData:
 if st.session_state.selected_team_state:
 
-    scouter_name = st.text_input("Scouter's name:", max_chars=20)
-
     st.divider()
     st.subheader("Auto!")
-    starting_auto = st.multiselect("Select auto starting location: ", auto_starting, max_selections=2)
+    starting_auto = st.multiselect("Select auto starting location: ", auto_starting, max_selections=1)
     if "Center" in starting_auto:
         center_shoot = st.toggle("Scored any fuel?")
         center_intake = st.toggle("Intaked other fuel besides preload?")
@@ -134,7 +158,7 @@ if st.session_state.selected_team_state:
 
     robo_scored = st.toggle("Did robot score fuel?", value=True)
     if robo_scored == True:
-        robo_shooter_type = st.multiselect("Shooter type: ", shooter_types, max_selections=2)
+        robo_shooter_type = st.multiselect("Shooter type: ", shooter_types, max_selections=1)
         robo_hopper_size = st.select_slider("Hopper capacity: ", ["Small (<30)", "Medium (31-60)", "Large (>61)"], value="Medium (31-60)")
         robo_accuracy = st.slider("Robot accuracy: ", min_value=1, max_value=100, value=80)
         robo_cycle_time = st.select_slider("Robot cycle time: ", ["Extremely Slow", "Below Average", "Average", "Above Average", "Super Fast"], value="Average")
@@ -143,14 +167,15 @@ if st.session_state.selected_team_state:
         robo_shooter_type = "N/A"
         robo_hopper_size = "N/A"
         robo_accuracy = 0
+        robo_cycle_time = "N/A"
         robo_throughput = "N/A"
 
     robo_driving = st.select_slider("How fluid is their driving?", ["Not real sure what they're doing", "Mechanical failure that hinders drive performance", "Could be better", "Average", "Above Average", "Couldn't be better"], value="Average")
 
-    robo_intake = st.multiselect("How do they intake?", ["Floor", "Outpost/Human Player", "Both"], max_selections=2)
-    if "Floor" in robo_intake:
+    robo_intake = st.multiselect("How do they intake?", ["Floor", "Outpost/Human Player", "Both"], max_selections=1)
+    if "Outpost/Human Player" not in robo_intake:
         robo_intake_rating = st.select_slider("How's the intake?", ["There's an intake?", "Jammed several times", "Average", "Above Average", "Awesome!"], value="Average")
-    if "Floor" not in robo_intake:
+    if "Outpost/Human Player" in robo_intake:
         robo_intake_rating = "Can't intake from floor"
 
     robo_do_when_inactive = st.multiselect("When the hub is inactive, what do they do? (Can select more that one)", ["Nothing", "Defense", "Clear opposing alliances fuel", "Pass/Collect fuel"])
@@ -236,45 +261,56 @@ if st.session_state.selected_team_state:
         "Robot Broke Explanation": robo_broke_explanation,
         "Extra Notes": robo_extra
     }
+    rawMatchData = [
+        scouter_name,
+        team_clean,
+        qualMatch,
+        starting_auto[0] if starting_auto else "Not entered",
+        center_intake,
+        center_shoot,
+        neutral_passes,
+        robo_auto_climb,
+        robo_scored,
+        robo_shooter_type[0] if robo_shooter_type else "Not entered",
+        robo_hopper_size,
+        robo_accuracy,
+        robo_throughput,
+        robo_cycle_time,
+        robo_driving,
+        robo_intake[0] if robo_intake else "Not entered",
+        robo_intake_rating,
+        ", ".join(robo_do_when_inactive) if robo_do_when_inactive else "Not entered",
+        robo_sotm,
+        robo_trench,
+        robo_bump,
+        ", ".join(robo_prefered_travel) if isinstance(robo_prefered_travel, list) else robo_prefered_travel,
+        robo_play_defense,
+        robo_defense_effeciency,
+        robo_had_defense,
+        robo_had_defense_rating,
+        robo_played_defense_on_team,
+        robo_tele_climb,
+        robo_teleop_level,
+        robo_broke,
+        robo_broke_explanation,
+        robo_extra
+    ]
 
 st.divider()
 
-# --- STEP 2: TRIGGER THE SAVE ACTION ---
-# Consolidated into a single button layout to prevent duplicate state submissions
-col_save, col_clear = st.columns(2)
 
-with col_save:
-    st.badge("Add current data to list", color="yellow")
-    if st.button("Save Match Data"):   
-        if match_data_entered:
-            st.session_state.all_scouting_data.append(match_data_entered)
-        else:
-            st.error("Please ensure a team is selected and data is entered before saving.")
+if st.button("Upload Match"):
+    try:
+        worksheet.append_row(rawMatchData)
+        st.balloons()
+        qualMatch += 1
+        st.session_state.found_teams = False
+        st.success("Saved!")
+    except Exception as e:
+        st.error("Failed to upload match")
+        if st.expander("See error code:"):
+            st.write(e)
 
-with col_clear:
-    st.badge("This will clear current match results!", color="red")
-    if st.button("Clear Current Data"):
-        st.session_state.all_scouting_data = []
-        st.toast("All match data has been deleted")
-        st.rerun()
-
-if st.session_state.all_scouting_data:
-
-    #st.subheader(f"Currently Collected Matches ({len(st.session_state.all_scouting_data)})")
-    
-    downloadable_data = pd.DataFrame(st.session_state.all_scouting_data)
-    st.dataframe(downloadable_data)
-
-    convert_data = downloadable_data.to_csv(index=False, header=False).encode('utf-8')
-
-    st.download_button(
-        label="Download All Data",
-        data=convert_data,
-        file_name=f"Scouting_Data_{Entered_Match_Key}.csv",
-        mime="text/csv"
-    )
-else:
-    st.info("No matches have been saved in this cache session yet.")
 
 if RedPrediction is not None and BluePrediction is not None:
     if RedPrediction > 0 and BluePrediction > 0:
