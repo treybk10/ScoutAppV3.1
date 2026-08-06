@@ -28,6 +28,55 @@ st.page_link("pages/Statbotics.py", label="Statbotics")
 
 event_key = st.text_input("Event Key: ", value="2026miwrc")
 
+
+with st.expander("TBA Match Prediction"):
+    matchNumber = st.number_input("Please enter match number: ", step=1)
+    if matchNumber is not None and matchNumber > 0:
+        MATCH_KEY = f"{event_key}_qm{matchNumber}"
+        url = f"https://www.thebluealliance.com/api/v3/match/{MATCH_KEY}"    
+
+        oprURL = f"https://www.thebluealliance.com/api/v3/event/{event_key}/oprs"
+
+        response = requests.get(url, headers=headers)
+        oprResponse = requests.get(oprURL, headers=headers)
+        
+        if response.status_code == 200 and oprResponse.status_code == 200:
+            match_data = response.json()   
+            opr_data = oprResponse.json()
+
+            alliances = match_data.get("alliances", {})
+
+            globalOPR = opr_data.get("oprs", {})
+
+            red_teams = [team.replace("frc", "") for team in alliances.get("red", {}).get("team_keys", [])]
+            blue_teams = [team.replace("frc", "") for team in alliances.get("blue", {}).get("team_keys", [])]
+
+            red_alliance_opr = 0.0
+            blue_alliance_opr = 0.0
+
+            col1, col2 = st.columns(2)
+            with col1:
+                st.error("RED ALLIANCE")
+                for teams in red_teams:
+                    team_opr = globalOPR.get(f"frc{teams}", 0.0) 
+                    red_alliance_opr += team_opr
+                    st.write(teams, round(team_opr, 1))
+                st.error(f"Total Red OPR: {round(red_alliance_opr, 1)}")
+            with col2:
+                st.info("BLUE ALLIANCE")
+                for teams in blue_teams:
+                    team_opr = globalOPR.get(f"frc{teams}", 0.0) 
+                    blue_alliance_opr += team_opr
+                    st.write(teams, round(team_opr, 1))
+                st.info(f"Total Blue OPR: {round(blue_alliance_opr, 1)}")
+            if red_alliance_opr > blue_alliance_opr:
+                st.error(f"Red Wins by {round(red_alliance_opr - blue_alliance_opr, 1)}")
+            else:
+                st.info(f"Blue Wins by {round(blue_alliance_opr - red_alliance_opr, 1)}")
+
+        else:
+            st.error("Can't find match")
+
 st.badge("Match predictions will not work due to statbotics API issue!", color="red")
 with st.expander("Match Predicctions: "):
     match_number = st.number_input("Match Number: ", value=1)
@@ -313,22 +362,25 @@ with st.expander("Event Match Schedule: "):
             st.write(f":blue-background[{blue3}]")
 
 
-st.badge("Team data will not work due to statbotics API issue!", color="red")
+#st.badge("Team data will not work due to statbotics API issue!", color="red")
 with st.expander("Find Team Data"):
     search_team = st.number_input("Enter Team Number", step=1)
 
     if st.button("Search For Team"):
-        team_data = sb.get_team(search_team)
+        try:
+            team_data = sb.get_team(search_team)
 
-        epa_data = team_data['norm_epa']
-        record_data = team_data['record']
+            epa_data = team_data['norm_epa']
+            record_data = team_data['record']
 
-        st.header(f"Team {team_data['name']}")
-        st.subheader(f"EPA: {epa_data['current']}")
-        st.subheader(f"Win Rate: {record_data['winrate']}")
+            st.header(f"Team {team_data['name']}")
+            st.subheader(f"EPA: {epa_data['current']}")
+            st.subheader(f"Win Rate: {record_data['winrate']}")
 
-        st.subheader(f"Country: {team_data['country']}")
-        st.subheader(f"State: {team_data['state']}")
-        st.subheader(f"Rookie Year: {team_data['rookie_year']}")
-        with st.expander("View Raw Team Data"):
-            st.write(team_data)
+            st.subheader(f"Country: {team_data['country']}")
+            st.subheader(f"State: {team_data['state']}")
+            st.subheader(f"Rookie Year: {team_data['rookie_year']}")
+            with st.expander("View Raw Team Data"):
+                st.write(team_data)
+        except Exception as e:
+            st.error("Can't find data on team. Make sure team number is set correctly!")
