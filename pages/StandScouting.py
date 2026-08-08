@@ -9,8 +9,8 @@ st.html(
     """
     <style>
         div[data-testid="stVerticalBlock"] > div:has(div[data-testid="stSlider"]) {
-            padding-left: 5%;
-            padding-right: 5%;
+            padding-left: 8%;
+            padding-right: 8%;
         }
     </style>
     """
