@@ -69,6 +69,7 @@ with st.expander("TBA Match Prediction"):
                     blue_alliance_opr += team_opr
                     st.write(teams, round(team_opr, 1))
                 st.info(f"Total Blue OPR: {round(blue_alliance_opr, 1)}")
+
             if red_alliance_opr > blue_alliance_opr:
                 st.error(f"Red Wins by {round(red_alliance_opr - blue_alliance_opr, 1)}")
             else:
@@ -382,5 +383,6 @@ with st.expander("Find Team Data"):
             st.subheader(f"Rookie Year: {team_data['rookie_year']}")
             with st.expander("View Raw Team Data"):
                 st.write(team_data)
+                
         except Exception as e:
             st.error("Can't find data on team. Make sure team number is set correctly!")

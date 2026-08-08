@@ -31,8 +31,6 @@ if "all_teams" not in st.session_state:
     st.session_state.all_teams = []
 if "all_scouting_data" not in st.session_state:
     st.session_state.all_scouting_data = []
-if "save_locked" not in st.session_state:
-    st.session_state.save_locked = False
 
 TBA_API_KEY = st.secrets["TBA_KEY"]
 
@@ -81,8 +79,9 @@ selectedAlliance = st.title("FRC Scouting Master")
 st.subheader("Scout Matches!")
 
 Entered_Match_Key = st.text_input("Please enter event key: ", value="2026miwrc")
-qualMatch = st.text_input("Please enter match number:")
-# intQualMatch = int(qualMatch)
+scouter_name = st.text_input("Scouter's name:")
+qualMatch = st.number_input("Please enter match number:", step=1, min_value=1)
+#intQualMatch = int(qualMatch)
 allianceOptions = ["Red", "Blue"]
 
 RedPrediction = None
@@ -94,7 +93,6 @@ MATCH_KEY = f"{Entered_Match_Key}_qm{qualMatch}"
 
 url = f"https://www.thebluealliance.com/api/v3/match/{MATCH_KEY}"
 
-scouter_name = st.text_input("Scouter's name:", max_chars=20)
 
 auto_starting = ["Left", "Right", "Center"]
 shooter_types = ["Single Dumper", "Multi-Wide Dumper", "Single Turret", "Dual Turret"]
@@ -297,19 +295,20 @@ if st.session_state.selected_team_state:
         robo_extra
     ]
 
-st.divider()
+    st.divider()
 
 
-if st.button("Upload Match"):
-    try:
-        worksheet.append_row(rawMatchData)
-        st.balloons()
-        st.session_state.found_teams = False
-        st.success("Saved!")
-    except Exception as e:
-        st.error("Failed to upload match")
-        if st.expander("See error code:"):
-            st.write(e)
+    if st.button("Upload Match"):
+        try:
+            worksheet.append_row(rawMatchData)
+            st.balloons()
+            qualMatch += 1
+            st.session_state.found_teams = False
+            st.success("Saved!")
+        except Exception as e:
+            st.error("Failed to upload match")
+            if st.expander("See error code:"):
+                st.write(e)
 
 
 if RedPrediction is not None and BluePrediction is not None:
