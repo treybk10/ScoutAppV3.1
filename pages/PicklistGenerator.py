@@ -1,6 +1,5 @@
 # import statbotics
 
-import cv2
 import base64
 import os
 from openai import OpenAI

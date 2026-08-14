@@ -86,8 +86,7 @@ allianceOptions = ["Red", "Blue"]
 
 RedPrediction = None
 BluePrediction = None
-#selectedAlliance = st.multiselect("Please Select What Alliance The Scouted Team Is On", allianceOptions,  max_selections=1)
-#MATCH_KEY = f"2026micmp1_qm{qualMatch}"
+
 
 MATCH_KEY = f"{Entered_Match_Key}_qm{qualMatch}"
 
