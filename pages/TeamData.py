@@ -21,6 +21,12 @@ st.subheader("Figure out next match")
 event_key = st.text_input("Event Key", value="2026miwrc")
 
 
+mediaTBA = "https://www.thebluealliance.com/api/v3/team/frc1506/media/2026"
+
+responseMedia = requests.get(mediaTBA, headers=headers)
+st.write(responseMedia)
+st.json(responseMedia.json())
+
 
 wanted_team = st.number_input("Team Number", step=1, value=1506)
 if st.button("Find Matches"):
