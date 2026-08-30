@@ -7,17 +7,15 @@ from openai import OpenAI
 import streamlit as st
 import requests
 
-
-if "allInput" not in st.session_state:
-    st.session_state.allInput = []
-
-
 # --- Configuration ---
 #API KEY GOES HERE
-HACK_CLUB_API_KEY = st.secrets["AI_API"]
+HACK_CLUB_API_KEY = st.secrets["API_KEY"]
 HACK_CLUB_BASE_URL = "https://ai.hackclub.com/proxy/v1" 
 
 MODEL_NAME = "google/gemini-2.5-flash" 
+
+if "allInput" not in st.session_state:
+    st.session_state.allInput = []
 
 client = OpenAI(
     base_url="https://openrouter.ai",
