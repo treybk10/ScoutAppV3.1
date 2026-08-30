@@ -9,10 +9,10 @@ import requests
 
 # --- Configuration ---
 #API KEY GOES HERE
-HACK_CLUB_API_KEY = st.secrets["API_KEY"]
+HACK_CLUB_API_KEY = st.secrets["AI_API"]
 HACK_CLUB_BASE_URL = "https://ai.hackclub.com/proxy/v1" 
 
-MODEL_NAME = "google/gemini-2.5-flash" 
+MODEL_NAME = "openrouter/free" 
 
 if "allInput" not in st.session_state:
     st.session_state.allInput = []
