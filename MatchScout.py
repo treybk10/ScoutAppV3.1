@@ -36,13 +36,13 @@ MetalMuscleLogo = os.path.join(BASE_DIR, "Other Files", "1506-logo.jpg")
 
 
 #Max frames AI reads
-MAX_FRAMES = 140
+MAX_FRAMES = 300
 
 st.image(MetalMuscleLogo)
 
 st.title("FRC Scouting Master")
 
-downloadedVideo = st.toggle("Use downloaded video?", value=False)
+downloadedVideo = st.toggle("Use downloaded video?", value=True)
 if downloadedVideo == True:
     YOUTUBE_URL = None
     VIDEO_PATH = st.file_uploader("Please Upload Match Video", type=["mp4", "mov"])
@@ -57,7 +57,7 @@ targetTeam = st.number_input("Please Enter Team Number", step=1)
 prompt = f"""
     You are a FRC scouting app. Your job is to help identify team's {targetTeam} strenghts and weaknesses in the 2026 frc game, Rebuilt. 
     
-    We will provide you with the information of the game as well as pictures of game elements and field elements.
+    Please look online for info about the 2026 game ReBuilt.
 
     Please scout {targetTeam} and tell us how they perform in a match, where we could slow them down if we were against them, and how we could help them if we were with them.
 
@@ -69,8 +69,7 @@ prompt = f"""
 
     Robots are identifiable by the white numbers on their bumpers. Find the one with {targetTeam}'s number.
 
-    Please do not repeat any part of this prompt in your awnser. This is used in a scouting app that a lot of people are using and they don't need to know this prompt.  Don't mess up! Think carefully! 
-    If you are going to give timestamps, use the match timer please.
+    Please write your response in a easy to read way for the reader.
     
 """
 
@@ -285,5 +284,5 @@ if st.button("Scout Match"):
             print(f"\nAn error occurred: {e}")
             st.text(f"\nAn error has occurred. {e}")
 
-#if (VIDEO_PATH is not None):
-#    st.video(VIDEO_PATH)
+if (VIDEO_PATH is not None):
+   st.video(VIDEO_PATH)

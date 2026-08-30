@@ -53,16 +53,29 @@ if user_input is not None:
                 }
             ]
         )
-    
+
     st.session_state.allInput.append(user_input)
     st.session_state.allInput.append(response.choices[0].message.content)
 
-    for data in st.session_state.allInput:
-        with st.chat_message(currentRespone):
-            if (currentRespone == "user"):
-                currentRespone = "ai"
-            else:
-                currentRespone = "user"
-            st.write(data)
-
+    with st.expander("Full Conversation"):
+        for data in st.session_state.allInput:
+            with st.chat_message(currentRespone):
+                if (currentRespone == "user"):
+                    currentRespone = "ai"
+                else:
+                    currentRespone = "user"
+                st.write(data)
+    
+    with st.chat_message(currentRespone):
+        if (currentRespone == "user"):
+            currentRespone = "ai"
+        else:
+            currentRespone = "user"
+        st.write(user_input)
+    with st.chat_message(currentRespone):
+        if (currentRespone == "user"):
+            currentRespone = "ai"
+        else:
+            currentRespone = "user"
+        st.write(response.choices[0].message.content)
 #st.write(st.session_state.allInput)

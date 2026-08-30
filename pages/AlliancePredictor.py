@@ -21,7 +21,7 @@ headers = {
 
 
 # pro doesn't work?
-MODEL_NAME = "google/gemini-2.5-flash" 
+MODEL_NAME = "openrouter/free" 
 
 BASE_DIR = os.path.dirname(__file__)
 
@@ -50,8 +50,8 @@ AI_readable_rankings = []
 
 #Add a timeout so the connection doesn't drop while the AI is thinking
 client = OpenAI(
-    base_url=HACK_CLUB_BASE_URL,
-    api_key=HACK_CLUB_API_KEY,
+    base_url="https://openrouter.ai/api/v1",
+    api_key= st.secrets["AI_API"],
     timeout=5000 # Wait up to 5 minutes for a response
 )
 

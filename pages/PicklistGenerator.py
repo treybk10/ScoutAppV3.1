@@ -28,13 +28,13 @@ st.image(MetalMuscleLogo)
 selectedAlliance = st.title("FRC Scouting Master")
 st.subheader("This is to help with alliance selection. Import your scouting data and a prompt for AI and it will generate a picklist!")
 
-Use_Pro_AI = st.toggle("Use Gemini Pro?", value=False)
+# Use_Pro_AI = st.toggle("Use Gemini Pro?", value=False)
 
-if Use_Pro_AI == True:
-    MODEL_NAME = "google/gemini-2.5-pro" 
-elif Use_Pro_AI == False:
-    MODEL_NAME = "google/gemini-2.5-flash" 
-
+# if Use_Pro_AI == True:
+#     MODEL_NAME = "google/gemini-2.5-pro" 
+# elif Use_Pro_AI == False:
+#     MODEL_NAME = "google/gemini-2.5-flash" 
+MODEL_NAME = "openrouter/free"
 # sb = statbotics.Statbotics()
 Event_Key = st.text_input("Event Key: ", value="2026miwrc")
 # event_teams = sb.get_team_events(event=f"{Event_Key}", limit=100)
@@ -51,8 +51,8 @@ ONLY USE TEAMS FROM THE GIVEN EVENT LIST! Focus more on scouting data than epa, 
 
 #Add a timeout so the connection doesn't drop while the AI is thinking
 client = OpenAI(
-    base_url=HACK_CLUB_BASE_URL,
-    api_key=HACK_CLUB_API_KEY,
+    base_url="https://openrouter.ai/api/v1",
+    api_key= st.secrets["AI_API"],
     timeout=5000 # Wait up to 5 minutes for a response
 )
 
