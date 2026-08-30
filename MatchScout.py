@@ -15,7 +15,7 @@ HACK_CLUB_API_KEY = st.secrets["API_KEY"]
 HACK_CLUB_BASE_URL = "https://ai.hackclub.com/proxy/v1" 
 
 # pro doesn't work?
-MODEL_NAME = "google/gemini-2.5-flash" 
+MODEL_NAME = "openrouter/free" 
 
 VIDEO_PATH = ""
 
@@ -160,8 +160,8 @@ def extract_frames_from_video(video_path, max_frames=MAX_FRAMES):
 
 #Add a timeout so the connection doesn't drop while the AI is thinking
 client = OpenAI(
-    base_url=HACK_CLUB_BASE_URL,
-    api_key=HACK_CLUB_API_KEY,
+    base_url="https://openrouter.ai/api/v1",
+    api_key= st.secrets["AI_API"],
     timeout=5000 # Wait up to 5 minutes for a response
 )
 
@@ -189,9 +189,9 @@ if st.button("Scout Match"):
             # Clean up and delete the temporary file from disk immediately
             os.unlink(temp_video_path)
 
-        if not YOUTUBE_URL.strip() and YOUTUBE_URL is not None:
-            st.warning("Please provide a valid YouTube URL first.")
-            st.stop()
+        # if not YOUTUBE_URL.strip() and YOUTUBE_URL is not None:
+        #     st.warning("Please provide a valid YouTube URL first.")
+        #     st.stop()
         try:
             if YOUTUBE_URL is not None:
                 temp_video_path = None

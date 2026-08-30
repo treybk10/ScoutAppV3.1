@@ -18,8 +18,8 @@ if "allInput" not in st.session_state:
     st.session_state.allInput = []
 
 client = OpenAI(
-    base_url="https://openrouter.ai",
-    api_key=HACK_CLUB_API_KEY,
+    base_url="https://openrouter.ai/api/v1",
+    api_key= st.secrets["AI_API"],
     timeout=5000 # Wait up to 5 minutes for a response
 )
 
@@ -40,7 +40,7 @@ selectedAlliance = st.title("FRC Scouting Master")
 user_input = st.chat_input(placeholder="Message Here")
 
 if user_input is not None:
-    content_list = [{"type": "text", "text": user_input}]
+    content_list = [{"type": "text", "text": f"You are a FRC scouting app. Your job is to provide the most reasonable scouting response to this prompt from the user: {user_input}. The Previous Conversation is here: {st.session_state.allInput}. Please give the best response you can."}]
 
 
     with st.spinner(f"Asking AI: {user_input}"):
