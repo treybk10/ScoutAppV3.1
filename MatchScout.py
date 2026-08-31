@@ -16,6 +16,7 @@ HACK_CLUB_BASE_URL = "https://ai.hackclub.com/proxy/v1"
 
 # pro doesn't work?
 MODEL_NAME = "openrouter/free" 
+TTS_MODEL_NAME = "fish-audio/s2.1-pro-free:free"
 
 VIDEO_PATH = ""
 
@@ -279,6 +280,18 @@ if st.button("Scout Match"):
             print("\n--- AI RESPONSE ---")
             print(response.choices[0].message.content)
             st.text(response.choices[0].message.content)
+
+            ai_text = response.choices[0].message.content
+            cleaned_text = ai_text.replace("**", "").replace("###", "").replace("* ", "")
+
+
+            tts_response = client.audio.speech.create(
+                model=TTS_MODEL_NAME,
+                voice="en_paul_neutral",
+                input=response.choices[0].message.content,
+                response_format="mp3"
+            )
+            st.audio(tts_response.content, format="audio/mp3", autoplay=True)
 
         except Exception as e:
             print(f"\nAn error occurred: {e}")
