@@ -84,7 +84,7 @@ if user_input is not None:
         
         tts_response = client.audio.speech.create(
             model=TTS_MODEL_NAME,
-            voice="b347db033a6549378b48d00acb0d06cd",
+            voice="601e4808613a487f88416690ea564b8c",
             input=response.choices[0].message.content,
             response_format="mp3"
         )

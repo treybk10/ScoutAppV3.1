@@ -11,7 +11,7 @@ import tempfile
 
 # --- Configuration ---
 #API KEY GOES HERE
-HACK_CLUB_API_KEY = st.secrets["API_KEY"]
+HACK_CLUB_API_KEY = st.secrets["AI_API"]
 HACK_CLUB_BASE_URL = "https://ai.hackclub.com/proxy/v1" 
 
 # pro doesn't work?
@@ -287,7 +287,7 @@ if st.button("Scout Match"):
 
             tts_response = client.audio.speech.create(
                 model=TTS_MODEL_NAME,
-                voice="en_paul_neutral",
+                voice="601e4808613a487f88416690ea564b8c",
                 input=response.choices[0].message.content,
                 response_format="mp3"
             )
@@ -295,7 +295,7 @@ if st.button("Scout Match"):
 
         except Exception as e:
             print(f"\nAn error occurred: {e}")
-            st.text(f"\nAn error has occurred. {e}")
+            st.write(f"\nAn error has occurred. {e}")
 
 if (VIDEO_PATH is not None):
    st.video(VIDEO_PATH)
