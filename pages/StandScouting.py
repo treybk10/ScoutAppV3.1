@@ -338,7 +338,7 @@ if st.session_state.submit_match:
     if RedPrediction == 0 or BluePrediction == 0:
         st.error("Can't enter 0 for predected score")
     elif st.session_state.red_prediction is not None and st.session_state.blue_prediction is not None:
-        if RedPrediction > 0 and BluePrediction > 0:
+        if st.session_state.red_prediction > 0 and st.session_state.blue_prediction > 0:
             st.subheader("Real Match Results")
             col1_2, col2_2 = st.columns(2)
             
@@ -348,8 +348,8 @@ if st.session_state.submit_match:
                 realBlueScore = st.number_input("Real Blue Score", step=1, min_value=0, value=0)
                 
             if realRedScore > 0 and realBlueScore > 0:
-                redErrorOff = max(-100, round(100 - ((abs(realRedScore - RedPrediction) / realRedScore) * 100)))
-                blueErrorOff = max(-100, round(100 - ((abs(realBlueScore - BluePrediction) / realBlueScore) * 100)))
+                redErrorOff = max(-100, round(100 - ((abs(realRedScore - st.session_state.red_prediction) / realRedScore) * 100)))
+                blueErrorOff = max(-100, round(100 - ((abs(realBlueScore - st.session_state.blue_prediction) / realBlueScore) * 100)))
 
                 col1_3, col2_3 = st.columns(2)
                 with col1_3:
