@@ -66,7 +66,7 @@ def readable_ai_conversion(text: str) -> str:
 
 
 if user_input is not None:
-    content_list = [{"type": "text", "text": f"You are a FRC scouting app. Your job is to provide the most reasonable scouting response to this prompt from the user: {user_input}. The Previous Conversation is here: {st.session_state.allInput}. Please give the best response you can."}]
+    content_list = [{"type": "text", "text": f"You are a FRC scouting app. Your job is to provide the most reasonable scouting response to this prompt from the user: {user_input}. The Previous Conversation is here: {st.session_state.allInput}. Please give the best response you can. Please proved the best awnser possible."}]
 
 
     with st.spinner(f"Asking AI: {user_input}"):
@@ -80,15 +80,15 @@ if user_input is not None:
             ]
         )
 
-        ai_readable = readable_ai_conversion(response.choices[0].message.content)
+    #     ai_readable = readable_ai_conversion(response.choices[0].message.content)
         
-        tts_response = client.audio.speech.create(
-            model=TTS_MODEL_NAME,
-            voice="601e4808613a487f88416690ea564b8c",
-            input=response.choices[0].message.content,
-            response_format="mp3"
-        )
-    st.audio(tts_response.content, format="audio/mp3", autoplay=True)
+    #     tts_response = client.audio.speech.create(
+    #         model=TTS_MODEL_NAME,
+    #         voice="601e4808613a487f88416690ea564b8c",
+    #         input=response.choices[0].message.content,
+    #         response_format="mp3"
+    #     )
+    # st.audio(tts_response.content, format="audio/mp3", autoplay=True)
 
     st.session_state.allInput.append(user_input)
     st.session_state.allInput.append(response.choices[0].message.content)

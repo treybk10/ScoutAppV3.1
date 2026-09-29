@@ -31,6 +31,8 @@ if "all_teams" not in st.session_state:
     st.session_state.all_teams = []
 if "all_scouting_data" not in st.session_state:
     st.session_state.all_scouting_data = []
+if "submit_match" not in st.session_state:
+    st.session_state.submit_match = False
 
 TBA_API_KEY = st.secrets["TBA_KEY"]
 
@@ -38,7 +40,7 @@ headers = {
     "X-TBA-Auth-Key": TBA_API_KEY
 }
 
-submit_match = False
+
 
 secrets_info = st.secrets["connections"]["gsheets"]
 creds_dict = {
@@ -79,7 +81,11 @@ selectedAlliance = st.title("FRC Scouting Master")
 st.subheader("Scout Matches!")
 
 Entered_Match_Key = st.text_input("Please enter event key: ", value="2026miwrc")
+
 scouter_name = st.text_input("Scouter's name:")
+
+enter_predictions = st.toggle("Would you like to enter match predictions? (Optional)", value=True)
+
 qualMatch = st.number_input("Please enter match number:", step=1, min_value=1)
 #intQualMatch = int(qualMatch)
 allianceOptions = ["Red", "Blue"]
@@ -99,6 +105,7 @@ shooter_types = ["Single Dumper", "Multi-Wide Dumper", "Single Turret", "Dual Tu
 total_scouting_data = []
 
 if st.button("Find Teams"):
+    #st.session_state.submit_match = False
     response = requests.get(url, headers=headers)
 
     if response.status_code == 200:
@@ -122,12 +129,20 @@ if st.session_state.found_teams:
         st.error("RED ALLIANCE")
         for teams in st.session_state.red_teams:
             st.write(teams)
-        RedPrediction = st.number_input("Red Predicted Score", step=1)
+    
     with col2:
         st.info("BLUE ALLIANCE")
         for teams in st.session_state.blue_teams:
             st.write(teams)
-        BluePrediction = st.number_input("Blue Predicted Score", step=1)
+
+    if enter_predictions:
+        with col1:
+            RedPrediction = st.number_input("Red Predicted Score", step=1)
+        with col2:
+            BluePrediction = st.number_input("Blue Predicted Score", step=1)
+    else:
+        RedPrediction = None
+        BluePrediction = None
 
     selected_team = st.multiselect("Please select team:", st.session_state.all_teams, key="selected_team_state", max_selections=1)
 
@@ -298,40 +313,47 @@ if st.session_state.selected_team_state:
 
 
     if st.button("Upload Match"):
+
         try:
             worksheet.append_row(rawMatchData)
             st.balloons()
             qualMatch += 1
             st.session_state.found_teams = False
             st.success("Saved!")
+
+            st.session_state.submit_match = True
         except Exception as e:
             st.error("Failed to upload match")
             if st.expander("See error code:"):
                 st.write(e)
 
-
-if RedPrediction is not None and BluePrediction is not None:
-    if RedPrediction > 0 and BluePrediction > 0:
-        st.subheader("Real Match Results")
-        col1_2, col2_2 = st.columns(2)
-        
-        with col1_2:
-            realRedScore = st.number_input("Real Red Score", step=1, min_value=0, value=0)
-        with col2_2:
-            realBlueScore = st.number_input("Real Blue Score", step=1, min_value=0, value=0)
+if st.session_state.submit_match:
+    if RedPrediction == 0 or BluePrediction == 0:
+        st.error("Can't enter 0 for predected score")
+    elif RedPrediction is not None and BluePrediction is not None:
+        if RedPrediction > 0 and BluePrediction > 0:
+            st.subheader("Real Match Results")
+            col1_2, col2_2 = st.columns(2)
             
-        if realRedScore > 0 and realBlueScore > 0:
-            redErrorOff = max(-100, round(100 - ((abs(realRedScore - RedPrediction) / realRedScore) * 100)))
-            blueErrorOff = max(-100, round(100 - ((abs(realBlueScore - BluePrediction) / realBlueScore) * 100)))
-
-            col1_3, col2_3 = st.columns(2)
-            with col1_3:
-                st.error("Red Prediction Score: ")
-                st.subheader(f"{redErrorOff}%")
-            with col2_3:
-                st.info("Blue Prediction Score: ")
-                st.subheader(f"{blueErrorOff}%")
+            with col1_2:
+                realRedScore = st.number_input("Real Red Score", step=1, min_value=0, value=0)
+            with col2_2:
+                realBlueScore = st.number_input("Real Blue Score", step=1, min_value=0, value=0)
                 
-            percentageOff = (redErrorOff + blueErrorOff) / 2
-            st.warning("Total Score (Higher Is Better): ")
-            st.title(f"{percentageOff}%")
+            if realRedScore > 0 and realBlueScore > 0:
+                redErrorOff = max(-100, round(100 - ((abs(realRedScore - RedPrediction) / realRedScore) * 100)))
+                blueErrorOff = max(-100, round(100 - ((abs(realBlueScore - BluePrediction) / realBlueScore) * 100)))
+
+                col1_3, col2_3 = st.columns(2)
+                with col1_3:
+                    st.error("Red Prediction Score: ")
+                    st.subheader(f"{redErrorOff}%")
+                with col2_3:
+                    st.info("Blue Prediction Score: ")
+                    st.subheader(f"{blueErrorOff}%")
+                    
+                percentageOff = (redErrorOff + blueErrorOff) / 2
+                st.warning("Total Score (Higher Is Better): ")
+                st.title(f"{percentageOff}%")
+    else:
+        st.error("Something went wrong. Please try again next match.")
