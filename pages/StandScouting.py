@@ -33,6 +33,10 @@ if "all_scouting_data" not in st.session_state:
     st.session_state.all_scouting_data = []
 if "submit_match" not in st.session_state:
     st.session_state.submit_match = False
+if "red_prediction" not in st.session_state:
+    st.session_state.red_prediction = None
+if "blue_prediction" not in st.session_state:
+    st.session_state.blue_prediction = None
 
 TBA_API_KEY = st.secrets["TBA_KEY"]
 
@@ -140,6 +144,9 @@ if st.session_state.found_teams:
             RedPrediction = st.number_input("Red Predicted Score", step=1)
         with col2:
             BluePrediction = st.number_input("Blue Predicted Score", step=1)
+        if st.button("Submit Prediction"):
+            st.session_state.red_prediction = RedPrediction
+            st.session_state.blue_prediction = BluePrediction
     else:
         RedPrediction = None
         BluePrediction = None
@@ -330,7 +337,7 @@ if st.session_state.selected_team_state:
 if st.session_state.submit_match:
     if RedPrediction == 0 or BluePrediction == 0:
         st.error("Can't enter 0 for predected score")
-    elif RedPrediction is not None and BluePrediction is not None:
+    elif st.session_state.red_prediction is not None and st.session_state.blue_prediction is not None:
         if RedPrediction > 0 and BluePrediction > 0:
             st.subheader("Real Match Results")
             col1_2, col2_2 = st.columns(2)
