@@ -33,6 +33,8 @@ if "all_scouting_data" not in st.session_state:
     st.session_state.all_scouting_data = []
 if "submit_match" not in st.session_state:
     st.session_state.submit_match = False
+if "predictions_entered" not in st.session_state:
+    st.session_state.predictions_entered = False
 if "red_prediction" not in st.session_state:
     st.session_state.red_prediction = None
 if "blue_prediction" not in st.session_state:
@@ -109,7 +111,8 @@ shooter_types = ["Single Dumper", "Multi-Wide Dumper", "Single Turret", "Dual Tu
 total_scouting_data = []
 
 if st.button("Find Teams"):
-    #st.session_state.submit_match = False
+    st.session_state.predictions_entered = False
+    st.session_state.submit_match = False
     response = requests.get(url, headers=headers)
 
     if response.status_code == 200:
@@ -145,11 +148,17 @@ if st.session_state.found_teams:
         with col2:
             BluePrediction = st.number_input("Blue Predicted Score", step=1)
         if st.button("Submit Prediction"):
-            st.session_state.red_prediction = RedPrediction
-            st.session_state.blue_prediction = BluePrediction
+            if BluePrediction > 0 and RedPrediction > 0:
+                st.session_state.red_prediction = RedPrediction
+                st.session_state.blue_prediction = BluePrediction
+                st.session_state.predictions_entered = True
+                st.success("Predictions entered")
+            else: 
+                st.warning("Predictions Are not valid. Needs to be at least 1. Please try again.")
     else:
         RedPrediction = None
         BluePrediction = None
+        st.session_state.predictions_entered = True
 
     selected_team = st.multiselect("Please select team:", st.session_state.all_teams, key="selected_team_state", max_selections=1)
 
@@ -157,7 +166,7 @@ if st.session_state.found_teams:
 # bufferLeft, middleData, bufferRight = st.columns([0.1, 0.8, 0.1])
 
 #with middleData:
-if st.session_state.selected_team_state:
+if st.session_state.selected_team_state and st.session_state.predictions_entered:
 
     st.divider()
     st.subheader("Auto!")
@@ -243,7 +252,7 @@ if st.session_state.selected_team_state:
 match_data_entered = None
 
 # Only build the dictionary if a team is actively selected to prevent crashes
-if st.session_state.selected_team_state:
+if st.session_state.selected_team_state and st.session_state.predictions_entered:
     # Ensure team selection handles fallback formatting for lists safely
     team_clean = st.session_state.selected_team_state[0] if isinstance(st.session_state.selected_team_state, list) and st.session_state.selected_team_state else "Unknown"
     
@@ -336,7 +345,7 @@ if st.session_state.selected_team_state:
 
 if st.session_state.submit_match:
     if RedPrediction == 0 or BluePrediction == 0:
-        st.error("Can't enter 0 for predected score")
+        st.error("Can't enter 0 for predected score. Prediction won't work this match. Please try again ")
     elif st.session_state.red_prediction is not None and st.session_state.blue_prediction is not None:
         if st.session_state.red_prediction > 0 and st.session_state.blue_prediction > 0:
             st.subheader("Real Match Results")
@@ -348,8 +357,8 @@ if st.session_state.submit_match:
                 realBlueScore = st.number_input("Real Blue Score", step=1, min_value=0, value=0)
                 
             if realRedScore > 0 and realBlueScore > 0:
-                redErrorOff = max(-100, round(100 - ((abs(realRedScore - st.session_state.red_prediction) / realRedScore) * 100)))
-                blueErrorOff = max(-100, round(100 - ((abs(realBlueScore - st.session_state.blue_prediction) / realBlueScore) * 100)))
+                redErrorOff = abs(max(-100, round(100 - ((abs(realRedScore - st.session_state.red_prediction) / realRedScore) * 100))))
+                blueErrorOff = abs(max(-100, round(100 - ((abs(realBlueScore - st.session_state.blue_prediction) / realBlueScore) * 100))))
 
                 col1_3, col2_3 = st.columns(2)
                 with col1_3:
