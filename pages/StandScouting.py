@@ -156,7 +156,7 @@ if st.session_state.found_teams:
                 st.session_state.predictions_entered = True
                 st.success("Predictions entered")
             else: 
-                st.warning("Predictions Are not valid. Needs to be at least 1. Please try again.")
+                st.error("Predictions Are not valid. Both need to be at least 1. Please try again.")
     else:
         RedPrediction = None
         BluePrediction = None
@@ -221,7 +221,7 @@ if st.session_state.selected_team_state and st.session_state.predictions_entered
     robo_bump = st.toggle("Did the robot drive over the bump?", value=True)
 
     if robo_trench == True and robo_bump == True:
-        robo_prefered_travel = st.multiselect("Prefered method of travel: ", ["Trench", "Bump"])
+        robo_prefered_travel = st.multiselect("Prefered method of travel: ", ["Trench", "Bump", "Can't Tell"], max_selections=1)
     else:
         robo_prefered_travel = "Don't do both"
 

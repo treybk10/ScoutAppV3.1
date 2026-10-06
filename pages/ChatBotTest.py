@@ -13,7 +13,7 @@ import requests
 HACK_CLUB_API_KEY = st.secrets["AI_API"]
 HACK_CLUB_BASE_URL = "https://ai.hackclub.com/proxy/v1" 
 
-MODEL_NAME = "openrouter/free" 
+MODEL_NAME = "openrouter/free:online" 
 TTS_MODEL_NAME = "fish-audio/s2.1-pro-free:free"
 
 if "allInput" not in st.session_state:
