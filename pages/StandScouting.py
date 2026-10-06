@@ -84,13 +84,15 @@ st.page_link("pages/CurrentRankings.py", label="Current Rankings")
 st.page_link("pages/Statbotics.py", label="Statbotics")
 
 selectedAlliance = st.title("FRC Scouting Master")
-st.subheader("Scout Matches!")
+#st.subheader("Scout Matches!")
+st.info("Please know that all of this is meant to be an estimate and just provide your best guess.")
 
 Entered_Match_Key = st.text_input("Please enter event key: ", value="2026miwrc")
 
 scouter_name = st.text_input("Scouter's name:")
 
 enter_predictions = st.toggle("Would you like to enter match predictions? (Optional)", value=True)
+st.warning("Match predictions are in beta and is just for fun. You can enter your score predictions and see how well you did at the end. ")
 
 qualMatch = st.number_input("Please enter match number:", step=1, min_value=1)
 #intQualMatch = int(qualMatch)
@@ -144,9 +146,9 @@ if st.session_state.found_teams:
 
     if enter_predictions:
         with col1:
-            RedPrediction = st.number_input("Red Predicted Score", step=1)
+            RedPrediction = st.number_input("Red Predicted Score", step=1, min_value=0)
         with col2:
-            BluePrediction = st.number_input("Blue Predicted Score", step=1)
+            BluePrediction = st.number_input("Blue Predicted Score", step=1, min_value=0)
         if st.button("Submit Prediction"):
             if BluePrediction > 0 and RedPrediction > 0:
                 st.session_state.red_prediction = RedPrediction
@@ -161,6 +163,11 @@ if st.session_state.found_teams:
         st.session_state.predictions_entered = True
 
     selected_team = st.multiselect("Please select team:", st.session_state.all_teams, key="selected_team_state", max_selections=1)
+
+
+    if selected_team is None:
+        if st.session_state.red_prediction is None or st.session_state.blue_prediction is None:
+            st.warning("Please enter a prediction or turn off predictions to continue.")
 
 
 # bufferLeft, middleData, bufferRight = st.columns([0.1, 0.8, 0.1])
@@ -199,7 +206,7 @@ if st.session_state.selected_team_state and st.session_state.predictions_entered
         robo_cycle_time = "N/A"
         robo_throughput = "N/A"
 
-    robo_driving = st.select_slider("How fluid is their driving?", ["Not real sure what they're doing", "Mechanical failure that hinders drive performance", "Could be better", "Average", "Above Average", "Couldn't be better"], value="Average")
+    #robo_driving = st.select_slider("How fluid is their driving?", ["Not real sure what they're doing", "Mechanical failure that hinders drive performance", "Could be better", "Average", "Above Average", "Couldn't be better"], value="Average")
 
     robo_intake = st.multiselect("How do they intake?", ["Floor", "Outpost/Human Player", "Both"], max_selections=1)
     if "Outpost/Human Player" not in robo_intake:
@@ -271,7 +278,7 @@ if st.session_state.selected_team_state and st.session_state.predictions_entered
         "Robot Accuracy": robo_accuracy,
         "Robot Throughput": robo_throughput,
         "Robot Cycle Time": robo_cycle_time,
-        "Robot Driving Rating": robo_driving,
+        #"Robot Driving Rating": robo_driving,
         "Robot Intake": robo_intake[0] if robo_intake else "Not entered",
         "Robot Intake Rating": robo_intake_rating,
         "Robot Does When Inactive": ", ".join(robo_do_when_inactive) if robo_do_when_inactive else "Not entered",
@@ -305,7 +312,7 @@ if st.session_state.selected_team_state and st.session_state.predictions_entered
         robo_accuracy,
         robo_throughput,
         robo_cycle_time,
-        robo_driving,
+        #robo_driving,
         robo_intake[0] if robo_intake else "Not entered",
         robo_intake_rating,
         ", ".join(robo_do_when_inactive) if robo_do_when_inactive else "Not entered",
