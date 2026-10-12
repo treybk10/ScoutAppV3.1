@@ -13,7 +13,6 @@ import requests
 HACK_CLUB_API_KEY = st.secrets["AI_API"]
 HACK_CLUB_BASE_URL = "https://ai.hackclub.com/proxy/v1" 
 
-MODEL_NAME = "openrouter/free:online" 
 TTS_MODEL_NAME = "fish-audio/s2.1-pro-free:free"
 
 if "allInput" not in st.session_state:
@@ -38,6 +37,15 @@ st.set_page_config(page_title="Metal Muscle Scouting", layout="centered")
 st.image(MetalMuscleLogo)
 
 selectedAlliance = st.title("FRC Scouting Master")
+
+online = st.toggle("Online AI", value=False)
+if online:
+    MODEL_NAME = "openrouter/free:online"  
+else: 
+    MODEL_NAME = "openrouter/free"  
+
+st.error("WARINING! File uploader not tested yet!")
+file = st.file_uploader("Optional: Upload scouting data or any other file")
 
 user_input = st.chat_input(placeholder="Message Here")
 
@@ -67,7 +75,8 @@ def readable_ai_conversion(text: str) -> str:
 
 if user_input is not None:
     content_list = [{"type": "text", "text": f"You are a FRC scouting app. Your job is to provide the most reasonable scouting response to this prompt from the user: {user_input}. The Previous Conversation is here: {st.session_state.allInput}. Please give the best response you can. Please proved the best awnser possible."}]
-
+    if file is not None:
+        content_list.append({"type": "text", "text": f"Here is a list of scouting data from a event. Take it into consideration if needed. {file}."})
 
     with st.spinner(f"Asking AI: {user_input}"):
         response = client.chat.completions.create(
