@@ -26,7 +26,7 @@ st.page_link("pages/CurrentRankings.py", label="Current Rankings")
 st.page_link("pages/StandScouting.py", label="Stand Scouting")
 st.page_link("pages/Statbotics.py", label="Statbotics")
 
-event_key = st.text_input("Event Key: ", value="2026miwrc")
+event_key = st.text_input("Event Key: ", value="2026mibg")
 
 
 with st.expander("TBA Match Prediction"):
@@ -96,12 +96,16 @@ with st.expander("TBA Match Prediction"):
 
 # st.badge("Match predictions will not work due to statbotics API issue!", color="red")
 # with st.expander("Match Predicctions: "):
-#     match_number = st.number_input("Match Number: ", value=1)
-#     if st.toggle("Playoff Match"):
+#     withPlayoff = False
+#     withElim = False
+#     st.number_input("Match Number: ", value=1)
+#     st.toggle("Playoff Match", key=withPlayoff)
+#     withElim = st.toggle("Elimination Match", key=withElim)
+#     if withPlayoff:
 #         Playoff = True
 #     else:
 #         Playoff = False
-#     if st.toggle("Elimination Match"):
+#     if withElim:
 #         Elimination = True
 #     else:
 #         Elimination = False
@@ -317,9 +321,12 @@ with st.expander("Event Match Schedule: "):
     matches = [m for m in allMatches if m['comp_level'] == 'qm']
     matches = sorted(matches, key=lambda x: x['match_number'])
 
+    #st.write(allMatches)
+
     playoffMatches = [m for m in allMatches if m['comp_level'] in ['sf', 'f']]
     playoffMatches = sorted(playoffMatches, key=lambda x: x.get('time') or 0)
 
+    #if matches is not None:
     col1, col2, col3 = st.columns(3)
     with col1:
         st.warning("MATCH NUMBER")
@@ -377,6 +384,8 @@ with st.expander("Event Match Schedule: "):
             st.write(f":blue-background[{blue1}]")
             st.write(f":blue-background[{blue2}]")
             st.write(f":blue-background[{blue3}]")
+    # else:
+    #     st.error("No Matches Uploaded Yet")
 
 
 #st.badge("Team data will not work due to statbotics API issue!", color="red")

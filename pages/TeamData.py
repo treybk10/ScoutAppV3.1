@@ -18,7 +18,7 @@ st.image(MetalMuscleLogo)
 selectedAlliance = st.title("FRC Scouting Master")
 st.subheader("Figure out next match")
 
-event_key = st.text_input("Event Key", value="2026miwrc")
+event_key = st.text_input("Event Key", value="2026mibg")
 
 
 mediaTBA = "https://www.thebluealliance.com/api/v3/team/frc1506/media/2026"
