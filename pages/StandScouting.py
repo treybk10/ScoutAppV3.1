@@ -77,7 +77,7 @@ worksheet = sh.get_worksheet(0)
 BASE_DIR = os.path.dirname(__file__)
 
 st.set_page_config(page_title="Metal Muscle Scouting", layout="centered")
-MetalMuscleLogo = os.path.join(BASE_DIR, "More Files", "1506-logo.jpg")
+MetalMuscleLogo = os.path.join(BASE_DIR, "Other Files", "1506-logo.jpg")
 
 st.image(MetalMuscleLogo)
 
