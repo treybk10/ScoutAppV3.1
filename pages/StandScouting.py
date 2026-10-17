@@ -89,7 +89,7 @@ selectedAlliance = st.title("FRC Scouting Master")
 #st.subheader("Scout Matches!")
 st.info("Please know that all of this is meant to be an estimate and just provide your best guess.")
 
-Entered_Match_Key = st.text_input("Please enter event key: ", value="2026miwrc")
+Entered_Match_Key = st.text_input("Please enter event key: ", value="2026mibg")
 
 scouter_name = st.text_input("Scouter's name:")
 
